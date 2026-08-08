@@ -1,0 +1,253 @@
+/* nav */
+.nav-label { font-size: var(--t-xs); letter-spacing: .1em; color: var(--faint); margin-bottom: var(--s-2); }
+.nav-item {
+  display: flex; justify-content: space-between; gap: var(--s-2);
+  padding: 7px var(--s-2); border-radius: var(--r-1);
+  color: var(--ink-2); text-decoration: none; font-size: var(--t-sm);
+}
+.nav-item:hover { background: var(--bg); color: var(--ink); }
+.nav-item[aria-current="page"] { background: var(--accent-bg); color: var(--accent); font-weight: 600; }
+.streak { font-size: var(--t-sm); color: var(--ink-2); }
+.streak b { font-weight: 650; }
+.progress-line { font-size: var(--t-xs); color: var(--dim); margin-top: var(--s-1); }
+
+/* headings */
+.eyebrow { font-size: var(--t-xs); letter-spacing: .14em; color: var(--dim); margin-bottom: var(--s-2); }
+h1 { font-size: var(--t-2xl); font-weight: 650; margin: 0 0 var(--s-2); letter-spacing: -.01em; }
+h2 { font-size: var(--t-lg); font-weight: 620; margin: 0 0 var(--s-3); }
+.purpose { color: var(--dim); margin: 0 0 var(--s-6); }
+.field-label { font-size: var(--t-xs); letter-spacing: .1em; color: var(--dim); margin: var(--s-5) 0 var(--s-2); }
+.field-label:first-child { margin-top: 0; }
+
+/* cards */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2); padding: var(--s-5); }
+.deck-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s-4); }
+.deck {
+  display: block; text-align: left; text-decoration: none; color: inherit; cursor: pointer;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2);
+  padding: var(--s-5); width: 100%;
+}
+.deck:hover { border-color: var(--line-2); background: var(--raised); }
+.deck h3 { margin: var(--s-1) 0 var(--s-3); font-size: var(--t-xl); font-weight: 620; }
+.deck .stat { font-size: var(--t-sm); color: var(--dim); }
+.deck .stat b { color: var(--ink); font-weight: 620; }
+
+/* mode cards */
+.modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s-2); }
+.mode {
+  text-align: left; cursor: pointer; background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--r-2); padding: var(--s-3) var(--s-4);
+}
+.mode:hover:not(:disabled) { border-color: var(--line-2); }
+.mode[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-bg); }
+.mode:disabled { opacity: .5; cursor: not-allowed; }
+.mode .name { font-weight: 620; font-size: var(--t-sm); }
+.mode .desc { font-size: var(--t-xs); color: var(--dim); margin-top: 2px; }
+
+/* pills */
+.pills { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.pill {
+  cursor: pointer; background: var(--surface); border: 1px solid var(--line-2);
+  border-radius: 999px; padding: 5px var(--s-3); font-size: var(--t-sm); color: var(--ink-2);
+}
+.pill:hover { border-color: var(--dim); }
+.pill[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.pill .count { opacity: .6; margin-left: 5px; font-size: var(--t-xs); }
+/* FIX E. A group or tier with nothing at the other filter's setting. Dimmed, still clickable, so a
+   selection is never silently cleared when you move the difficulty. */
+.pill[data-empty="true"] { opacity: .45; }
+
+/* buttons */
+.btn {
+  cursor: pointer; border: 1px solid var(--line-2); background: var(--surface);
+  border-radius: var(--r-1); padding: 7px var(--s-4); font-size: var(--t-sm);
+}
+.btn:hover:not(:disabled) { background: var(--bg); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; padding: 10px var(--s-5); }
+.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-row { display: flex; gap: var(--s-2); justify-content: flex-end; margin-top: var(--s-4); }
+
+/* toggle panel */
+details.opts { border-top: 1px solid var(--line); margin-top: var(--s-5); padding-top: var(--s-3); }
+details.opts summary { cursor: pointer; font-size: var(--t-sm); color: var(--ink-2); }
+.toggle-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--s-2) var(--s-4); margin: var(--s-4) 0; }
+.toggle { display: flex; align-items: center; gap: var(--s-2); font-size: var(--t-sm); cursor: pointer; }
+.toggle input { width: 15px; height: 15px; accent-color: var(--accent); }
+.toggle .changed { color: var(--warn); font-size: var(--t-xs); }
+.scope { font-size: var(--t-sm); color: var(--dim); margin: var(--s-5) 0 var(--s-4); }
+.scope b { color: var(--ink); }
+
+/* session bar */
+#session-bar {
+  display: flex; align-items: center; gap: var(--s-4);
+  padding: var(--s-3) var(--s-6); border-bottom: 1px solid var(--line); background: var(--surface);
+}
+#session-bar .qcount { font-weight: 620; }
+#session-bar .clock { font-family: var(--mono); font-size: var(--t-lg); margin-left: auto; font-variant-numeric: tabular-nums; }
+#session-bar .clock.warn { color: var(--bad); animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .45; } }
+.segbar { display: flex; gap: 2px; padding: 0 var(--s-6) 0; margin-top: var(--s-3); }
+.seg { height: 4px; flex: 1; background: var(--line); border-radius: 2px; }
+.seg.done { background: var(--accent); }
+.seg.now { background: var(--ink); }
+
+/* question */
+.stimulus p { margin: 0 0 var(--s-3); }
+.qtext { font-weight: 600; margin: 0 0 var(--s-5); }
+.options { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.option {
+  display: flex; align-items: center; gap: var(--s-3); width: 100%; text-align: left;
+  cursor: pointer; background: var(--surface); border: 1px solid var(--line-2);
+  border-radius: var(--r-1); padding: 10px var(--s-3); font-size: var(--t-md);
+}
+.option:hover:not([aria-disabled="true"]) { border-color: var(--dim); }
+/* FIX G. A revealed option keeps aria-disabled rather than disabled, so it stays in the tab
+   order and you can review what you picked. Full opacity is deliberate: the reveal colours
+   have to stay legible, unlike a disabled button. */
+.option[aria-disabled="true"] { cursor: default; }
+.option[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-bg); }
+.option .badge {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--line-2); display: grid; place-items: center;
+  font-size: var(--t-xs); color: var(--dim); font-variant-numeric: tabular-nums;
+}
+.option[aria-pressed="true"] .badge { border-color: var(--accent); color: var(--accent); }
+.option .val { font-variant-numeric: tabular-nums; }
+.option.correct { border-color: var(--good); background: var(--good-bg); }
+.option.chosen-wrong { border-color: var(--bad); background: var(--bad-bg); }
+.option .verdict { margin-left: auto; font-size: var(--t-xs); }
+.option.correct .verdict { color: var(--good); }
+.option.chosen-wrong .verdict { color: var(--bad); }
+.setup-row { margin-top: var(--s-5); }
+.setup-row label { display: block; font-size: var(--t-xs); letter-spacing: .08em; color: var(--dim); margin-bottom: var(--s-1); }
+.setup-row input {
+  width: 100%; font: var(--t-md) var(--mono); padding: 8px var(--s-3);
+  border: 1px solid var(--line-2); border-radius: var(--r-1); background: var(--surface); color: var(--ink);
+}
+.feedback { margin-top: var(--s-4); font-size: var(--t-sm); }
+.feedback .ok { color: var(--good); font-weight: 600; }
+.feedback .no { color: var(--bad); font-weight: 600; }
+.feedback .why { color: var(--ink-2); }
+.spread { color: var(--dim); font-size: var(--t-xs); margin-top: var(--s-1); }
+
+/* The estimation route sits ABOVE the exact chain and is styled to read as
+   the method rather than as an aside: a left rule, the label in small caps, the arithmetic in the
+   mono face so a rounded input lines up under the exact one in the chain below it. */
+.estimate { margin-top: var(--s-3); padding-left: var(--s-3); border-left: 2px solid var(--accent);
+  font-size: var(--t-sm); display: flex; flex-direction: column; gap: 2px; }
+.estimate-label { color: var(--accent); font-size: var(--t-xs); font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase; }
+.estimate-run { font-family: var(--mono); color: var(--ink); }
+.estimate-lands { color: var(--ink-2); font-size: var(--t-xs); }
+.precision { margin-top: var(--s-2); color: var(--ink-2); font-size: var(--t-xs); }
+.arch-name { font-size: var(--t-xs); letter-spacing: .08em; color: var(--dim); margin-bottom: var(--s-2); }
+.flagbtn[aria-pressed="true"] { color: var(--flag); border-color: var(--flag); }
+
+/* standalone table stimulus, part A3 */
+.stim-table {
+  border-collapse: collapse; width: 100%; margin: var(--s-3) 0 var(--s-2);
+  font-size: var(--t-sm); font-variant-numeric: tabular-nums;
+}
+.stim-table caption {
+  caption-side: top; text-align: left; font-size: var(--t-xs); letter-spacing: .06em;
+  color: var(--dim); padding-bottom: var(--s-2);
+}
+.stim-table th, .stim-table td {
+  border: 1px solid var(--line); padding: 6px var(--s-3); text-align: left; white-space: nowrap;
+}
+.stim-table th {
+  background: var(--bg); font-weight: 600; font-size: var(--t-xs);
+  color: var(--ink-2); letter-spacing: .02em;
+}
+.stim-table td.num, .stim-table th.num { text-align: right; }
+.stim-table tbody tr:nth-child(even) td { background: var(--raised); }
+.table-note { font-size: var(--t-xs); color: var(--dim); margin: var(--s-1) 0 0; }
+
+/* tables */
+table.grid { border-collapse: collapse; width: 100%; font-size: var(--t-sm); }
+table.grid th, table.grid td { border-bottom: 1px solid var(--line); padding: 7px var(--s-3); text-align: left; }
+table.grid th { font-size: var(--t-xs); letter-spacing: .06em; color: var(--dim); font-weight: 500; }
+table.grid td.num, table.grid th.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.grid tr.wrong td:first-child { box-shadow: inset 3px 0 0 var(--bad); }
+table.grid tbody tr.expandable { cursor: pointer; }
+table.grid tbody tr.expandable:hover td { background: var(--raised); }
+.detail { background: var(--raised); }
+.detail .steps { font-family: var(--mono); font-size: var(--t-sm); color: var(--ink-2); }
+.detail ul { margin: var(--s-2) 0 0; padding-left: var(--s-5); }
+.detail li { margin-bottom: 2px; }
+
+/* misc */
+#key-hints {
+  padding: var(--s-3) var(--s-6); border-top: 1px solid var(--line);
+  font-size: var(--t-xs); color: var(--dim); background: var(--surface);
+}
+#key-hints kbd {
+  font-family: var(--mono); border: 1px solid var(--line-2); border-radius: 3px;
+  padding: 1px 5px; margin-right: 3px; background: var(--bg);
+}
+#toast {
+  position: fixed; bottom: var(--s-5); left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--bg); padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-1); font-size: var(--t-sm); opacity: 0; pointer-events: none;
+}
+#toast.show { opacity: 1; }
+.empty { color: var(--dim); font-size: var(--t-sm); }
+.rule { border: 0; border-top: 1px solid var(--line); margin: var(--s-6) 0; }
+
+/* dashboard panels */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-2);
+  padding: var(--s-5); margin-bottom: var(--s-4); }
+.panel h2 { margin-bottom: var(--s-2); }
+.panel > .purpose { margin-bottom: var(--s-4); }
+.tag-list { display: flex; flex-wrap: wrap; gap: var(--s-2); list-style: none; margin: 0 0 var(--s-3); padding: 0; }
+.tag-list li { font-size: var(--t-sm); background: var(--good-bg); color: var(--good);
+  border: 1px solid var(--good); border-radius: 999px; padding: 3px var(--s-3); }
+.coverage-note { font-size: var(--t-sm); color: var(--ink-2); background: var(--bg);
+  border-left: 3px solid var(--line-2); padding: var(--s-3) var(--s-4); border-radius: var(--r-1); }
+.coverage-note.hit { border-left-color: var(--good); background: var(--good-bg); color: var(--good); }
+table.grid tr.at-target td:first-child { box-shadow: inset 3px 0 0 var(--good); }
+
+/* comprehension against arithmetic */
+.split-list { display: flex; flex-direction: column; gap: 6px; }
+.split-row { display: grid; grid-template-columns: minmax(140px, 1.4fr) 3fr auto;
+  align-items: center; gap: var(--s-3); font-size: var(--t-sm); }
+.split-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.split-bar { display: flex; height: 14px; border-radius: 3px; overflow: hidden; background: var(--line); }
+.seg-comp { background: var(--accent); }
+.seg-arith { background: var(--warn); }
+.split-nums { color: var(--dim); font-size: var(--t-xs); white-space: nowrap; }
+.legend { font-size: var(--t-xs); color: var(--dim); margin-top: var(--s-3); }
+.legend .key { display: inline-block; width: 11px; height: 11px; border-radius: 2px;
+  margin: 0 4px 0 var(--s-3); vertical-align: -1px; }
+
+/* weight table bar */
+.wbar { display: block; height: 9px; border-radius: 2px; background: var(--accent); min-width: 2px; }
+
+/* accuracy trend */
+svg.trend { width: 100%; height: auto; max-height: 150px; }
+svg.trend .gl { stroke: var(--line); stroke-width: 1; }
+svg.trend .ax { fill: var(--faint); font-size: 9px; font-family: var(--mono); }
+svg.trend .tl { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+svg.trend .tp { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+
+/* FIX D. The worked solution under instant feedback. It used to show only the last line of the
+   workings, which for nearly every archetype is "answer = 96", so getting an item RIGHT taught you
+   nothing while getting it wrong named the exact mistake. Open where the Setup box is on, since
+   those are the learning modes, closed in Exam. */
+.working { margin-top: var(--s-2); font-size: var(--t-sm); }
+.working summary { cursor: pointer; color: var(--ink-2); }
+.working summary:hover { color: var(--ink); }
+.working .steps {
+  margin: var(--s-2) 0 0; padding-left: var(--s-4); color: var(--ink-2);
+  display: flex; flex-direction: column; gap: 3px;
+}
+.working .steps li { font-variant-numeric: tabular-nums; }
+
+/* P1. A session that came up short. Loud on purpose: a score out of a denominator you did not choose
+   is not a measurement of the skill, and Exam mode exists to be one. */
+.shortfall {
+  margin: var(--s-3) 0 0; padding: var(--s-2) var(--s-3);
+  border-left: 3px solid var(--warn); background: var(--raised);
+  font-size: var(--t-sm); color: var(--ink);
+}

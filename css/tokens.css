@@ -1,0 +1,114 @@
+/* Colours, spacing, type scale. Restyle here only. */
+:root {
+  --ink:        #14161a;
+  --ink-2:      #3d434d;
+  --dim:        #6d7480;
+  --faint:      #9aa1ac;
+  --line:       #e2e5ea;
+  --line-2:     #cfd4dc;
+  --bg:         #f7f8fa;
+  --surface:    #ffffff;
+  --raised:     #fdfdfe;
+  --accent:     #14524a;
+  --accent-ink: #ffffff;
+  --accent-bg:  #e7f1ef;
+  --good:       #0b7a5c;
+  --good-bg:    #ecfaf4;
+  --bad:        #b3341d;
+  --bad-bg:     #fdeeea;
+  --warn:       #9a6205;
+  --flag:       #8a5a00;
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px;
+
+  --r-1: 4px; --r-2: 7px;
+
+  --t-xs: 11px; --t-sm: 13px; --t-md: 15px; --t-lg: 18px;
+  --t-xl: 22px; --t-2xl: 30px;
+
+  --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+
+  /* Chart palette. js/lib/chart.js reads these with hardcoded fallbacks so the
+     standalone audit page renders without this stylesheet. Defining them here is
+     what makes charts follow the app's theme rather than their own. */
+  --font-ui:    ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --chart-grid: #e2e5ea;
+  --chart-axis: #6d7480;
+  --chart-ink:  #3d434d;
+  --chart-bg:   #ffffff;
+  --chart-1:    #14524a;
+  --chart-2:    #4a6d8c;
+  --chart-3:    #8a5a3c;
+  --chart-4:    #5c5f7a;
+  --chart-5:    #7a6a3c;
+  --chart-6:    #6d4a5c;
+
+  --accent-hover: #0f403a;
+
+  --sidebar-w: 216px;
+  --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: var(--t-md)/1.5 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--r-1); }
+button { font: inherit; color: inherit; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.tnum { font-variant-numeric: tabular-nums; }
+/* Dark theme. Every value below overrides a token declared above, so nothing
+   downstream needs to know which theme is active. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink:        #e8eaee;
+    --ink-2:      #b6bcc6;
+    --dim:        #8b929d;
+    --faint:      #6a7280;
+    --line:       #262a31;
+    --line-2:     #343a43;
+    --bg:         #0f1115;
+    --surface:    #16191f;
+    --raised:     #1b1f26;
+    --accent:     #4db6a4;
+    --accent-ink: #0f1115;
+    --accent-bg:  #14312c;
+    --good:       #45c79b;
+    --good-bg:    #12291f;
+    --bad:        #f0846a;
+    --bad-bg:     #2d1712;
+    --warn:       #d9a343;
+    --flag:       #d9a343;
+    --focus: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+
+    --chart-grid: #262a31;
+    --chart-axis: #8b929d;
+    --chart-ink:  #b6bcc6;
+    --chart-bg:   #16191f;
+    --chart-1:    #4db6a4;
+    --chart-2:    #7fa8c9;
+    --chart-3:    #c99878;
+    --chart-4:    #9a9dc0;
+    --chart-5:    #c0ac72;
+    --chart-6:    #b98aa0;
+
+    --accent-hover: #6ac9b8;
+  }
+}
+/* Keyboard users should not have to tab the whole sidebar to reach a question. */
+.skip-link {
+  position: absolute; left: var(--s-2); top: var(--s-2); z-index: 10;
+  padding: var(--s-2) var(--s-3); border-radius: var(--r-1);
+  background: var(--accent); color: var(--accent-ink);
+  font-size: var(--t-sm); font-weight: 600; text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

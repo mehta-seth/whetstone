@@ -1,0 +1,55 @@
+body {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas: "sidebar main" "sidebar hints";
+  min-height: 100vh;
+}
+#sidebar {
+  grid-area: sidebar;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+  padding: var(--s-5) var(--s-4);
+  display: flex; flex-direction: column; gap: var(--s-5);
+  position: sticky; top: 0; height: 100vh;
+}
+#brand { font-size: var(--t-lg); font-weight: 650; letter-spacing: .12em; }
+#nav-train, #nav-review { display: flex; flex-direction: column; gap: 1px; }
+#progress-summary { margin-top: auto; }
+#main { grid-area: main; min-width: 0; display: flex; flex-direction: column; }
+#session-bar:empty { display: none; }
+#screen { padding: var(--s-6) var(--s-6) var(--s-7); max-width: 1080px; }
+#key-hints { grid-area: hints; }
+
+.two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid var(--line); border-radius: var(--r-2);
+  background: var(--surface); overflow: hidden;
+}
+.two-col > * { padding: var(--s-5); min-width: 0; }
+.two-col > .stimulus { border-right: 1px solid var(--line); background: var(--raised); }
+/* Below this width the sidebar becomes a horizontal bar above the content rather
+   than disappearing. Hiding it removed the only navigation, the brand and the
+   progress summary, which left the app unusable on a phone. */
+@media (max-width: 860px) {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "sidebar" "main" "hints";
+  }
+  #sidebar {
+    position: static; height: auto;
+    border-right: 0; border-bottom: 1px solid var(--line);
+    padding: var(--s-3) var(--s-4);
+    flex-direction: row; align-items: center; flex-wrap: wrap;
+    gap: var(--s-3) var(--s-4);
+  }
+  #brand { font-size: var(--t-md); }
+  #nav-train, #nav-review { flex-direction: row; flex-wrap: wrap; gap: var(--s-1); }
+  #nav-train .nav-label, #nav-review .nav-label { display: none; }
+  #nav-train .nav-item, #nav-review .nav-item { padding: var(--s-1) var(--s-2); }
+  #progress-summary { margin-top: 0; margin-left: auto; text-align: right; }
+  #screen { padding: var(--s-5) var(--s-4) var(--s-6); }
+  .two-col { grid-template-columns: 1fr; }
+  .two-col > .stimulus { border-right: 0; border-bottom: 1px solid var(--line); }
+}
