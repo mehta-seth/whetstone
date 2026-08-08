@@ -1,0 +1,3359 @@
+{
+  "_note": "Parameter-injected rather than seed-based. Every value here is machine-verified. If code disagrees with a fixture, the code is wrong.",
+  "a01": [
+    {
+      "label": "Wording matches the question mock. The distractor SET changed, not the arithmetic. The answer, and every value the `values` block pins, are unchanged. a01 traded `no-discount` for a far-side `omitted-component` and d03 traded `inverted` for a placeable filler, both to close a 100% zero-arithmetic scan exploit measured at 4.97x and 5.00x. The two draws that decide the set are forced here, per 9.4.",
+      "tier": "standard",
+      "forced": {
+        "budget": 240,
+        "priceA": 18.5,
+        "qtyA": 4,
+        "priceB": 34.2,
+        "qtyB": 2,
+        "unitPrice": 1.45,
+        "discount": 15,
+        "buyer": {
+          "name": "Priya",
+          "subject": "she",
+          "possessive": "her"
+        },
+        "kit": {
+          "role": "stationery purchasing",
+          "collective": "stationery",
+          "a": {
+            "s": "ring binder",
+            "p": "ring binders"
+          },
+          "b": {
+            "s": "marker pack",
+            "p": "marker packs"
+          },
+          "u": {
+            "s": "sticky note pad",
+            "p": "sticky note pads"
+          }
+        },
+        "keepRoundUp": true,
+        "decoyAbove": false
+      },
+      "expect": {
+        "values": {
+          "fixed": 121.04,
+          "remainder": 118.96,
+          "quotient": 96.5193
+        },
+        "answer": {
+          "value": 96,
+          "display": "96 pads"
+        },
+        "options": [
+          {
+            "value": 81,
+            "display": "81 pads",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 82,
+            "display": "82 pads",
+            "role": "distractor",
+            "errorType": "partial-discount"
+          },
+          {
+            "value": 96,
+            "display": "96 pads",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 97,
+            "display": "97 pads",
+            "role": "distractor",
+            "errorType": "round-up"
+          },
+          {
+            "value": 194,
+            "display": "194 pads",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          }
+        ]
+      }
+    }
+  ],
+  "a02": [
+    {
+      "label": "Machine-verified. 120 lines/hour, 4% herring, 792 in 6 hours.",
+      "tier": "standard",
+      "forced": {
+        "line": {
+          "org": "Ferrier Textiles",
+          "out": {
+            "s": "metre",
+            "p": "metres"
+          },
+          "thing": "woven cloth",
+          "herring": "the proportion of cloth rejected at inspection"
+        },
+        "startRate": 120,
+        "increase": 10,
+        "herring": 4,
+        "duration": 6
+      },
+      "expect": {
+        "values": {
+          "endRate": 132,
+          "gain": 12,
+          "totalOutput": 792
+        },
+        "answer": {
+          "value": 10,
+          "display": "10%"
+        },
+        "options": [
+          {
+            "value": 4,
+            "display": "4%",
+            "role": "distractor",
+            "errorType": "reported-input"
+          },
+          {
+            "value": 10,
+            "display": "10%",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 12,
+            "display": "12%",
+            "role": "distractor",
+            "errorType": "points-not-percent"
+          },
+          {
+            "value": 14,
+            "display": "14%",
+            "role": "distractor",
+            "errorType": "added-herring"
+          },
+          {
+            "value": 16,
+            "display": "16%",
+            "role": "filler",
+            "errorType": "filler"
+          }
+        ]
+      }
+    }
+  ],
+  "a03": [
+    {
+      "label": "Machine-verified. 3 x 35s + 4 x 12s = 153s, 22% faster. The filler uses 15% rather than the original spec's 18%, since the neighbouring rate with the widest minimum gap is taken.",
+      "tier": "standard",
+      "forced": {
+        "task": {
+          "org": "a warehouse picker",
+          "a": {
+            "s": "a pallet label",
+            "p": "pallet labels"
+          },
+          "b": {
+            "s": "a shelf tag",
+            "p": "shelf tags"
+          }
+        },
+        "tA": 35,
+        "tB": 12,
+        "qtyA": 3,
+        "qtyB": 4,
+        "speedup": 22
+      },
+      "expect": {
+        "values": {
+          "oldTotal": 153,
+          "saved": 33.66
+        },
+        "answer": {
+          "value": 119.34,
+          "display": "119.34"
+        },
+        "options": [
+          {
+            "value": 33.66,
+            "display": "33.66",
+            "role": "distractor",
+            "errorType": "wrong-quantity"
+          },
+          {
+            "value": 119.34,
+            "display": "119.34",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 130.05,
+            "display": "130.05",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 153,
+            "display": "153",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          },
+          {
+            "value": 186.66,
+            "display": "186.66",
+            "role": "distractor",
+            "errorType": "sign-flip"
+          }
+        ]
+      }
+    }
+  ],
+  "a04": [
+    {
+      "label": "Repinned. Its 150 with a 1/5 deficit gives a wrong-base of 162/5 = 32.4, a fractional count shipped as 32, which is the defect a18's own correction exists to remove. Headcount 125 gives have 100, need 135, answer 35 and a wrong-base of exactly 27.",
+      "tier": "standard",
+      "forced": {
+        "kit": {
+          "org": "Halewood Assembly",
+          "unit": {
+            "s": "torque driver",
+            "p": "torque drivers"
+          },
+          "role": "line fitter",
+          "roles": "line fitters"
+        },
+        "frac": {
+          "n": 1,
+          "d": 5,
+          "t": "a fifth"
+        },
+        "growth": 8,
+        "headcount": 125
+      },
+      "expect": {
+        "values": {
+          "have": 100,
+          "need": 135
+        },
+        "answer": {
+          "value": 35,
+          "display": "35 torque drivers"
+        },
+        "options": [
+          {
+            "value": 10,
+            "display": "10 torque drivers",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 25,
+            "display": "25 torque drivers",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 27,
+            "display": "27 torque drivers",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 35,
+            "display": "35 torque drivers",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 135,
+            "display": "135 torque drivers",
+            "role": "distractor",
+            "errorType": "wrong-quantity"
+          }
+        ]
+      }
+    }
+  ],
+  "a05": [
+    {
+      "label": "Machine-verified. 1,400 pots per 40 min, tray of 24 at 14.40, 8 hours, cost 126,000. The original spec's 25.00 option was the halved-working-day distractor, which is exactly twice the answer in every item and made a05 solvable from the option values alone. Replaced by a wrong day length drawn from the other allowed values, 10 hours here, giving 10.00. Answer and the other three options unchanged.",
+      "tier": "standard",
+      "forced": {
+        "plant": {
+          "org": "Culverden Potteries",
+          "unit": {
+            "s": "pot",
+            "p": "pots"
+          },
+          "box": {
+            "s": "tray",
+            "p": "trays"
+          },
+          "kit": "a second kiln"
+        },
+        "unitsPerBatch": 1400,
+        "batchMinutes": 40,
+        "hoursPerDay": 8,
+        "containerSize": 24,
+        "containerPrice": 14.4,
+        "answer": 12.5,
+        "wrongHours": 10
+      },
+      "expect": {
+        "values": {
+          "perHour": 2100,
+          "perDay": 16800,
+          "containers": 700,
+          "revenue": 10080
+        },
+        "answer": {
+          "value": 12.5,
+          "display": "12.50"
+        },
+        "options": [
+          {
+            "value": 0.52,
+            "display": "0.52",
+            "role": "distractor",
+            "errorType": "wrong-unit"
+          },
+          {
+            "value": 4.17,
+            "display": "4.17",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 12.5,
+            "display": "12.50",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 18.75,
+            "display": "18.75",
+            "role": "distractor",
+            "errorType": "wrong-unit"
+          },
+          {
+            "value": 10,
+            "display": "10.00",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          }
+        ]
+      }
+    }
+  ],
+  "a06": [
+    {
+      "label": "Own parameters. The original spec ties the 80 and the 250, but 250 is also the largest tier and already carries the assumed-bulk-cheapest derivation, so that tie placement is rejected. The two non-extreme non-winners are tied instead.",
+      "tier": "warmup",
+      "forced": {
+        "goods": {
+          "org": "Wickham Supplies",
+          "unit": {
+            "s": "cable tie",
+            "p": "cable ties"
+          },
+          "pack": "box"
+        },
+        "quantities": [
+          40,
+          80,
+          120,
+          200,
+          250
+        ],
+        "winner": 3,
+        "base": 220,
+        "spread": 22,
+        "tieCost": 231,
+        "largeCost": 238
+      },
+      "expect": {
+        "values": {
+          "per_40": 0.242,
+          "per_80": 0.231,
+          "per_120": 0.231,
+          "per_200": 0.22,
+          "per_250": 0.238
+        },
+        "answer": {
+          "value": "t3",
+          "display": "200 for £44.00"
+        },
+        "options": [
+          {
+            "value": "t0",
+            "display": "40 for £9.68",
+            "role": "distractor",
+            "errorType": "checked-extremes-only"
+          },
+          {
+            "value": "t1",
+            "display": "80 for £18.48",
+            "role": "distractor",
+            "errorType": "partial-check"
+          },
+          {
+            "value": "t2",
+            "display": "120 for £27.72",
+            "role": "distractor",
+            "errorType": "partial-check"
+          },
+          {
+            "value": "t3",
+            "display": "200 for £44.00",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "t4",
+            "display": "250 for £59.50",
+            "role": "distractor",
+            "errorType": "assumed-bulk-cheapest"
+          }
+        ]
+      }
+    }
+  ],
+  "a07": [
+    {
+      "label": "Machine-verified cancellation. 3G + S = 6C from 3S + C = 62 and S = 18, giving C = 8 and G = 10. The printed coefficients differ from the original spec's 4G+3S+C = G+2S+7C because the common terms are chosen separately; the cancellation and the answer are identical.",
+      "tier": "hard",
+      "forced": {
+        "market": {
+          "org": "a produce market",
+          "g": {
+            "s": "crate of grain",
+            "p": "crates of grain"
+          },
+          "s": {
+            "s": "sack of salt",
+            "p": "sacks of salt"
+          },
+          "c": {
+            "s": "box of cocoa",
+            "p": "boxes of cocoa"
+          }
+        },
+        "combo": {
+          "A": 3,
+          "B": 1,
+          "F": 6,
+          "G": 10,
+          "S": 18,
+          "C": 8,
+          "slip": 22,
+          "p": 3,
+          "T": 62
+        }
+      },
+      "expect": {
+        "values": {
+          "cancelled": "3G + 1S = 6C",
+          "third": 8,
+          "second": 18,
+          "left": 84,
+          "right": 84
+        },
+        "answer": {
+          "value": 10,
+          "display": "10"
+        },
+        "options": [
+          {
+            "value": 7,
+            "display": "7",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 8,
+            "display": "8",
+            "role": "distractor",
+            "errorType": "reported-input"
+          },
+          {
+            "value": 10,
+            "display": "10",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 11,
+            "display": "11",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 22,
+            "display": "22",
+            "role": "distractor",
+            "errorType": "algebra-slip"
+          }
+        ]
+      }
+    }
+  ],
+  "a08": [
+    {
+      "label": "Machine-verified. 5/6 start, pour 2/5, spill 1/12, uplift 40%.",
+      "tier": "standard",
+      "forced": {
+        "vessel": {
+          "org": "a cider press",
+          "vessel": "vat",
+          "liquid": "juice",
+          "unit": "of a vat"
+        },
+        "combo": {
+          "start": [
+            5,
+            6
+          ],
+          "pour": [
+            2,
+            5
+          ],
+          "spill": [
+            1,
+            12
+          ],
+          "uplift": 40
+        }
+      },
+      "expect": {
+        "values": {
+          "remaining": "5/12",
+          "target": "7/6",
+          "answer": "3/4"
+        },
+        "answer": {
+          "value": 0.75,
+          "display": "3/4"
+        },
+        "options": [
+          {
+            "value": 0.4166666666666667,
+            "display": "5/12",
+            "role": "distractor",
+            "errorType": "wrong-quantity"
+          },
+          {
+            "value": 0.5833333333333334,
+            "display": "7/12",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 0.6666666666666666,
+            "display": "2/3",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 0.75,
+            "display": "3/4",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 1.1666666666666667,
+            "display": "7/6",
+            "role": "distractor",
+            "errorType": "wrong-quantity"
+          }
+        ]
+      }
+    }
+  ],
+  "a09": [
+    {
+      "label": "Machine-verified. Pair 1,920 in 6h, trio 2,700 in 5h, target 3h45.",
+      "tier": "hard",
+      "forced": {
+        "crew": {
+          "org": "a tiling firm",
+          "a": "Mira",
+          "b": "Owen",
+          "c": "Rafe",
+          "out": {
+            "s": "tile",
+            "p": "tiles"
+          }
+        },
+        "ratio": 3,
+        "minutes": 45,
+        "hours": 3,
+        "thirdRate": 220,
+        "pairRate": 320,
+        "pairHours": 6,
+        "trioHours": 5
+      },
+      "expect": {
+        "values": {
+          "pairRate": 320,
+          "trioRate": 540,
+          "thirdRate": 220
+        },
+        "answer": {
+          "value": 825,
+          "display": "825 tiles"
+        },
+        "options": [
+          {
+            "value": 660,
+            "display": "660 tiles",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 825,
+            "display": "825 tiles",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 880,
+            "display": "880 tiles",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 1200,
+            "display": "1,200 tiles",
+            "role": "distractor",
+            "errorType": "wrong-rate"
+          },
+          {
+            "value": 2025,
+            "display": "2,025 tiles",
+            "role": "distractor",
+            "errorType": "wrong-rate"
+          }
+        ]
+      }
+    }
+  ],
+  "a10": [
+    {
+      "label": "Its own five bars: 5,500 at 22% / 3,000 at 5% / 4,500 at 14% / 5,000 at 9% / 4,000 at 6%, giving 4,290 / 2,850 / 3,870 / 4,550 / 3,760 and a winner at 4,550 with a margin of 260. These parameters break its ORIGINAL constraint that the winner be second on both dimensions, the winner being third on loss rate, and satisfy the rewrite.",
+      "tier": "standard",
+      "forced": {
+        "scenario": {
+          "org": "Aldermay Group",
+          "unit": "applications",
+          "pass": "cleared first-round screening",
+          "channels": [
+            "Job board",
+            "Recruitment agency",
+            "Employee referral",
+            "Careers site",
+            "Campus fair"
+          ]
+        },
+        "heights": [
+          5500,
+          3000,
+          4500,
+          5000,
+          4000
+        ],
+        "rates": [
+          22,
+          5,
+          14,
+          9,
+          6
+        ]
+      },
+      "expect": {
+        "values": {
+          "Job board": "5,500 less 22% = 4,290",
+          "Recruitment agency": "3,000 less 5% = 2,850",
+          "Employee referral": "4,500 less 14% = 3,870",
+          "Careers site": "5,000 less 9% = 4,550",
+          "Campus fair": "4,000 less 6% = 3,760"
+        },
+        "answer": {
+          "value": "c3",
+          "display": "Careers site"
+        },
+        "options": [
+          {
+            "value": "c0",
+            "display": "Job board",
+            "role": "distractor",
+            "errorType": "headline-metric"
+          },
+          {
+            "value": "c1",
+            "display": "Recruitment agency",
+            "role": "distractor",
+            "errorType": "headline-metric"
+          },
+          {
+            "value": "c2",
+            "display": "Employee referral",
+            "role": "distractor",
+            "errorType": "partial-check"
+          },
+          {
+            "value": "c3",
+            "display": "Careers site",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "c4",
+            "display": "Campus fair",
+            "role": "filler",
+            "errorType": "filler"
+          }
+        ],
+        "chart": {
+          "interval": 500,
+          "grid": 500,
+          "axisMax": 6000,
+          "barValues": [
+            5500,
+            3000,
+            4500,
+            5000,
+            4000
+          ]
+        }
+      }
+    }
+  ],
+  "a11": [
+    {
+      "label": "Parameters with a corrected target. Its stated 64,000 clears October by 8,793, or 77.5% of one month of profit, against its own constraint of 5 to 20%. A target of 71,000 satisfies the constraint and the answer is still October.",
+      "tier": "hard",
+      "forced": {
+        "firm": {
+          "org": "Ravensworth Joinery",
+          "what": "profit"
+        },
+        "startIdx": 3,
+        "first": 9500,
+        "growth": 3,
+        "k": 6,
+        "target": 71000
+      },
+      "expect": {
+        "values": {
+          "cumBefore": 61449.89,
+          "cumCrossing": 72793.39,
+          "monthProfit": 11343.5
+        },
+        "answer": {
+          "value": 9,
+          "display": "October"
+        },
+        "options": [
+          {
+            "value": 6,
+            "display": "July",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 7,
+            "display": "August",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 8,
+            "display": "September",
+            "role": "distractor",
+            "errorType": "off-by-one"
+          },
+          {
+            "value": 9,
+            "display": "October",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 10,
+            "display": "November",
+            "role": "distractor",
+            "errorType": "off-by-one"
+          }
+        ]
+      }
+    }
+  ],
+  "a12": {
+    "formula": [
+      {
+        "label": "Machine-verified. Arithmetic only: these parameters are rejected by the omission-distinctness constraint (blocker B1), because X is simultaneously the lowest licence, the trainer-only winner and the trainee-only winner, so they cannot pin an option set.",
+        "input": {
+          "trainees": 12,
+          "trainerRate": 26,
+          "traineeRate": 15,
+          "packages": [
+            {
+              "key": "W",
+              "licence": 21000,
+              "setup": 260,
+              "trainers": 3,
+              "hours": 22
+            },
+            {
+              "key": "X",
+              "licence": 19500,
+              "setup": 310,
+              "trainers": 4,
+              "hours": 26
+            },
+            {
+              "key": "Y",
+              "licence": 22000,
+              "setup": 240,
+              "trainers": 3,
+              "hours": 20
+            },
+            {
+              "key": "Z",
+              "licence": 24000,
+              "setup": 200,
+              "trainers": 2,
+              "hours": 18
+            }
+          ]
+        },
+        "expect": {
+          "total_W": 26936,
+          "total_X": 27194,
+          "total_Y": 27400,
+          "total_Z": 28376,
+          "winner": "W",
+          "margin": 258
+        }
+      }
+    ],
+    "cases": [
+      {
+        "label": "Regenerated after the column-correlation fixes.",
+        "tier": "standard",
+        "forced": {
+          "scenario": {
+            "org": "Ashcombe Legal",
+            "system": "a case management system",
+            "trainee": "paralegal",
+            "trainees": "paralegals"
+          },
+          "letters": [
+            "C",
+            "D",
+            "E",
+            "F"
+          ],
+          "trainees": 13,
+          "trainerRate": 27,
+          "traineeRate": 14,
+          "variant": "winner",
+          "freeLicence": true,
+          "packages": [
+            {
+              "role": "trainers",
+              "hours": 22,
+              "trainers": 4,
+              "setup": 311,
+              "key": "C",
+              "licence": 20750
+            },
+            {
+              "role": "licence",
+              "hours": 25,
+              "trainers": 3,
+              "setup": 208,
+              "key": "D",
+              "licence": 20900
+            },
+            {
+              "role": "winner",
+              "hours": 23,
+              "trainers": 2,
+              "setup": 231,
+              "key": "E",
+              "licence": 20700
+            },
+            {
+              "role": "trainees",
+              "hours": 27,
+              "trainers": 2,
+              "setup": 228,
+              "key": "F",
+              "licence": 20050
+            }
+          ]
+        },
+        "expect": {
+          "values": {
+            "licenceSpread": 850,
+            "margin": 291,
+            "licenceRank": 2,
+            "total_C": 27441,
+            "total_D": 27683,
+            "total_E": 26359,
+            "total_F": 26650
+          },
+          "answer": {
+            "value": "E",
+            "display": "Package E"
+          },
+          "table": [
+            [
+              "Package C",
+              "£20,750",
+              "£311",
+              "4",
+              "22"
+            ],
+            [
+              "Package D",
+              "£20,900",
+              "£208",
+              "3",
+              "25"
+            ],
+            [
+              "Package E",
+              "£20,700",
+              "£231",
+              "2",
+              "23"
+            ],
+            [
+              "Package F",
+              "£20,050",
+              "£228",
+              "2",
+              "27"
+            ]
+          ],
+          "options": [
+            {
+              "value": "C",
+              "display": "Package C",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": "D",
+              "display": "Package D",
+              "role": "filler",
+              "errorType": "filler"
+            },
+            {
+              "value": "E",
+              "display": "Package E",
+              "role": "correct",
+              "errorType": null
+            },
+            {
+              "value": "F",
+              "display": "Package F",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": "same",
+              "display": "All would cost the same",
+              "role": "filler",
+              "errorType": "filler"
+            }
+          ]
+        }
+      },
+      {
+        "label": "Tie variant. The catch-all is the answer and both wage-bill shortcuts still land on specific packages.",
+        "tier": "standard",
+        "forced": {
+          "scenario": {
+            "org": "Ashcombe Legal",
+            "system": "a case management system",
+            "trainee": "paralegal",
+            "trainees": "paralegals"
+          },
+          "letters": [
+            "J",
+            "K",
+            "L",
+            "M"
+          ],
+          "trainees": 14,
+          "trainerRate": 28,
+          "traineeRate": 15,
+          "variant": "tie",
+          "freeLicence": false,
+          "packages": [
+            {
+              "role": "trainers",
+              "hours": 22,
+              "trainers": 4,
+              "setup": 284,
+              "key": "J",
+              "licence": 21250
+            },
+            {
+              "role": "licence",
+              "hours": 25,
+              "trainers": 3,
+              "setup": 268,
+              "key": "K",
+              "licence": 21000
+            },
+            {
+              "role": "winner",
+              "hours": 23,
+              "trainers": 2,
+              "setup": 250,
+              "key": "L",
+              "licence": 22250
+            },
+            {
+              "role": "trainees",
+              "hours": 27,
+              "trainers": 2,
+              "setup": 236,
+              "key": "M",
+              "licence": 21200
+            }
+          ]
+        },
+        "expect": {
+          "values": {
+            "licenceSpread": 1250,
+            "total_J": 28618,
+            "total_K": 28618,
+            "total_L": 28618,
+            "total_M": 28618
+          },
+          "answer": {
+            "value": "same",
+            "display": "All would cost the same"
+          },
+          "table": [
+            [
+              "Package J",
+              "£21,250",
+              "£284",
+              "4",
+              "22"
+            ],
+            [
+              "Package K",
+              "£21,000",
+              "£268",
+              "3",
+              "25"
+            ],
+            [
+              "Package L",
+              "£22,250",
+              "£250",
+              "2",
+              "23"
+            ],
+            [
+              "Package M",
+              "£21,200",
+              "£236",
+              "2",
+              "27"
+            ]
+          ],
+          "options": [
+            {
+              "value": "J",
+              "display": "Package J",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": "K",
+              "display": "Package K",
+              "role": "distractor",
+              "errorType": "headline-price"
+            },
+            {
+              "value": "L",
+              "display": "Package L",
+              "role": "filler",
+              "errorType": "filler"
+            },
+            {
+              "value": "M",
+              "display": "Package M",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": "same",
+              "display": "All would cost the same",
+              "role": "correct",
+              "errorType": null
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "a13": [
+    {
+      "label": "Machine-verified. Price 6.40, volume 200, 15% cut, 12% lift. The zero-magnitude verdict option is the reason validate.js exempts them from the ratio guards.",
+      "tier": "standard",
+      "forced": {
+        "line": {
+          "org": "Marrable Bakery",
+          "item": "sourdough loaf",
+          "items": "loaves"
+        },
+        "cut": 15,
+        "lift": 12,
+        "price": 6.4,
+        "volume": 200
+      },
+      "expect": {
+        "values": {
+          "before": 1280,
+          "after": 1218.56,
+          "newVolume": 224
+        },
+        "answer": {
+          "value": -61.44,
+          "display": "Decrease by £61.44"
+        },
+        "options": [
+          {
+            "value": -192,
+            "display": "Decrease by £192.00",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": -61.44,
+            "display": "Decrease by £61.44",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 0,
+            "display": "Revenue would not change",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 61.44,
+            "display": "Increase by £61.44",
+            "role": "distractor",
+            "errorType": "sign-flip"
+          },
+          {
+            "value": 153.6,
+            "display": "Increase by £153.60",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          }
+        ]
+      }
+    }
+  ],
+  "a14": {
+    "formula": [
+      {
+        "label": "Machine-verified. Arithmetic only: these parameters are rejected because argmax(sellThrough x price) equals the winner D (blocker B2), the fastest and most-sold models are both C, and the margin of 9.91% is outside the 1 to 8% band.",
+        "input": {
+          "hoursPerDay": 10,
+          "daysPerWeek": 6,
+          "models": [
+            {
+              "key": "A",
+              "mfgTime": 12,
+              "sellThrough": 0.7,
+              "price": 48
+            },
+            {
+              "key": "B",
+              "mfgTime": 15,
+              "sellThrough": 0.88,
+              "price": 62
+            },
+            {
+              "key": "C",
+              "mfgTime": 9,
+              "sellThrough": 0.64,
+              "price": 37
+            },
+            {
+              "key": "D",
+              "mfgTime": 20,
+              "sellThrough": 0.95,
+              "price": 85
+            },
+            {
+              "key": "E",
+              "mfgTime": 14,
+              "sellThrough": 0.8,
+              "price": 58
+            }
+          ]
+        },
+        "expect": {
+          "minutes": 3600,
+          "revenue_A": 10080,
+          "revenue_B": 13094.4,
+          "revenue_C": 9472,
+          "revenue_D": 14535,
+          "revenue_E": 11931.43,
+          "winner": "D",
+          "margin": 9.91
+        }
+      }
+    ],
+    "cases": [
+      {
+        "label": "Regenerated after the column-correlation fixes. The spare model is the runner-up on revenue in these parameters, so its role is distractor / runner-up and no longer filler. Arithmetic unchanged.",
+        "tier": "hard",
+        "forced": {
+          "scenario": {
+            "org": "Kessler Instruments",
+            "line": "assembly line",
+            "unit": "meter",
+            "units": "meters"
+          },
+          "letters": [
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T"
+          ],
+          "hoursPerDay": 8,
+          "daysPerWeek": 6,
+          "models": [
+            {
+              "mfgTime": 20,
+              "sellThrough": 0.92,
+              "price": 73,
+              "key": "P"
+            },
+            {
+              "mfgTime": 17,
+              "sellThrough": 0.89,
+              "price": 69,
+              "key": "Q"
+            },
+            {
+              "mfgTime": 9,
+              "sellThrough": 0.65,
+              "price": 38,
+              "key": "R"
+            },
+            {
+              "mfgTime": 13,
+              "sellThrough": 0.67,
+              "price": 62,
+              "key": "S"
+            },
+            {
+              "mfgTime": 12,
+              "sellThrough": 0.93,
+              "price": 41,
+              "key": "T"
+            }
+          ]
+        },
+        "expect": {
+          "values": {
+            "minutes": 2880,
+            "margin": 7.04,
+            "winnerMfgRank": 4,
+            "revenue_P": 9671.04,
+            "revenue_Q": 10403.58,
+            "revenue_R": 7904,
+            "revenue_S": 9202.71,
+            "revenue_T": 9151.2
+          },
+          "answer": {
+            "value": "Q",
+            "display": "Model Q"
+          },
+          "table": [
+            [
+              "Model P",
+              "20",
+              "92%",
+              "£73"
+            ],
+            [
+              "Model Q",
+              "17",
+              "89%",
+              "£69"
+            ],
+            [
+              "Model R",
+              "9",
+              "65%",
+              "£38"
+            ],
+            [
+              "Model S",
+              "13",
+              "67%",
+              "£62"
+            ],
+            [
+              "Model T",
+              "12",
+              "93%",
+              "£41"
+            ]
+          ],
+          "options": [
+            {
+              "value": "P",
+              "display": "Model P",
+              "role": "distractor",
+              "errorType": "runner-up"
+            },
+            {
+              "value": "Q",
+              "display": "Model Q",
+              "role": "correct",
+              "errorType": null
+            },
+            {
+              "value": "R",
+              "display": "Model R",
+              "role": "distractor",
+              "errorType": "headline-metric"
+            },
+            {
+              "value": "S",
+              "display": "Model S",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": "T",
+              "display": "Model T",
+              "role": "distractor",
+              "errorType": "partial-product"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "a15": [
+    {
+      "label": "The design rules parameters. Option set revised: wrong-base at 15.2x removed, near cover added. At f = 0.739 the double-application option collides with the answer at 1.035x, so this fixture falls to the nearby-markup filler at 0.716x.",
+      "tier": "standard",
+      "forced": {
+        "units": 9,
+        "unitCost": 34800,
+        "markup": 27,
+        "overhead": 62500,
+        "firm": {
+          "name": "Vance Marine",
+          "s": "survey drone",
+          "p": "survey drones",
+          "period": "quarter"
+        }
+      },
+      "expect": {
+        "values": {
+          "gross": 84564,
+          "overheadShareOfGross": 73.9
+        },
+        "answer": {
+          "value": 22064,
+          "display": "£22,064"
+        },
+        "options": [
+          {
+            "value": 9396,
+            "display": "£9,396",
+            "role": "distractor",
+            "errorType": "single-unit"
+          },
+          {
+            "value": 15800,
+            "display": "£15,800",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 22064,
+            "display": "£22,064",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 84564,
+            "display": "£84,564",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          },
+          {
+            "value": 147064,
+            "display": "£147,064",
+            "role": "distractor",
+            "errorType": "sign-flip"
+          }
+        ]
+      }
+    }
+  ],
+  "a16": [
+    {
+      "label": "Machine-verified. X at 46.50, Y at 38.75, counts 22/14, 12/27, 19/20. TargetSlot is pinned at 3 because both spread distractors sit above the answer in these parameters. The slot is now drawn rather than falling out of the draw, since it was 97% slot 3 before.",
+      "tier": "standard",
+      "forced": {
+        "market": {
+          "org": "a garden centre",
+          "sellers": [
+            "Ravi",
+            "Delphine",
+            "Toma"
+          ],
+          "x": {
+            "s": "shrub",
+            "p": "shrubs"
+          },
+          "y": {
+            "s": "planter",
+            "p": "planters"
+          }
+        },
+        "priceX": 46.5,
+        "priceY": 38.75,
+        "counts": [
+          {
+            "x": 22,
+            "y": 14
+          },
+          {
+            "x": 12,
+            "y": 27
+          },
+          {
+            "x": 19,
+            "y": 20
+          }
+        ],
+        "targetSlot": 3
+      },
+      "expect": {
+        "values": {
+          "total1": 1565.5,
+          "total2": 1604.25,
+          "total3": 1658.5
+        },
+        "answer": {
+          "value": 93,
+          "display": "£93.00"
+        },
+        "options": [
+          {
+            "value": 38.75,
+            "display": "£38.75",
+            "role": "distractor",
+            "errorType": "wrong-pair"
+          },
+          {
+            "value": 54.25,
+            "display": "£54.25",
+            "role": "distractor",
+            "errorType": "wrong-pair"
+          },
+          {
+            "value": 93,
+            "display": "£93.00",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 217,
+            "display": "£217.00",
+            "role": "distractor",
+            "errorType": "swapped-inputs"
+          },
+          {
+            "value": 465,
+            "display": "£465.00",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          }
+        ]
+      }
+    }
+  ],
+  "a17": {
+    "formula": [
+      {
+        "label": "The original spec's stated parameters are pinned at the FORMULA level, because an earlier central whole-value check rejects the option set they produce: the answer is the only value with an empty fractional part. The design rules's route, a12's precedent. The arithmetic is unchanged and independently verified against the document. The cases entry below pins the generate path at the nearest legal parameter set, which is a regression pin rather than an independent source. The original spec a17: 2019 total 52.0, 2022 total 62.0, retain 0.70, answer 7.00, with 3.50, 9.45, 15.40 and 24.15.",
+        "input": {
+          "earlyTotal": 52,
+          "lateTotal": 62,
+          "mid1Total": 57,
+          "mid2Total": 65.5,
+          "r1": 10,
+          "r2": 20,
+          "dropOne": 12,
+          "dropTwo": 12.5
+        },
+        "expect": {
+          "retain": 0.7,
+          "rise": 10,
+          "answer": 7,
+          "missOne": 15.4,
+          "missTwo": 24.15,
+          "wrongMid1": 3.5,
+          "wrongMid2": 9.45
+        }
+      }
+    ],
+    "cases": [
+      {
+        "label": "a17 generate path at a legal parameter set. A rise of 10.5 on the 0.5 grid gives 10.5 x 0.70 = 7.35, so the answer carries a fractional part. Omissions (10.5 + 12) x 0.7 = 15.75 and (10.5 + 12 + 12.5) x 0.7 = 24.50; wrong pairs (57 - 52) x 0.7 = 3.50 and (65.5 - 52) x 0.7 = 9.45.",
+        "tier": "standard",
+        "forced": {
+          "scenario": {
+            "firm": "Halverson Freight",
+            "unit": "sales",
+            "a": "distribution charge",
+            "b": "sales commission"
+          },
+          "rates": [
+            10,
+            20
+          ],
+          "earlyTotal": 52,
+          "rise": 10.5,
+          "targetSlot": 2,
+          "startYear": 2019,
+          "mids": [
+            57,
+            65.5
+          ],
+          "bars": [
+            [
+              12.5,
+              13,
+              14.5,
+              12
+            ],
+            [
+              14,
+              15.5,
+              13.5,
+              14
+            ],
+            [
+              16,
+              16.5,
+              17,
+              16
+            ],
+            [
+              15,
+              16.5,
+              17,
+              13.5
+            ]
+          ],
+          "dropOne": 12,
+          "dropTwo": 12.5
+        },
+        "expect": {
+          "answer": {
+            "value": 7.35,
+            "display": "$7.35m"
+          },
+          "options": [
+            {
+              "value": 3.5,
+              "display": "$3.50m",
+              "role": "distractor",
+              "errorType": "wrong-pair"
+            },
+            {
+              "value": 7.35,
+              "display": "$7.35m",
+              "role": "correct",
+              "errorType": null
+            },
+            {
+              "value": 9.45,
+              "display": "$9.45m",
+              "role": "distractor",
+              "errorType": "wrong-pair"
+            },
+            {
+              "value": 15.75,
+              "display": "$15.75m",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            },
+            {
+              "value": 24.5,
+              "display": "$24.50m",
+              "role": "distractor",
+              "errorType": "omitted-component"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "a18": [
+    {
+      "label": "Machine-verified. Unlike a12 and a14 these parameters satisfy every constraint, so the full option set is pinned.",
+      "tier": "hard",
+      "forced": {
+        "scenario": {
+          "org": "Ashdown Aviation",
+          "kind": "aircraft",
+          "a": {
+            "s": "Harrier",
+            "p": "Harriers"
+          },
+          "b": {
+            "s": "Kestrel",
+            "p": "Kestrels"
+          }
+        },
+        "profit1": 25,
+        "p2": 50000,
+        "triple": {
+          "p1": 40000,
+          "bonus1": 10,
+          "w1": 5
+        },
+        "w2": 10,
+        "u1": 12,
+        "u2": 15
+      },
+      "expect": {
+        "values": {
+          "unitProfit1": 120000,
+          "warrantyPot1": 20000,
+          "warrantyPot2": 50000,
+          "known": 190000,
+          "residue": 150000,
+          "perUnit": 10000
+        },
+        "answer": {
+          "value": 15,
+          "display": "15 Kestrels"
+        },
+        "table": [
+          [
+            "Harrier",
+            "£40,000",
+            "25%",
+            "10%",
+            "12",
+            "5"
+          ],
+          [
+            "Kestrel",
+            "£50,000",
+            "20%",
+            "10%",
+            "?",
+            "10"
+          ]
+        ],
+        "options": [
+          {
+            "value": 12,
+            "display": "12 Kestrels",
+            "role": "distractor",
+            "errorType": "wrong-rate"
+          },
+          {
+            "value": 15,
+            "display": "15 Kestrels",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 17,
+            "display": "17 Kestrels",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 20,
+            "display": "20 Kestrels",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 22,
+            "display": "22 Kestrels",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          }
+        ]
+      }
+    }
+  ],
+  "a19": [
+    {
+      "label": "Constraint 2 restated as the oldPct bound. Points-raw replaced by complement per decision 3; the decimal-slip filler at 8x replaced by a mean-base distractor, since filler must now sit within 2x.",
+      "tier": "standard",
+      "forced": {
+        "oldPct": 1.25,
+        "direction": "fall",
+        "metric": {
+          "name": "defect rate",
+          "owner": "Thorne Castings",
+          "fall": "fall",
+          "rise": "rise"
+        },
+        "audit": [
+          "March",
+          "September"
+        ],
+        "newPct": 0.95
+      },
+      "expect": {
+        "values": {
+          "oldPct": 1.25,
+          "newPct": 0.95,
+          "pointDifference": 0.3
+        },
+        "answer": {
+          "value": 24,
+          "display": "24%"
+        },
+        "options": [
+          {
+            "value": 24,
+            "display": "24%",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 27,
+            "display": "27%",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 30,
+            "display": "30%",
+            "role": "distractor",
+            "errorType": "points-not-percent"
+          },
+          {
+            "value": 32,
+            "display": "32%",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 76,
+            "display": "76%",
+            "role": "distractor",
+            "errorType": "complement"
+          }
+        ]
+      }
+    }
+  ],
+  "a20": {
+    "formula": [
+      {
+        "label": "The original spec's stated parameters are pinned at the FORMULA level, because an earlier central whole-value check rejects the option set they produce: the answer is the only value with an empty fractional part. The design rules's route, a12's precedent. The arithmetic is unchanged and independently verified against the document. The cases entry below pins the generate path at the nearest legal parameter set, which is a regression pin rather than an independent source. The original spec a20: 494.00 at 35% off gives 760.00, with 666.90, 172.90 and 1,411.43.",
+        "input": {
+          "finalPrice": 494,
+          "discount": 35
+        },
+        "expect": {
+          "answer": 760,
+          "multiplyBack": 666.9,
+          "wrongOperation": 172.9,
+          "wrongBase": 1411.43
+        }
+      }
+    ],
+    "cases": [
+      {
+        "label": "a20 generate path at a legal parameter set. 494.13 / 0.65 = 760.20, so the answer carries pence and is not alone on a whole value. 494.13 x 1.35 = 667.08, 494.13 x 0.35 = 172.95, 494.13 / 0.35 = 1,411.80, filler 494.13 / 0.60 = 823.55.",
+        "tier": "warmup",
+        "forced": {
+          "finalPrice": 494.13,
+          "discount": 35,
+          "fillerComplement": 60,
+          "shop": {
+            "name": "Halcyon Audio",
+            "item": "a turntable",
+            "sale": "the winter sale"
+          }
+        },
+        "expect": {
+          "answer": {
+            "value": 760.2,
+            "display": "£760.20"
+          },
+          "options": [
+            {
+              "value": 172.95,
+              "display": "£172.95",
+              "role": "distractor",
+              "errorType": "wrong-operation"
+            },
+            {
+              "value": 667.08,
+              "display": "£667.08",
+              "role": "distractor",
+              "errorType": "multiply-back"
+            },
+            {
+              "value": 760.2,
+              "display": "£760.20",
+              "role": "correct",
+              "errorType": null
+            },
+            {
+              "value": 823.55,
+              "display": "£823.55",
+              "role": "filler",
+              "errorType": "filler"
+            },
+            {
+              "value": 1411.8,
+              "display": "£1,411.80",
+              "role": "distractor",
+              "errorType": "wrong-base"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "a21": [
+    {
+      "label": "Natural formatting keeps 40% and 65% at zero decimals.",
+      "tier": "standard",
+      "forced": {
+        "n1": 20,
+        "r1": 65,
+        "n2": 30,
+        "r2": 40,
+        "clubs": [
+          "Rosemont",
+          "Ashford"
+        ],
+        "contest": {
+          "unit": "fixtures",
+          "verb": "won"
+        }
+      },
+      "expect": {
+        "values": {
+          "wins1": 13,
+          "wins2": 12,
+          "totalWins": 25,
+          "total": 50
+        },
+        "answer": {
+          "value": 50,
+          "display": "50%"
+        },
+        "options": [
+          {
+            "value": 40,
+            "display": "40%",
+            "role": "distractor",
+            "errorType": "reported-input"
+          },
+          {
+            "value": 50,
+            "display": "50%",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 52.5,
+            "display": "52.5%",
+            "role": "distractor",
+            "errorType": "unweighted-average"
+          },
+          {
+            "value": 55,
+            "display": "55%",
+            "role": "distractor",
+            "errorType": "weights-swapped"
+          },
+          {
+            "value": 65,
+            "display": "65%",
+            "role": "distractor",
+            "errorType": "reported-input"
+          }
+        ]
+      }
+    }
+  ],
+  "a22": [
+    {
+      "label": "Arithmetic hand-verified and unchanged: 0.88^3 = 0.681472, so 18,000 x 0.681472 = 12,266, and simple depreciation gives 18,000 x 0.64 = 11,520. The DISTRACTOR SET changed under the off-by-one bound: both off-by-ones were short, so the answer sat at the bottom of a geometric run in 1/0.88 and \"take the smallest of the run\" hit 100% of items. Replacements: the untouched cost 18,000, the reverse-base value 18,000 / 1.12^3 = 18,000 / 1.404928 = 12,812, and the term compounded at a misread 13%, 18,000 x 0.87^3 = 0.658503 = 11,853. This entry pins the below side, answer in sorted slot 3 of 5. The production draw makes the initial value awkward; 18,000 is pinned here to preserve the original spec's verified arithmetic.",
+      "tier": "standard",
+      "forced": {
+        "asset": {
+          "org": "Pemberton Haulage",
+          "item": "a delivery van",
+          "short": "the van"
+        },
+        "initial": 18000,
+        "rate": 12,
+        "years": 3,
+        "wrongSide": "below"
+      },
+      "expect": {
+        "values": {
+          "initial": 18000,
+          "rate": 12,
+          "years": 3,
+          "keep": 0.681472,
+          "exact": 12266.5,
+          "wrongRate": 13
+        },
+        "answer": {
+          "value": 12266,
+          "display": "£12,266"
+        },
+        "options": [
+          {
+            "value": 11520,
+            "display": "£11,520",
+            "role": "distractor",
+            "errorType": "simple-not-compound"
+          },
+          {
+            "value": 11853,
+            "display": "£11,853",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 12266,
+            "display": "£12,266",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 12812,
+            "display": "£12,812",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 18000,
+            "display": "£18,000",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Arithmetic hand-verified and unchanged: 0.88^3 = 0.681472, so 18,000 x 0.681472 = 12,266, and simple depreciation gives 18,000 x 0.64 = 11,520. The DISTRACTOR SET changed under the off-by-one bound: both off-by-ones were short, so the answer sat at the bottom of a geometric run in 1/0.88 and \"take the smallest of the run\" hit 100% of items. Replacements: the untouched cost 18,000, the reverse-base value 18,000 / 1.12^3 = 18,000 / 1.404928 = 12,812, and the term compounded at a misread 10%, 18,000 x 0.90^3 = 0.729 = 13,122. This entry pins the above side, answer in sorted slot 2 of 5. The production draw makes the initial value awkward; 18,000 is pinned here to preserve the original spec's verified arithmetic.",
+      "tier": "standard",
+      "forced": {
+        "asset": {
+          "org": "Pemberton Haulage",
+          "item": "a delivery van",
+          "short": "the van"
+        },
+        "initial": 18000,
+        "rate": 12,
+        "years": 3,
+        "wrongSide": "above"
+      },
+      "expect": {
+        "values": {
+          "initial": 18000,
+          "rate": 12,
+          "years": 3,
+          "keep": 0.681472,
+          "exact": 12266.5,
+          "wrongRate": 10
+        },
+        "answer": {
+          "value": 12266,
+          "display": "£12,266"
+        },
+        "options": [
+          {
+            "value": 11520,
+            "display": "£11,520",
+            "role": "distractor",
+            "errorType": "simple-not-compound"
+          },
+          {
+            "value": 12266,
+            "display": "£12,266",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 12812,
+            "display": "£12,812",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 13122,
+            "display": "£13,122",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 18000,
+            "display": "£18,000",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          }
+        ]
+      }
+    }
+  ],
+  "b01": [
+    {
+      "dataset": {
+        "family": "nutrition",
+        "rows": [
+          {
+            "key": "energy",
+            "label": "Energy",
+            "unit": "kJ",
+            "dp": 0,
+            "additive": false
+          },
+          {
+            "key": "fat",
+            "label": "Fat",
+            "unit": "g",
+            "dp": 1,
+            "additive": false
+          },
+          {
+            "key": "fibre",
+            "label": "Fibre",
+            "unit": "g",
+            "dp": 1,
+            "additive": false
+          },
+          {
+            "key": "salt",
+            "label": "Salt",
+            "unit": "g",
+            "dp": 1,
+            "additive": false
+          }
+        ],
+        "cols": [
+          {
+            "key": "Ready Salted",
+            "label": "Ready Salted"
+          },
+          {
+            "key": "BBQ",
+            "label": "BBQ"
+          },
+          {
+            "key": "Pickled Onion",
+            "label": "Pickled Onion"
+          },
+          {
+            "key": "Cheese & Chive",
+            "label": "Cheese & Chive"
+          }
+        ],
+        "values": [
+          [
+            2180,
+            1940,
+            2120,
+            2260
+          ],
+          [
+            31.4,
+            26.8,
+            33.2,
+            22.6
+          ],
+          [
+            3.6,
+            7.2,
+            4.8,
+            2.4
+          ],
+          [
+            1.7,
+            0.9,
+            2.1,
+            1.4
+          ]
+        ],
+        "totals": {},
+        "meta": {
+          "packs": [
+            100,
+            25,
+            30,
+            75
+          ],
+          "refs": {
+            "energy": 9000,
+            "fat": 70,
+            "salt": 6
+          },
+          "unreferenced": "fibre",
+          "packRowLabel": "Pack size",
+          "packUnit": "g",
+          "pack": "packet",
+          "packPlural": "packets",
+          "scenario": {
+            "org": "Tolliver Snacks"
+          }
+        },
+        "caption": "Tolliver Snacks: nutritional content per 100 g",
+        "text": "Every figure in the table is the amount contained in 100 g of that variety. The bottom row gives the weight of one packet as sold."
+      },
+      "tier": "standard",
+      "forced": {
+        "nutrient": 0,
+        "variant": "pair",
+        "pair": {
+          "target": 1,
+          "misread": 0
+        },
+        "picks": [
+          {
+            "col": 1,
+            "qty": 3
+          },
+          {
+            "col": 2,
+            "qty": 2
+          }
+        ],
+        "misread": 0
+      },
+      "expect": {
+        "values": {
+          "per100_1": 1940,
+          "scale_1": 0.25,
+          "term_1": 1455,
+          "per100_2": 2120,
+          "scale_2": 0.3,
+          "term_2": 1272,
+          "answer": 2727
+        },
+        "answer": {
+          "value": 2727,
+          "display": "2,727"
+        },
+        "table": [
+          [
+            "Energy",
+            "2,180 kJ",
+            "1,940 kJ",
+            "2,120 kJ",
+            "2,260 kJ"
+          ],
+          [
+            "Fat",
+            "31.4 g",
+            "26.8 g",
+            "33.2 g",
+            "22.6 g"
+          ],
+          [
+            "Fibre",
+            "3.6 g",
+            "7.2 g",
+            "4.8 g",
+            "2.4 g"
+          ],
+          [
+            "Salt",
+            "1.7 g",
+            "0.9 g",
+            "2.1 g",
+            "1.4 g"
+          ],
+          [
+            "Pack size (g)",
+            "100",
+            "25",
+            "30",
+            "75"
+          ]
+        ],
+        "options": [
+          {
+            "value": 1272,
+            "display": "1,272",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 1455,
+            "display": "1,455",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 2727,
+            "display": "2,727",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 2907,
+            "display": "2,907",
+            "role": "distractor",
+            "errorType": "adjacent-column"
+          },
+          {
+            "value": 10060,
+            "display": "10,060",
+            "role": "distractor",
+            "errorType": "omitted-scaling"
+          }
+        ]
+      },
+      "label": "b01, hand-verified before the code was written: BBQ 1,940 kJ at a 25 g pack x 3 gives 1,455, Pickled Onion 2,120 kJ at 30 g x 2 gives 1,272, so 2,727. Part B supplies no fixtures of its own; this one pins against regression rather than an independent source."
+    }
+  ],
+  "c01": [
+    {
+      "label": "c01 pinned on the design rules's worked shape: four segments at 34 / 26 / 22 / 18 summing to exactly 100, caption total 13,700, asked segment 34%. 34 x 13,700 / 100 = 4,658. The wrong-unit option sits at total / 100 = 137x the answer, which is why the caption total is capped at 19,000 against the 200x option-spread ceiling.",
+      "tier": "standard",
+      "forced": {
+        "scenario": {
+          "org": "Marchwood Trust",
+          "noun": "enquiries",
+          "unitNoun": "enquiries",
+          "period": "last year",
+          "cats": [
+            "Billing",
+            "Delivery",
+            "Product fault",
+            "Returns",
+            "Account access",
+            "Website",
+            "Other"
+          ]
+        },
+        "shares": [
+          34,
+          26,
+          22,
+          18
+        ],
+        "asked": 0,
+        "neighbour": 1,
+        "total": 13700,
+        "targetSlot": 3,
+        "segments": 4
+      },
+      "expect": {
+        "values": {
+          "total": "13,700",
+          "Billing share": "34%",
+          "answer": "4,658"
+        },
+        "answer": {
+          "value": 4658,
+          "display": "4,658"
+        },
+        "options": [
+          {
+            "value": 34,
+            "display": "34",
+            "role": "distractor",
+            "errorType": "wrong-unit"
+          },
+          {
+            "value": 3562,
+            "display": "3,562",
+            "role": "distractor",
+            "errorType": "adjacent-segment"
+          },
+          {
+            "value": 4658,
+            "display": "4,658",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 9042,
+            "display": "9,042",
+            "role": "distractor",
+            "errorType": "complement"
+          },
+          {
+            "value": 46580,
+            "display": "46,580",
+            "role": "distractor",
+            "errorType": "scale-slip"
+          }
+        ],
+        "chart": {
+          "labelMode": "percent",
+          "total": 13700,
+          "segmentValues": [
+            34,
+            26,
+            22,
+            18
+          ]
+        }
+      }
+    }
+  ],
+  "c02": [
+    {
+      "label": "c02 pinned on the reversal explicitly. Totals 11,100 then 15,700, a 41% rise. Foot passenger falls from 18% to 13% and still rises from 1,998 to 2,041, which is the trap. Freight wins on absolute growth at +1,521 while Coach party takes the largest share rise, so the share reading and the absolute reading are different labels.",
+      "tier": "hard",
+      "forced": {
+        "scenario": {
+          "org": "Calderwick Ferries",
+          "noun": "passengers",
+          "unitNoun": "passengers",
+          "early": "2018",
+          "late": "2023",
+          "cats": [
+            "Foot passenger",
+            "Car and driver",
+            "Freight",
+            "Coach party",
+            "Motorcycle",
+            "Cyclist"
+          ]
+        },
+        "segments": 6,
+        "total1": 11100,
+        "total2": 15700,
+        "shares1": [
+          18,
+          25,
+          16,
+          12,
+          19,
+          10
+        ],
+        "shares2": [
+          13,
+          23,
+          21,
+          18,
+          10,
+          15
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "s2",
+          "display": "Freight"
+        },
+        "options": [
+          {
+            "value": "s0",
+            "display": "Foot passenger",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": "s1",
+            "display": "Car and driver",
+            "role": "distractor",
+            "errorType": "headline-metric"
+          },
+          {
+            "value": "s2",
+            "display": "Freight",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "s3",
+            "display": "Coach party",
+            "role": "distractor",
+            "errorType": "share-not-absolute"
+          },
+          {
+            "value": "s4",
+            "display": "Motorcycle",
+            "role": "distractor",
+            "errorType": "sign-flip"
+          }
+        ],
+        "chart": {
+          "totals": [
+            11100,
+            15700
+          ],
+          "segmentValues": [
+            [
+              18,
+              25,
+              16,
+              12,
+              19,
+              10
+            ],
+            [
+              13,
+              23,
+              21,
+              18,
+              10,
+              15
+            ]
+          ]
+        }
+      }
+    }
+  ],
+  "d01": [
+    {
+      "label": "Hand-verified. 3 x EUR124.48 = EUR373.44 at GBP1 = 1.28 euros. 373.44 / 1.28 = 291.75 exactly, and 291.75 x 1.28 = 373.44 back. Q starts at three because q = 2 put an exact 2:1 pair in every option set.",
+      "tier": "standard",
+      "forced": {
+        "direction": "intoHome",
+        "cur": {
+          "name": "euros",
+          "one": "euro",
+          "symbol": "€",
+          "lo": 1.19,
+          "hi": 1.32,
+          "orders": [
+            {
+              "org": "a workshop in Hamburg",
+              "item": "brake assembly",
+              "plural": "brake assemblies"
+            }
+          ]
+        },
+        "order": {
+          "org": "a workshop in Hamburg",
+          "item": "brake assembly",
+          "plural": "brake assemblies"
+        },
+        "buyer": "Marguerite",
+        "q": 3,
+        "k": 128,
+        "pencePer": 12448,
+        "fillerBelow": true,
+        "filler": 261.15
+      },
+      "expect": {
+        "values": {
+          "unitPrice": 124.48,
+          "q": 3,
+          "totalPriced": 373.44,
+          "rate": 1.28
+        },
+        "answer": {
+          "value": 291.75,
+          "display": "£291.75"
+        },
+        "options": [
+          {
+            "value": 97.25,
+            "display": "£97.25",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 227.93,
+            "display": "£227.93",
+            "role": "distractor",
+            "errorType": "double-application"
+          },
+          {
+            "value": 261.15,
+            "display": "£261.15",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 291.75,
+            "display": "£291.75",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 478,
+            "display": "£478.00",
+            "role": "distractor",
+            "errorType": "inverted-rate"
+          }
+        ]
+      }
+    }
+  ],
+  "d02": [
+    {
+      "label": "Hand-verified. GBP840 at a 3% commission is GBP814.80, converted at the bureau's sell rate of 1.13 = EUR920.72. The spread band is 10 to 13 per cent, not the original spec's 1.5 to 4, because the mid-rate option sits halfway between the two sides and the narrower band cannot clear the 2% minimum option gap.",
+      "tier": "hard",
+      "forced": {
+        "direction": "buying",
+        "bureau": {
+          "city": "Dover",
+          "cur": "euros",
+          "one": "euro",
+          "sym": "€",
+          "lo": 112,
+          "hi": 132
+        },
+        "who": "Delphine",
+        "mid": 120,
+        "halfSpread": 7,
+        "commission": 3,
+        "amount": 840,
+        "fillerBelow": true,
+        "filler": 865
+      },
+      "expect": {
+        "values": {
+          "amount": 840,
+          "sell": 1.13,
+          "buy": 1.27,
+          "mid": 1.2,
+          "commission": 3,
+          "applied": 1.13
+        },
+        "answer": {
+          "value": 920.72,
+          "display": "€920.72"
+        },
+        "options": [
+          {
+            "value": 865,
+            "display": "€865.00",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 920.72,
+            "display": "€920.72",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 949.2,
+            "display": "€949.20",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 977.76,
+            "display": "€977.76",
+            "role": "distractor",
+            "errorType": "used-mid"
+          },
+          {
+            "value": 1034.8,
+            "display": "€1,034.80",
+            "role": "distractor",
+            "errorType": "wrong-side"
+          }
+        ]
+      }
+    }
+  ],
+  "d03": [
+    {
+      "label": "Hand-verified. Contribution 86.40 - 31.15 = 55.25; 41,800 / 55.25 = 756.5611, so 757 frames. The wrong-denominator option at 1,342 sits above the answer, which is sorted slot 4; drawing wantSlot 5 puts the variable cost above the margin and every distractor below. The distractor SET changed, not the arithmetic. The answer, and every value the `values` block pins, are unchanged. a01 traded `no-discount` for a far-side `omitted-component` and d03 traded `inverted` for a placeable filler, both to close a 100% zero-arithmetic scan exploit measured at 4.97x and 5.00x. The two draws that decide the set are forced here, per 9.4.",
+      "tier": "standard",
+      "forced": {
+        "line": {
+          "org": "Kelvedon Cycles",
+          "unit": "frame",
+          "plural": "frames",
+          "sym": "£"
+        },
+        "wantSlot": 4,
+        "price": 86.4,
+        "variable": 31.15,
+        "fixed": 41800,
+        "keepFloor": true
+      },
+      "expect": {
+        "values": {
+          "price": 86.4,
+          "variable": 31.15,
+          "margin": 55.25,
+          "fixed": 41800,
+          "quotient": 756.5611
+        },
+        "answer": {
+          "value": 757,
+          "display": "757 frames"
+        },
+        "options": [
+          {
+            "value": 484,
+            "display": "484 frames",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 756,
+            "display": "756 frames",
+            "role": "distractor",
+            "errorType": "round-down"
+          },
+          {
+            "value": 757,
+            "display": "757 frames",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 1342,
+            "display": "1,342 frames",
+            "role": "distractor",
+            "errorType": "wrong-denominator"
+          },
+          {
+            "value": 1343,
+            "display": "1,343 frames",
+            "role": "filler",
+            "errorType": "filler"
+          }
+        ]
+      }
+    }
+  ],
+  "d04": [
+    {
+      "label": "Hand-verified. A 35% markup is a margin of 0.35/1.35 = 25.93%. The complement 100/1.35 = 74.1% is cost as a share of the selling price, and 0.35/0.65 = 53.8% is the other formula applied to the given figure.",
+      "tier": "hard",
+      "forced": {
+        "seller": "Halcyon Tools",
+        "asked": "margin",
+        "cost": 64.2,
+        "givenPct": 35,
+        "fillerBelow": true,
+        "filler": 23.5
+      },
+      "expect": {
+        "values": {
+          "cost": 64.2,
+          "revenue": 86.67,
+          "givenPct": 35,
+          "asked": "margin"
+        },
+        "answer": {
+          "value": 25.9,
+          "display": "25.9%"
+        },
+        "options": [
+          {
+            "value": 23.5,
+            "display": "23.5%",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 25.9,
+            "display": "25.9%",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 35,
+            "display": "35%",
+            "role": "distractor",
+            "errorType": "margin-markup-confusion"
+          },
+          {
+            "value": 53.8,
+            "display": "53.8%",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 74.1,
+            "display": "74.1%",
+            "role": "distractor",
+            "errorType": "inverted"
+          }
+        ]
+      }
+    }
+  ],
+  "d05": [
+    {
+      "label": "Hand-verified. 878.40 / 1.20 = 732.00 exactly. The rate set is {15,20,22,25}, not the original spec's {5,12,20}: the multiply-down value is the answer times (1 - t squared), so at 5% it is 0.25% away and fails both the original spec's own 1% bar and the library's 2% option gap.",
+      "tier": "standard",
+      "forced": {
+        "rate": 20,
+        "who": "Rosalind",
+        "job": {
+          "org": "Wenlock Joinery",
+          "thing": "a workbench"
+        },
+        "grossPence": 87840,
+        "fillerBelow": false,
+        "filler": 915
+      },
+      "expect": {
+        "values": {
+          "gross": 878.4,
+          "rate": 20,
+          "answer": 732
+        },
+        "answer": {
+          "value": 732,
+          "display": "£732.00"
+        },
+        "options": [
+          {
+            "value": 175.68,
+            "display": "£175.68",
+            "role": "distractor",
+            "errorType": "wrong-quantity"
+          },
+          {
+            "value": 702.72,
+            "display": "£702.72",
+            "role": "distractor",
+            "errorType": "multiply-down"
+          },
+          {
+            "value": 732,
+            "display": "£732.00",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 915,
+            "display": "£915.00",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 1054.08,
+            "display": "£1,054.08",
+            "role": "distractor",
+            "errorType": "sign-flip"
+          }
+        ]
+      }
+    }
+  ],
+  "d06": [
+    {
+      "label": "Hand-verified. 480 x 0.75 x 0.85 = 306.00. Added rates give 480 x 0.60 = 288, and taking the 15% off the 120 saved rather than off the reduced price gives 360 - 18 = 342.",
+      "tier": "standard",
+      "forced": {
+        "shop": {
+          "name": "Calder & Finch",
+          "item": "a dining table",
+          "first": "the clearance event",
+          "second": "a trade account"
+        },
+        "d1": 25,
+        "d2": 15,
+        "pricePence": 48000,
+        "fillerBelow": true,
+        "filler": 320
+      },
+      "expect": {
+        "values": {
+          "price": 480,
+          "d1": 25,
+          "d2": 15,
+          "afterFirst": 360
+        },
+        "answer": {
+          "value": 306,
+          "display": "£306"
+        },
+        "options": [
+          {
+            "value": 288,
+            "display": "£288",
+            "role": "distractor",
+            "errorType": "added-rates"
+          },
+          {
+            "value": 306,
+            "display": "£306",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 320,
+            "display": "£320",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 342,
+            "display": "£342",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 360,
+            "display": "£360",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          }
+        ]
+      }
+    }
+  ],
+  "d07": [
+    {
+      "label": "Arithmetic hand-verified and unchanged: 14,300 x 1.09^5 = 14,300 x 1.5386239549 = 22,002.32, and simple interest at 45% gives 20,735.00. The DISTRACTOR SET changed and the reason is proved rather than measured: the interest-only value is the answer less the printed principal and the two off-by-ones put the answer in the middle of a geometric run in the printed rate, so both were solvable at 100%. Replacements: the untouched principal, the reverse-percentage value 14,300 / 0.91^5 = 14,300 / 0.6240321451 = 22,915.49, and the term compounded at a misread 7%, 14,300 x 1.07^5 = 20,056.49. This entry pins the below side, answer in sorted slot 4 of 5.",
+      "tier": "standard",
+      "forced": {
+        "fund": {
+          "org": "the Ashcombe Trust",
+          "thing": "an endowment"
+        },
+        "rate": 9,
+        "years": 5,
+        "principal": 14300,
+        "wrongSide": "below"
+      },
+      "expect": {
+        "values": {
+          "principal": 14300,
+          "rate": 9,
+          "years": 5,
+          "factor": 1.538624,
+          "wrongRate": 7
+        },
+        "answer": {
+          "value": 22002.32,
+          "display": "£22,002.32"
+        },
+        "options": [
+          {
+            "value": 14300,
+            "display": "£14,300.00",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          },
+          {
+            "value": 20056.49,
+            "display": "£20,056.49",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          },
+          {
+            "value": 20735,
+            "display": "£20,735.00",
+            "role": "distractor",
+            "errorType": "simple-not-compound"
+          },
+          {
+            "value": 22002.32,
+            "display": "£22,002.32",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 22915.49,
+            "display": "£22,915.49",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Arithmetic hand-verified and unchanged: 14,300 x 1.09^5 = 14,300 x 1.5386239549 = 22,002.32, and simple interest at 45% gives 20,735.00. The DISTRACTOR SET changed and the reason is proved rather than measured: the interest-only value is the answer less the printed principal and the two off-by-ones put the answer in the middle of a geometric run in the printed rate, so both were solvable at 100%. Replacements: the untouched principal, the reverse-percentage value 14,300 / 0.91^5 = 14,300 / 0.6240321451 = 22,915.49, and the term compounded at a misread 11%, 14,300 x 1.11^5 = 24,096.33. This entry pins the above side, answer in sorted slot 3 of 5.",
+      "tier": "standard",
+      "forced": {
+        "fund": {
+          "org": "the Ashcombe Trust",
+          "thing": "an endowment"
+        },
+        "rate": 9,
+        "years": 5,
+        "principal": 14300,
+        "wrongSide": "above"
+      },
+      "expect": {
+        "values": {
+          "principal": 14300,
+          "rate": 9,
+          "years": 5,
+          "factor": 1.538624,
+          "wrongRate": 11
+        },
+        "answer": {
+          "value": 22002.32,
+          "display": "£22,002.32"
+        },
+        "options": [
+          {
+            "value": 14300,
+            "display": "£14,300.00",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          },
+          {
+            "value": 20735,
+            "display": "£20,735.00",
+            "role": "distractor",
+            "errorType": "simple-not-compound"
+          },
+          {
+            "value": 22002.32,
+            "display": "£22,002.32",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 22915.49,
+            "display": "£22,915.49",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 24096.33,
+            "display": "£24,096.33",
+            "role": "distractor",
+            "errorType": "wrong-input"
+          }
+        ]
+      }
+    }
+  ],
+  "d08": [
+    {
+      "label": "Hand-verified. 5 x 480 = 2,400 total, less 1,888 given, leaves 512. Both off-by-ones sit ABOVE the answer, because one period short goes negative whenever the missing value is below the mean.",
+      "tier": "standard",
+      "forced": {
+        "set": {
+          "org": "Thrapston Depot",
+          "unit": "consignments",
+          "noun": "consignment",
+          "period": "week"
+        },
+        "n": 5,
+        "mean": 480,
+        "answer": 512,
+        "known": [
+          628,
+          451,
+          508,
+          301
+        ]
+      },
+      "expect": {
+        "values": {
+          "n": 5,
+          "mean": 480,
+          "total": 2400,
+          "sumKnown": 1888
+        },
+        "answer": {
+          "value": 512,
+          "display": "512"
+        },
+        "options": [
+          {
+            "value": 378,
+            "display": "378",
+            "role": "distractor",
+            "errorType": "wrong-operation"
+          },
+          {
+            "value": 480,
+            "display": "480",
+            "role": "distractor",
+            "errorType": "reported-input"
+          },
+          {
+            "value": 512,
+            "display": "512",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 813,
+            "display": "813",
+            "role": "distractor",
+            "errorType": "omitted-component"
+          },
+          {
+            "value": 992,
+            "display": "992",
+            "role": "distractor",
+            "errorType": "off-by-one"
+          }
+        ]
+      }
+    }
+  ],
+  "d09": [
+    {
+      "label": "Hand-verified. (9 x 340 + 620) / 10 = 3,680 / 10 = 368.0. Dividing by 9 gives 408.9 and averaging the old mean with the new figure gives 480.",
+      "tier": "standard",
+      "forced": {
+        "set": {
+          "org": "Pelham Haulage",
+          "unit": "deliveries",
+          "thing": "a new driver"
+        },
+        "side": "above",
+        "n": 9,
+        "oldMean": 340,
+        "newValue": 620,
+        "fillerBelow": true,
+        "filler": 355
+      },
+      "expect": {
+        "values": {
+          "n": 9,
+          "oldMean": 340,
+          "newValue": 620,
+          "oldTotal": 3060
+        },
+        "answer": {
+          "value": 368,
+          "display": "368"
+        },
+        "options": [
+          {
+            "value": 340,
+            "display": "340",
+            "role": "distractor",
+            "errorType": "omitted-final-step"
+          },
+          {
+            "value": 355,
+            "display": "355",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 368,
+            "display": "368",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 408.9,
+            "display": "408.9",
+            "role": "distractor",
+            "errorType": "off-by-one"
+          },
+          {
+            "value": 480,
+            "display": "480",
+            "role": "distractor",
+            "errorType": "unweighted-average"
+          }
+        ]
+      }
+    }
+  ],
+  "d17": [
+    {
+      "label": "Hand-verified. 4,800 / 2,400 = 2, and 2^(1/5) - 1 = 14.87%, so 14.9%. Rooting by 4 gives 18.9%. The original spec names the simple average twice, so the duplicate becomes wrong-base, growth over the end value.",
+      "tier": "hard",
+      "forced": {
+        "series": {
+          "org": "Wrenfield Logistics",
+          "metric": "turnover",
+          "unit": "£",
+          "scale": "m"
+        },
+        "years": 5,
+        "start": 2400,
+        "end": 4800,
+        "offBy": "short"
+      },
+      "expect": {
+        "values": {
+          "start": 2400,
+          "end": 4800,
+          "years": 5,
+          "ratio": 2,
+          "totalGrowth": 100
+        },
+        "answer": {
+          "value": 14.9,
+          "display": "14.9%"
+        },
+        "options": [
+          {
+            "value": 10,
+            "display": "10%",
+            "role": "distractor",
+            "errorType": "wrong-base"
+          },
+          {
+            "value": 14.9,
+            "display": "14.9%",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 18.9,
+            "display": "18.9%",
+            "role": "distractor",
+            "errorType": "off-by-one"
+          },
+          {
+            "value": 20,
+            "display": "20%",
+            "role": "distractor",
+            "errorType": "simple-average"
+          },
+          {
+            "value": 100,
+            "display": "100%",
+            "role": "distractor",
+            "errorType": "omitted-annualisation"
+          }
+        ]
+      }
+    }
+  ],
+  "d13": {
+    "formula": [
+      {
+        "label": "d13 arithmetic, hand-verified. Spending in £m divided by population in thousands gives £ per head: 89.0/227 = 392, 196.1/216 = 908, 125.5/171 = 734, 310.2/287 = 1081, 322.2/311 = 1036, 308.2/353 = 873. The largest is index 3 at 1081, against index 4 on the largest total of 322.2 and index 5 on the largest population of 353. NOTE: no independent fixture exists for this entry, so this pins arithmetic verified by hand rather than a second source.",
+        "input": {
+          "population": [
+            227,
+            216,
+            171,
+            287,
+            311,
+            353
+          ],
+          "spending": [
+            89,
+            196.1,
+            125.5,
+            310.2,
+            322.2,
+            308.2
+          ]
+        },
+        "expect": {
+          "perHead": [
+            392,
+            908,
+            734,
+            1081,
+            1036,
+            873
+          ],
+          "answerIndex": 3,
+          "largestTotalIndex": 4,
+          "largestPopulationIndex": 5,
+          "lowestPerHeadIndex": 0
+        }
+      }
+    ],
+    "cases": [
+      {
+        "label": "d13 build path on an injected civic dataset. Six authorities, five offered. The winner Denhollow is rank 5 of 6 on spending and rank 4 of 6 on population, both interior, with a per-head margin of 1081/1036 = 4.3% inside the 2 to 12 per cent band.",
+        "tier": "standard",
+        "dataset": {
+          "family": "civic",
+          "rows": [
+            {
+              "key": "pop",
+              "label": "Population (thousands)",
+              "unit": null,
+              "dp": 0,
+              "additive": false
+            },
+            {
+              "key": "early",
+              "label": "Capital spending 2019 (£m)",
+              "unit": null,
+              "dp": 1,
+              "additive": false
+            },
+            {
+              "key": "late",
+              "label": "Capital spending 2024 (£m)",
+              "unit": null,
+              "dp": 1,
+              "additive": false
+            }
+          ],
+          "cols": [
+            {
+              "key": "Gorsemere",
+              "label": "Gorsemere"
+            },
+            {
+              "key": "Belmarch",
+              "label": "Belmarch"
+            },
+            {
+              "key": "Ardwick",
+              "label": "Ardwick"
+            },
+            {
+              "key": "Denhollow",
+              "label": "Denhollow"
+            },
+            {
+              "key": "Everton",
+              "label": "Everton"
+            },
+            {
+              "key": "Frayling",
+              "label": "Frayling"
+            }
+          ],
+          "values": [
+            [
+              227,
+              216,
+              171,
+              287,
+              311,
+              353
+            ],
+            [
+              78.1,
+              159.6,
+              118.3,
+              283.9,
+              270.6,
+              289.9
+            ],
+            [
+              89,
+              196.1,
+              125.5,
+              310.2,
+              322.2,
+              308.2
+            ]
+          ],
+          "meta": {
+            "scenario": {
+              "noun": "transport authorities",
+              "of": "Authority",
+              "spendNoun": "capital spending",
+              "unitNoun": "residents",
+              "keys": [
+                "Ardwick",
+                "Belmarch",
+                "Colthorpe",
+                "Denhollow",
+                "Everton",
+                "Frayling",
+                "Gorsemere"
+              ],
+              "symbol": "£"
+            },
+            "rowHeading": "Authority",
+            "years": [
+              2019,
+              2024
+            ],
+            "symbol": "£",
+            "unitNoun": "residents",
+            "noun": "transport authorities",
+            "roles": {
+              "winner": 3,
+              "topSpend": 4,
+              "topPop": 5,
+              "lowPop": 2,
+              "lowPerHead": 0
+            },
+            "ranks": {
+              "spend": 5,
+              "pop": 4
+            },
+            "perHead": [
+              0.3920704845814978,
+              0.9078703703703703,
+              0.7339181286549707,
+              1.0808362369337978,
+              1.0360128617363344,
+              0.8730878186968838
+            ]
+          },
+          "totals": {
+            "row": false,
+            "col": false
+          },
+          "caption": "Capital spending and population, by authority",
+          "text": "The table shows capital spending in 2019 and 2024 for 6 transport authorities, together with the resident population each one serves. Population is unchanged between the two years."
+        },
+        "stimulusSeed": 1,
+        "expect": {
+          "answer": {
+            "value": "Denhollow",
+            "display": "Denhollow"
+          },
+          "options": [
+            {
+              "value": "Gorsemere",
+              "display": "Gorsemere",
+              "role": "distractor",
+              "errorType": "inverted"
+            },
+            {
+              "value": "Ardwick",
+              "display": "Ardwick",
+              "role": "distractor",
+              "errorType": "checked-extremes-only"
+            },
+            {
+              "value": "Denhollow",
+              "display": "Denhollow",
+              "role": "correct",
+              "errorType": null
+            },
+            {
+              "value": "Everton",
+              "display": "Everton",
+              "role": "distractor",
+              "errorType": "headline-metric"
+            },
+            {
+              "value": "Frayling",
+              "display": "Frayling",
+              "role": "distractor",
+              "errorType": "headline-metric"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
