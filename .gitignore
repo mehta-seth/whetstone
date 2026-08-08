@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+__MACOSX/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node — the project has no dependencies; this guards against accidental installs
+node_modules/
+npm-debug.log*
+
+# Generated audit report. Rebuild with `npm run audit`.
+audit/audit.html
+
+# Exported practice history is personal data. The directory is kept so the export
+# has somewhere to land; its contents are not committed. test/run.js asserts this
+# rule holds, because it is the kind of thing a later tidy-up silently reverses.
+logs/*.csv

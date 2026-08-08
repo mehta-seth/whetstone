@@ -1,0 +1,27 @@
+{
+  "name": "whetstone",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Numerical reasoning practice that generates every question from scratch. No question bank, no dependencies, no build step.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mehta-seth/whetstone.git"
+  },
+  "keywords": [
+    "numerical-reasoning",
+    "aptitude-test",
+    "question-generator",
+    "procedural-generation",
+    "zero-dependencies"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node tools/serve.js",
+    "test": "node test/run.js",
+    "audit": "node audit/build.js --n 200"
+  }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whetstone — numerical reasoning practice</title>
+<meta name="description" content="A local-first numerical reasoning trainer. Every question is generated at run time, never replayed from a bank.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#14524a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%2314524a'/%3E%3Cpath d='M8 21.5 16 8l8 13.5z' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <a class="skip-link" href="#screen">Skip to content</a>
+  <noscript>
+    <p style="padding:1.5rem;font:15px system-ui">Whetstone generates every question in the
+    browser, so it needs JavaScript enabled.</p>
+  </noscript>
+  <aside id="sidebar">
+    <div id="brand"></div>
+    <nav id="nav-train"></nav>
+    <nav id="nav-review"></nav>
+    <div id="progress-summary"></div>
+  </aside>
+  <main id="main">
+    <header id="session-bar"></header>
+    <div id="screen" tabindex="-1"></div>
+  </main>
+  <footer id="key-hints"></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
