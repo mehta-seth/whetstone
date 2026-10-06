@@ -83,7 +83,9 @@ export default {
           { value: dWrongBase, errorType: 'wrong-base',
             note: 'took the growth as a share of the final figure rather than the starting one, then divided by the years' },
           { value: dOffByOne, errorType: 'off-by-one',
-            note: `rooted by ${wrongN} rather than ${years}, which is the count of figures rather than the count of intervals` },
+            note: wrongN > years
+              ? `rooted by ${wrongN} rather than ${years}, which counts the ${wrongN} year-end figures rather than the ${years} intervals between them`
+              : `rooted by ${wrongN} rather than ${years}, one year short of the ${years} years of growth` },
         ],
         answerType: 'percentage', rng,
       });

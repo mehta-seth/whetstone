@@ -23,7 +23,7 @@ import { derivedSeries } from '../lib/dataset.js';
 //
 // ---------------------------------------------------------------------------------------
 // TWO VARIANTS, and the second one is not decoration. The archetype spec states the formula for a
-// single product, then gives an observed example that needs two: "How much energy would 3
+// single product, then gives a worked example that needs two: "How much energy would 3
 // packets of BBQ and 2 packets of Pickled Onion produce?" requires two different scale
 // factors in one item. So both are built.
 //

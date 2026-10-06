@@ -2709,7 +2709,7 @@
   ],
   "d05": [
     {
-      "label": "Hand-verified. 878.40 / 1.20 = 732.00 exactly. The rate set is {15,20,22,25}, not the original spec's {5,12,20}: the multiply-down value is the answer times (1 - t squared), so at 5% it is 0.25% away and fails both the original spec's own 1% bar and the library's 2% option gap.",
+      "label": "Hand-verified. 878.40 / 1.20 = 732.00 exactly. The rate set is {15,20,22,25}, not the original spec's {5,12,20}: the multiply-down value is the answer times (1 - t squared), so at 5% it is 0.25% away and fails both the original spec's own 1% bar and the library's 2% option gap. Updated in 1.1.1: the wrong-quantity option is the tax itself, £878.40 - £732.00 = £146.40. The spec defined it as gross x rate, £175.68, which is neither the tax nor the net price, while its note said \"the tax itself\".",
       "tier": "standard",
       "forced": {
         "rate": 20,
@@ -2734,8 +2734,8 @@
         },
         "options": [
           {
-            "value": 175.68,
-            "display": "£175.68",
+            "value": 146.4,
+            "display": "£146.40",
             "role": "distractor",
             "errorType": "wrong-quantity"
           },
@@ -3355,5 +3355,819 @@
         }
       }
     ]
-  }
+  },
+  "l01": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l01 item by an independent reader. Variant: \"who\".",
+      "tier": "standard",
+      "forced": {
+        "scenario": "standup",
+        "names": [
+          "Chloe",
+          "Hugo",
+          "Priya",
+          "Vera",
+          "Yara"
+        ],
+        "order": [
+          3,
+          4,
+          1,
+          0,
+          2
+        ],
+        "ask": "who",
+        "target": 3,
+        "clues": [
+          {
+            "type": "before",
+            "a": 0,
+            "b": 2
+          },
+          {
+            "type": "before",
+            "a": 3,
+            "b": 0
+          },
+          {
+            "type": "before",
+            "a": 4,
+            "b": 0
+          },
+          {
+            "type": "before",
+            "a": 1,
+            "b": 0
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "p0",
+          "display": "Chloe"
+        },
+        "options": [
+          {
+            "value": "p0",
+            "display": "Chloe",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "p1",
+            "display": "Hugo",
+            "role": "distractor",
+            "errorType": "reversed-order"
+          },
+          {
+            "value": "p2",
+            "display": "Priya",
+            "role": "distractor",
+            "errorType": "reversed-order"
+          },
+          {
+            "value": "p3",
+            "display": "Vera",
+            "role": "distractor",
+            "errorType": "reversed-order"
+          },
+          {
+            "value": "p4",
+            "display": "Yara",
+            "role": "distractor",
+            "errorType": "reversed-order"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l01 item by an independent reader. Variant: \"when\".",
+      "tier": "hard",
+      "forced": {
+        "scenario": "deliveries",
+        "names": [
+          "Ashby Foods",
+          "Brindle Paper",
+          "Dunmore Print",
+          "Elstree Glass",
+          "Garnet Labs"
+        ],
+        "order": [
+          2,
+          0,
+          1,
+          4,
+          3
+        ],
+        "ask": "when",
+        "target": 0,
+        "clues": [
+          {
+            "type": "gap",
+            "a": 1,
+            "b": 3,
+            "k": 1
+          },
+          {
+            "type": "either",
+            "a": 3,
+            "d1": 4,
+            "d2": 2
+          },
+          {
+            "type": "gap",
+            "a": 0,
+            "b": 4,
+            "k": 1
+          },
+          {
+            "type": "either",
+            "a": 4,
+            "d1": 2,
+            "d2": 3
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "d1",
+          "display": "Tuesday"
+        },
+        "options": [
+          {
+            "value": "d0",
+            "display": "Monday",
+            "role": "distractor",
+            "errorType": "gap-off-by-one"
+          },
+          {
+            "value": "d1",
+            "display": "Tuesday",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "d2",
+            "display": "Wednesday",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": "d3",
+            "display": "Thursday",
+            "role": "distractor",
+            "errorType": "missed-clue"
+          },
+          {
+            "value": "d4",
+            "display": "Friday",
+            "role": "distractor",
+            "errorType": "gap-off-by-one"
+          }
+        ]
+      }
+    }
+  ],
+  "l02": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l02 item by an independent reader. Variant: \"must\".",
+      "tier": "standard",
+      "forced": {
+        "scenario": "interviews",
+        "names": [
+          "Bruno",
+          "Farid",
+          "Maya",
+          "Orla",
+          "Zeke"
+        ],
+        "order": [
+          3,
+          0,
+          4,
+          2,
+          1
+        ],
+        "ask": "must",
+        "clues": [
+          {
+            "type": "notOn",
+            "a": 3,
+            "d": 4
+          },
+          {
+            "type": "notOn",
+            "a": 2,
+            "d": 2
+          },
+          {
+            "type": "before",
+            "a": 0,
+            "b": 4
+          },
+          {
+            "type": "gap",
+            "a": 1,
+            "b": 3,
+            "k": 3
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "before:3:0",
+          "display": "Orla is interviewed on an earlier day than Bruno."
+        },
+        "options": [
+          {
+            "value": "on:2:3",
+            "display": "Maya is interviewed on Thursday.",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          },
+          {
+            "value": "before:3:0",
+            "display": "Orla is interviewed on an earlier day than Bruno.",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "dayBefore:1:3",
+            "display": "Farid is interviewed the day before Orla.",
+            "role": "distractor",
+            "errorType": "reversed-order"
+          },
+          {
+            "value": "dayBefore:3:1",
+            "display": "Orla is interviewed the day before Farid.",
+            "role": "distractor",
+            "errorType": "overstated-order"
+          },
+          {
+            "value": "before:2:0",
+            "display": "Maya is interviewed on an earlier day than Bruno.",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l02 item by an independent reader. Variant: \"cannot\".",
+      "tier": "hard",
+      "forced": {
+        "scenario": "deliveries",
+        "names": [
+          "Ashby Foods",
+          "Dunmore Print",
+          "Garnet Labs",
+          "Hollis Packaging",
+          "Juniper Textiles"
+        ],
+        "order": [
+          0,
+          2,
+          3,
+          1,
+          4
+        ],
+        "ask": "cannot",
+        "clues": [
+          {
+            "type": "either",
+            "a": 0,
+            "d1": 0,
+            "d2": 1
+          },
+          {
+            "type": "end",
+            "a": 0,
+            "last": 4
+          },
+          {
+            "type": "gap",
+            "a": 4,
+            "b": 2,
+            "k": 2
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "on:3:0",
+          "display": "Hollis Packaging delivers on Monday."
+        },
+        "options": [
+          {
+            "value": "dayBefore:3:1",
+            "display": "Hollis Packaging delivers the day before Dunmore Print.",
+            "role": "distractor",
+            "errorType": "missed-arrangement"
+          },
+          {
+            "value": "on:3:3",
+            "display": "Hollis Packaging delivers on Thursday.",
+            "role": "distractor",
+            "errorType": "missed-arrangement"
+          },
+          {
+            "value": "on:2:1",
+            "display": "Garnet Labs delivers on Tuesday.",
+            "role": "distractor",
+            "errorType": "missed-arrangement"
+          },
+          {
+            "value": "before:0:3",
+            "display": "Ashby Foods delivers on an earlier day than Hollis Packaging.",
+            "role": "distractor",
+            "errorType": "answered-must-for-cannot"
+          },
+          {
+            "value": "on:3:0",
+            "display": "Hollis Packaging delivers on Monday.",
+            "role": "correct",
+            "errorType": null
+          }
+        ]
+      }
+    }
+  ],
+  "l03": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l03 item by an independent reader. Variant: \"suppose\".",
+      "tier": "standard",
+      "forced": {
+        "scenario": "shifts",
+        "names": [
+          "Dev",
+          "Farid",
+          "Maya",
+          "Nikhil",
+          "Tara",
+          "Umar"
+        ],
+        "team": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "ask": "suppose",
+        "x": 1,
+        "y": 4,
+        "clues": [
+          {
+            "type": "on",
+            "a": 0,
+            "t": 1
+          },
+          {
+            "type": "diff",
+            "a": 5,
+            "b": 3
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "p2",
+          "display": "Maya"
+        },
+        "options": [
+          {
+            "value": "p0",
+            "display": "Dev",
+            "role": "distractor",
+            "errorType": "contradicts-clues"
+          },
+          {
+            "value": "p2",
+            "display": "Maya",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "p3",
+            "display": "Nikhil",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          },
+          {
+            "value": "p4",
+            "display": "Tara",
+            "role": "distractor",
+            "errorType": "contradicts-clues"
+          },
+          {
+            "value": "p5",
+            "display": "Umar",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l03 item by an independent reader. Variant: \"partner\".",
+      "tier": "warmup",
+      "forced": {
+        "scenario": "offices",
+        "names": [
+          "Bruno",
+          "Chloe",
+          "Grace",
+          "Isla",
+          "Maya",
+          "Nikhil"
+        ],
+        "team": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1
+        ],
+        "ask": "partner",
+        "x": 2,
+        "y": 0,
+        "clues": [
+          {
+            "type": "diff",
+            "a": 5,
+            "b": 0
+          },
+          {
+            "type": "diff",
+            "a": 2,
+            "b": 0
+          }
+        ]
+      },
+      "expect": {
+        "answer": {
+          "value": "p5",
+          "display": "Nikhil"
+        },
+        "options": [
+          {
+            "value": "p0",
+            "display": "Bruno",
+            "role": "distractor",
+            "errorType": "missed-negation"
+          },
+          {
+            "value": "p1",
+            "display": "Chloe",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          },
+          {
+            "value": "p3",
+            "display": "Isla",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          },
+          {
+            "value": "p4",
+            "display": "Maya",
+            "role": "distractor",
+            "errorType": "possible-not-necessary"
+          },
+          {
+            "value": "p5",
+            "display": "Nikhil",
+            "role": "correct",
+            "errorType": null
+          }
+        ]
+      }
+    }
+  ],
+  "l04": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l04 item by an independent reader. Variant: \"backward\".",
+      "tier": "standard",
+      "forced": {
+        "atoms": [
+          6,
+          2,
+          4,
+          3
+        ],
+        "chain": [
+          {
+            "atom": 0,
+            "val": false
+          },
+          {
+            "atom": 1,
+            "val": true
+          },
+          {
+            "atom": 2,
+            "val": true
+          }
+        ],
+        "case": "backward",
+        "noneBy": "affirm",
+        "mVal": true,
+        "j": 0
+      },
+      "expect": {
+        "answer": {
+          "value": "l:01",
+          "display": "The bonus pool is released."
+        },
+        "options": [
+          {
+            "value": "l:30",
+            "display": "The new system does not go live.",
+            "role": "distractor",
+            "errorType": "denied-antecedent"
+          },
+          {
+            "value": "l:11",
+            "display": "The client renews the contract.",
+            "role": "distractor",
+            "errorType": "reversed-conclusion"
+          },
+          {
+            "value": "l:00",
+            "display": "The bonus pool is not released.",
+            "role": "distractor",
+            "errorType": "reversed-conclusion"
+          },
+          {
+            "value": "l:01",
+            "display": "The bonus pool is released.",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "none",
+            "display": "None of the other options follows from the information given.",
+            "role": "distractor",
+            "errorType": "missed-valid-inference"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every l04 item by an independent reader. Variant: \"none\".",
+      "tier": "hard",
+      "forced": {
+        "atoms": [
+          6,
+          8,
+          5,
+          4,
+          0
+        ],
+        "chain": [
+          {
+            "atom": 0,
+            "val": true
+          },
+          {
+            "atom": 1,
+            "val": true
+          },
+          {
+            "atom": 2,
+            "val": true
+          },
+          {
+            "atom": 3,
+            "val": false
+          }
+        ],
+        "case": "none",
+        "noneBy": "affirm",
+        "mVal": true,
+        "j": 0
+      },
+      "expect": {
+        "answer": {
+          "value": "none",
+          "display": "None of the other options follows from the information given."
+        },
+        "options": [
+          {
+            "value": "l:01",
+            "display": "The bonus pool is released.",
+            "role": "distractor",
+            "errorType": "affirmed-consequent"
+          },
+          {
+            "value": "l:11",
+            "display": "The merger is announced.",
+            "role": "distractor",
+            "errorType": "affirmed-consequent"
+          },
+          {
+            "value": "l:21",
+            "display": "The shipment clears customs.",
+            "role": "distractor",
+            "errorType": "affirmed-consequent"
+          },
+          {
+            "value": "l:41",
+            "display": "The audit is signed off.",
+            "role": "distractor",
+            "errorType": "affirmed-consequent"
+          },
+          {
+            "value": "none",
+            "display": "None of the other options follows from the information given.",
+            "role": "correct",
+            "errorType": null
+          }
+        ]
+      }
+    }
+  ],
+  "i01": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every i01 item by an independent reader. Variant: \"growing\".",
+      "tier": "standard",
+      "forced": {
+        "family": "growing",
+        "params": {
+          "a": 3,
+          "d0": 5,
+          "dd": 2
+        }
+      },
+      "expect": {
+        "answer": {
+          "value": 48,
+          "display": "48"
+        },
+        "options": [
+          {
+            "value": 46,
+            "display": "46",
+            "role": "distractor",
+            "errorType": "last-difference"
+          },
+          {
+            "value": 48,
+            "display": "48",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": 52,
+            "display": "52",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 56,
+            "display": "56",
+            "role": "filler",
+            "errorType": "filler"
+          },
+          {
+            "value": 63,
+            "display": "63",
+            "role": "distractor",
+            "errorType": "skipped-term"
+          }
+        ]
+      }
+    }
+  ],
+  "i02": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every i02 item by an independent reader. Variant: \"growing\".",
+      "tier": "hard",
+      "forced": {
+        "family": "growing",
+        "params": {
+          "a": 8,
+          "d0": 1,
+          "dd": 1
+        },
+        "coded": true,
+        "n0": 8,
+        "nd": 2
+      },
+      "expect": {
+        "answer": {
+          "value": "W18",
+          "display": "W18"
+        },
+        "options": [
+          {
+            "value": "W20",
+            "display": "W20",
+            "role": "distractor",
+            "errorType": "number-slip"
+          },
+          {
+            "value": "M18",
+            "display": "M18",
+            "role": "distractor",
+            "errorType": "reversed-direction"
+          },
+          {
+            "value": "V18",
+            "display": "V18",
+            "role": "distractor",
+            "errorType": "counted-inclusively"
+          },
+          {
+            "value": "W16",
+            "display": "W16",
+            "role": "distractor",
+            "errorType": "number-slip"
+          },
+          {
+            "value": "W18",
+            "display": "W18",
+            "role": "correct",
+            "errorType": null
+          }
+        ]
+      }
+    }
+  ],
+  "i03": [
+    {
+      "label": "Regression pin, generated from the code and checked by test/logical.mjs, which re-solves every i03 item by an independent reader. Variant: \"figure\".",
+      "tier": "hard",
+      "forced": {
+        "varying": [
+          "shade",
+          "orient",
+          "pos",
+          "mark"
+        ],
+        "rules": {
+          "orient": {
+            "kind": "alt",
+            "v": 4,
+            "w": 5
+          },
+          "shade": {
+            "kind": "cycle",
+            "v": 2,
+            "dir": -1
+          },
+          "pos": {
+            "kind": "step",
+            "v": 7,
+            "k": 2
+          },
+          "mark": {
+            "kind": "alt",
+            "v": 0,
+            "w": 2
+          }
+        }
+      },
+      "expect": {
+        "answer": {
+          "value": "5.0.1.2",
+          "display": "white arrow pointing down-left, triangle top middle"
+        },
+        "options": [
+          {
+            "value": "5.0.1.2",
+            "display": "white arrow pointing down-left, triangle top middle",
+            "role": "correct",
+            "errorType": null
+          },
+          {
+            "value": "4.0.1.2",
+            "display": "white arrow pointing down, triangle top middle",
+            "role": "distractor",
+            "errorType": "missed-change"
+          },
+          {
+            "value": "5.1.1.2",
+            "display": "grey arrow pointing down-left, triangle top middle",
+            "role": "distractor",
+            "errorType": "missed-change"
+          },
+          {
+            "value": "5.0.5.2",
+            "display": "white arrow pointing down-left, triangle bottom middle",
+            "role": "distractor",
+            "errorType": "reversed-change"
+          },
+          {
+            "value": "5.0.1.0",
+            "display": "white arrow pointing down-left, circle top middle",
+            "role": "distractor",
+            "errorType": "missed-change"
+          }
+        ]
+      }
+    }
+  ]
 }

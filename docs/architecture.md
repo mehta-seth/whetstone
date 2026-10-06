@@ -1,8 +1,11 @@
 # Architecture
 
-The two session formats are called *desks* in the code (`DESKS`, `deskId`, `forDesk`) — a
-workstation metaphor, kept because the identifier is load-bearing in `localStorage` keys and
-fixture data. On screen they appear by name: Problem Solving and Data Interpretation.
+The session formats are called *desks* in the code (`DESKS`, `deskId`, `forDesk`), a
+workstation metaphor kept because the identifier is load-bearing in `localStorage` keys and
+fixture data. On screen they appear by name: Problem Solving, Data Interpretation, Deductive
+Reasoning, Inductive Reasoning and Mixed Reasoning. Every archetype belongs to exactly one desk;
+Mixed Reasoning declares a `pool` of the desks it borrows from instead of owning archetypes, so no
+archetype ever carries two target times.
 
 Whetstone is a static ES-module application with no dependencies and no build step. The browser loads `js/app.js` directly; Node runs the same modules for the test suite and the audit generator, and `tools/serve.js` serves the files locally using nothing but the Node standard library. One runtime, no install step. That constraint shapes everything below.
 
@@ -42,6 +45,11 @@ Dependencies point downward only. An archetype may import from `lib/`; nothing i
 | `chart.js` | SVG chart rendering. |
 | `stimulus.js` | Shared stimuli — one table serving several questions. |
 | `relations.js` | Relationships between generated quantities. |
+| `logic.js` | Finite worlds (orders, splits, truth assignments), clue semantics, the misreading catalogue. |
+| `logic-text.js` | The English for deductive items, kept apart from the semantics so the two can be checked against each other. |
+| `series.js` | Number and letter rule libraries, and the index that makes a series identifiable. |
+| `figure.js` | Figure-series spec, SVG and text renderers, per-attribute rule library. |
+| `typed.js` | Reading a typed answer and matching it to the option it rounds to. |
 
 Comments throughout the codebase refer to "the spec" and "the archetype spec". That is
 [design-rules.md](design-rules.md), which states every rule the generator enforces.

@@ -48,6 +48,14 @@
 
   --accent-hover: #0f403a;
 
+  /* Figure-series palette, read by js/lib/figure.js with fallbacks for the audit page. */
+  --fig-frame: #9aa1ac;
+  --fig-grid:  #e2e5ea;
+  --fig-ink:   #14161a;
+  --fig-grey:  #9aa1ac;
+  --fig-paper: #ffffff;
+  --fig-mark:  #14524a;
+
   --sidebar-w: 216px;
   --focus: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
 }
@@ -98,6 +106,13 @@ button { font: inherit; color: inherit; }
     --chart-6:    #b98aa0;
 
     --accent-hover: #6ac9b8;
+
+    --fig-frame: #6a7280;
+    --fig-grid:  #262a31;
+    --fig-ink:   #e8eaee;
+    --fig-grey:  #6a7280;
+    --fig-paper: #16191f;
+    --fig-mark:  #4db6a4;
   }
 }
 /* Keyboard users should not have to tab the whole sidebar to reach a question. */

@@ -34,6 +34,9 @@ const AUDITS = [['March', 'September'], ['January', 'July'], ['Q1', 'Q3'], ['the
 const gcd = (a, b) => { while (b) { [a, b] = [b, a % b]; } return a; };
 const pct = h => (h / 100).toFixed(2);
 
+// "Aldbury Dairies'" rather than "Aldbury Dairies's".
+const possessive = name => (/s$/.test(name) ? `${name}'` : `${name}'s`);
+
 export default {
   id: 'a19',
   name: 'Percent change of a percentage',
@@ -119,10 +122,10 @@ export default {
       tier,
       stimulusType: 'prose',
       stimulus: {
-        text: `At ${audit[0]}, ${metric.owner} recorded a ${metric.name} of ${pct(oldH)}%. `
-            + `At ${audit[1]} the ${metric.name} was ${pct(newH)}%.`,
+        text: `In ${audit[0]}, ${metric.owner} recorded a ${metric.name} of ${pct(oldH)}%. `
+            + `In ${audit[1]} the ${metric.name} was ${pct(newH)}%.`,
       },
-      questionText: `By what percentage did ${metric.owner}'s ${metric.name} ${verb} between the two?`,
+      questionText: `By what percentage did ${possessive(metric.owner)} ${metric.name} ${verb} between the two?`,
       answerType: 'percentage',
       correct: { value: answer, display: options.find(o => o.role === 'correct').display },
       options,
@@ -130,7 +133,7 @@ export default {
       workings: {
         formulaText: this.formulaText,
         steps: [
-          `point difference = ${pct(oldH)} − ${pct(newH)} = ${pct(deltaH)} percentage points`,
+          `point difference = ${pct(Math.max(oldH, newH))} − ${pct(Math.min(oldH, newH))} = ${pct(deltaH)} percentage points`,
           `answer = ${pct(deltaH)} ÷ ${pct(oldH)} × 100 = ${answer}%`,
         ],
       },

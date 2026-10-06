@@ -27,9 +27,12 @@ import { groupDigits } from '../lib/money.js';
 // legitimate path is two divisions, a sum and a multiplication against one multiplication for the
 // attack, so this is the cost case that d06 documents and the sweep is the arbiter.
 const RACES = [
-  { org: 'the Hallmoor eight', legUnit: 'metres', act: 'rowed', split: 'half of the course' },
-  { org: 'the Redcastle relay squad', legUnit: 'metres', act: 'ran', split: 'half of the route' },
-  { org: 'the Kelsmoor swimmers', legUnit: 'metres', act: 'swam', split: 'half of the distance' },
+  // Leg speeds are held to what each activity can do, in metres per second. The first version drew
+  // every race from one time range, which had the swimmers covering 800 metres in 79 seconds, six
+  // times faster than the world record.
+  { org: 'the Hallmoor eight', legUnit: 'metres', act: 'rowed', split: 'half of the course', legs: [500, 750, 1000], vmin: 4.2, vmax: 6.4 },
+  { org: 'the Redcastle relay squad', legUnit: 'metres', act: 'ran', split: 'half of the route', legs: [400, 600, 800], vmin: 4.0, vmax: 8.2 },
+  { org: 'the Kelsmoor swimmers', legUnit: 'metres', act: 'swam', split: 'half of the distance', legs: [100, 200, 400], vmin: 1.0, vmax: 2.0 },
 ];
 
 export default {
@@ -67,18 +70,17 @@ export default {
     // archetype. Enumerating the legal (leg distance, moving time, first leg) triples costs nothing,
     // because every condition below is a function of those three alone.
     const legal = [];
-    for (const legM of [400, 500, 600, 750, 800]) {
-      for (let moving = 130; moving <= 400; moving++) {
+    for (const legM of race.legs) {
+      for (let moving = Math.ceil(2 * legM / race.vmax); moving <= Math.floor(2 * legM / race.vmin); moving++) {
         if ((72 * legM) % moving !== 0) continue;
         const ans = K * (2 * legM) / moving;
-        if (ans < 6 || ans > 30) continue;
         // A WHOLE ANSWER IS EXCLUDED AT THE ENUMERATION. The other four options carry a decimal, so
         // a whole answer makes it the only value with an empty fractional part and the central check
         // rejects it: 35.6% of attempts before this line. The spec wants awkward values anyway.
         if (Math.abs(ans - Math.round(ans)) < 1e-9) continue;
-        for (let a = 55; a <= moving - 55; a++) {
+        for (let a = Math.ceil(legM / race.vmax); a <= Math.floor(legM / race.vmin); a++) {
           const b = moving - a;
-          if (a === b) continue;
+          if (a === b || legM / b < race.vmin || legM / b > race.vmax) continue;
           const r = Math.max(legM / a, legM / b) / Math.min(legM / a, legM / b);
           if (r < 1.326 || r > 2.2) continue;
           legal.push([legM, a, b]);
@@ -133,7 +135,7 @@ export default {
     return {
       id: `d14#${rng.seed}`, archetypeId: 'd14', seed: rng.seed, tier,
       stimulusType: 'prose',
-      stimulus: { text: `${race.org} ${race.act} the first ${legM} ${race.legUnit} in ${t1} seconds, `
+      stimulus: { text: `${race.org.charAt(0).toUpperCase() + race.org.slice(1)} ${race.act} the first ${legM} ${race.legUnit} in ${t1} seconds, `
         + `rested for ${rest} seconds, then ${race.act} the second ${legM} ${race.legUnit} in ${t2} seconds.` },
       questionText: 'What was their average speed while moving, in kilometres per hour?',
       answerType: 'number',

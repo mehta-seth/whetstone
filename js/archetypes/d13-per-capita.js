@@ -73,7 +73,10 @@ export default {
 
     const label = i => ({ value: cols[i].key, display: cols[i].label, sortKey: i });
     const noun = d.meta.one;
-    const [, y2] = d.meta.years;
+    // meta.years became [early, index, late] when the price index row was added for d12, and this
+    // destructure kept taking the SECOND element: the stem asked about 2022, a year with no column,
+    // while every figure came from 2024.
+    const y2 = d.meta.years.at(-1);
 
     let options;
     try {

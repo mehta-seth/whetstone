@@ -66,9 +66,9 @@ export const OPTION_RULES = {
   nearBandMinCount: 3,       // at least this many of the five sit inside it
 };
 
-// Option ordering. 'realistic' reproduces the observed Desk 01 paper, which was
-// ascending in 15 of 18 items. A pure shuffle of five options lands ascending
-// once in 120, which is not the same test.
+// Option ordering. 'realistic' is ascending most of the time with the occasional exception,
+// which is how printed option lists usually run: ascending in about 15 items of 18. A pure
+// shuffle of five options lands ascending once in 120, which reads quite differently.
 export const REALISTIC_ASCENDING_P = 0.83;
 
 export const ITEM_SEED_STRIDE      = 7919;   // itemSeed = sessionSeed + i * this
@@ -83,3 +83,8 @@ export const STIMULUS_QUESTIONS_MIN    = 3;
 export const STIMULUS_QUESTIONS_MAX    = 7;
 export const STIMULUS_QUESTIONS_TARGET = 5;
 export const STIMULUS_SEED_STRIDE      = 104729;
+
+// Where "Report a problem" files its issue, and the version every report carries. A fork changes
+// REPO; test/run.js keeps APP_VERSION equal to package.json.
+export const REPO = 'mehta-seth/whetstone';
+export const APP_VERSION = '1.2.0';

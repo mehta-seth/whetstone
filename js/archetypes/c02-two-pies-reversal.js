@@ -138,6 +138,10 @@ export function formula({ shares1, shares2, total1, total2 }) {
     biggest:  argmax(shares2),       // largest segment in the later pie
     byFall:   argmin(delta),         // largest share decrease
     reversals: shares1.map((s, i) => shares2[i] < s && abs2[i] > abs1[i]).filter(Boolean).length,
+    // A tie at the top of the share rise let the shortcut land on the answer itself: 10% to 15% and
+    // 17% to 22% are the same five-point rise. Each role has to be the ONLY extreme on its own series.
+    uniqueRoles: [delta.filter(v => v === Math.max(...delta)).length, shares2.filter(v => v === Math.max(...shares2)).length,
+      delta.filter(v => v === Math.min(...delta)).length, gain.filter(v => v === Math.max(...gain)).length].every(n => n === 1),
   };
 }
 
@@ -242,6 +246,7 @@ export default {
     const f = found.f ?? formula({ shares1, shares2, total1, total2 });
     if (!f.reversals) return reject(diag, 'no-reversal');
     if (new Set([f.answer, f.byShare, f.biggest, f.byFall]).size !== 4) return reject(diag, 'roles-collide');
+    if (!f.uniqueRoles) return reject(diag, 'role-tied');
 
     const leftover = shares1.map((_, i) => i).find(i => ![f.answer, f.byShare, f.biggest, f.byFall].includes(i));
     if (leftover === undefined) return reject(diag, 'no-segment-left-for-the-fifth-option');
@@ -295,8 +300,7 @@ export default {
       stimulusType: 'chart',
       stimulus: {
         text: `${sc.org} recorded its ${sc.noun} by category in ${sc.early} and again in ${sc.late}. `
-          + `The two totals are not the same, so a category can take a smaller share of a larger `
-          + `number.`,
+          + `The total for each year is given beside its chart.`,
         chart,
       },
       questionText: `Which category grew the most in absolute terms between ${sc.early} and ${sc.late}?`,

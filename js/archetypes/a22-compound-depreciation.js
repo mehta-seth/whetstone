@@ -17,7 +17,7 @@ import { reject } from '../lib/validate.js';
 // three-term run in ratio 1/(1 - r): "find the run, take the smallest" hit 100% of 200 items
 // against a 2.5% coincidence baseline, one division and two multiplications against the
 // exponentiation the item exists to make you do. It had shipped since early on, and it was
-// invisible to three successive versions of the an earlier round sweep, because a three-chain has two
+// invisible to three successive versions of an earlier round's sweep, because a three-chain has two
 // pairs at one ratio so the unique-pair test returns null and the chain's middle member is a
 // distractor rather than the answer.
 //

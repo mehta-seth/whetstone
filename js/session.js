@@ -8,22 +8,43 @@ import { archetypes, forDesk } from './archetypes/index.js';
 import { selectArchetypes, reviewDue, reviewPlan } from './adaptive.js';
 import * as store from './store.js';
 import { skipAllowed } from './toggles.js';
+import { TYPABLE, parseTyped, matchTyped } from './lib/typed.js';
 
 export const DESKS = {
-  1: { id: 1, eyebrow: 'PROBLEM SOLVING', name: 'Problem Solving',
-       purpose: 'Word problems under the clock.',
+  1: { id: 1, eyebrow: 'NUMERICAL REASONING', name: 'Problem Solving',
+       purpose: 'Word problems on budgets, discounts, rates, averages and ratios. Spot what is really being asked, then calculate.',
        items: 18, minutes: 25, seconds: 83, lengths: [10, 18, 20] },
-  2: { id: 2, eyebrow: 'DATA INTERPRETATION', name: 'Data Interpretation',
-       purpose: 'Tables and charts. Twenty items in fifteen minutes.',
+  2: { id: 2, eyebrow: 'NUMERICAL REASONING', name: 'Data Interpretation',
+       purpose: 'Tables and charts. Find the right figures quickly, then work out shares, ratios and changes.',
        items: 20, minutes: 15, seconds: 45, lengths: [10, 20] },
+  // The logical-reasoning formats: 90 seconds a question for deductive items and 72 for inductive
+  // ones, the pace timed reasoning tests of this kind commonly set. Classify is left out: with three
+  // or four question types per format, naming the type is not a skill worth ten seconds a go.
+  3: { id: 3, eyebrow: 'LOGICAL REASONING', name: 'Deductive Reasoning',
+       purpose: 'Orders, groups and if-then rules. Work out what must be true, and what cannot be.',
+       items: 12, minutes: 18, seconds: 90, lengths: [6, 12, 16], modes: ['practice', 'tempo', 'exam', 'review'] },
+  4: { id: 4, eyebrow: 'LOGICAL REASONING', name: 'Inductive Reasoning',
+       purpose: 'Number, letter and figure series. Spot the rule, then apply it once more.',
+       items: 15, minutes: 18, seconds: 72, lengths: [8, 15], modes: ['practice', 'tempo', 'exam', 'review'] },
+  // A mixed sitting: a third each of data interpretation, deductive and inductive items,
+  // interleaved. It draws on the three formats' archetypes rather than owning any.
+  5: { id: 5, eyebrow: 'MIXED', name: 'Mixed Reasoning',
+       purpose: 'Data, deductive and inductive questions mixed together in one timed sitting.',
+       items: 24, minutes: 36, seconds: 90, lengths: [12, 24], pool: [2, 3, 4], modes: ['practice', 'tempo', 'exam'] },
 };
 
-export const inScope = ({ desk, tier, groups }) => forDesk(desk).filter(a =>
+// The archetypes a format draws on. A format with a `pool` borrows from other formats instead of
+// declaring its own, which keeps every archetype on exactly one desk and its target time single.
+export const deskPool = desk => (DESKS[desk]?.pool
+  ? archetypes.filter(a => a.desks.some(d => DESKS[desk].pool.includes(d)))
+  : forDesk(desk));
+
+export const inScope = ({ desk, tier, groups }) => deskPool(desk).filter(a =>
   (!tier || a.tiers.includes(tier)) && (!groups?.length || groups.includes(a.group)));
 
 export const groupsForDesk = desk => {
   const counts = {};
-  for (const a of forDesk(desk)) counts[a.group] = (counts[a.group] ?? 0) + 1;
+  for (const a of deskPool(desk)) counts[a.group] = (counts[a.group] ?? 0) + 1;
   return Object.entries(counts).sort((a, b) => a[0] < b[0] ? -1 : 1);
 };
 
@@ -324,6 +345,7 @@ export function buildItems({ desk, tier, groups, length, sessionSeed, adaptive, 
   if (desk === 2 && mode !== 'review') {
     return buildStimulusItems({ desk, tier, groups, length, sessionSeed, adaptive });
   }
+  if (DESKS[desk]?.pool) return buildMixed({ desk, tier, groups, length, sessionSeed, adaptive, mode });
   const pool = inScope({ desk, tier, groups });
   if (!pool.length) return { items: [], pool };
   // Review due bypasses the weighted sampler entirely. 13.6 is explicit that the mode's length
@@ -350,6 +372,38 @@ export function buildItems({ desk, tier, groups, length, sessionSeed, adaptive, 
     if (it) items.push(it);
   }
   return { items, pool };
+}
+
+// The mixed format. Each borrowed format builds its share through its own path, so data
+// interpretation still reads several questions off one table, and the three are interleaved: one
+// table's run of questions, then a deductive item, then an inductive one, and round again. A format
+// with nothing in scope at the chosen tier or groups gives its share to the others rather than
+// leaving the session short.
+const MIX_SEED_STRIDE = 15485863;
+function buildMixed({ desk, tier, groups, length, sessionSeed, adaptive, mode }) {
+  // A part's own groups are the selected groups that exist on it. With groups selected and none of
+  // them on a part, that part sits out; with nothing selected, every part takes everything.
+  const ownGroups = d => (groups?.length ? groups.filter(g => groupsForDesk(d).some(([x]) => x === g)) : []);
+  const live = DESKS[desk].pool.filter(d => (!groups?.length || ownGroups(d).length)
+    && inScope({ desk: d, tier, groups: ownGroups(d) }).length);
+  if (!live.length) return { items: [], pool: [] };
+  const share = live.map((_, i) => Math.floor(length / live.length) + (i < length % live.length ? 1 : 0));
+  const blocks = live.map((d, i) => buildItems({ desk: d, tier, groups: ownGroups(d), length: share[i],
+    sessionSeed: sessionSeed + (i + 1) * MIX_SEED_STRIDE, adaptive, mode }));
+  const pool = blocks.flatMap(b => b.pool);
+  // Group each block into runs: a shared table's questions stay together, everything else is a run of one.
+  const runs = blocks.map(b => {
+    const out = [];
+    for (const it of b.items) {
+      const last = out.at(-1);
+      if (last && it.stimulusId && last[0].stimulusId === it.stimulusId) last.push(it);
+      else out.push([it]);
+    }
+    return out;
+  });
+  const items = [];
+  while (runs.some(r => r.length)) for (const r of runs) if (r.length) items.push(...r.shift());
+  return { items: items.slice(0, length), pool };
 }
 
 // Classify mode offers eight archetype names: the correct one plus seven drawn preferentially
@@ -409,8 +463,11 @@ export function createRun(config) {
     responses: [], blurEvents: [], finishedAt: null,
   };
 
+  // Typed answers apply per item: a numeric item hides its options, anything else is still chosen.
+  const typedItem = it => !!config.toggles.typedAnswer && !isClassify && TYPABLE.has(it?.answerType);
+
   const state = items.map(() => ({
-    chosenIndex: null, setupText: '', msToFirstSetupKey: null,
+    chosenIndex: null, setupText: '', typedText: '', msToFirstSetupKey: null,
     accumulatedMs: 0, shownAt: null, submitted: false,
     flagged: false, skipped: false, timedOut: false,
   }));
@@ -431,6 +488,8 @@ export function createRun(config) {
     get index() { return index; },
     get current() { return items[index]; },
     get cur() { return state[index]; },
+    get typed() { return typedItem(items[index]); },
+    typedItem,
     finished: false,
 
     show() { if (state[index].shownAt === null) state[index].shownAt = Date.now(); },
@@ -439,6 +498,13 @@ export function createRun(config) {
       const s = state[index];
       if (s.submitted && config.toggles.instantFeedback) return false;
       s.chosenIndex = i;
+      return true;
+    },
+
+    type(text) {
+      const s = state[index];
+      if (s.submitted) return false;
+      s.typedText = text;
       return true;
     },
 
@@ -462,7 +528,8 @@ export function createRun(config) {
 
     canAdvance() {
       const s = state[index];
-      if (config.toggles.blockBlanks && s.chosenIndex === null) return false;
+      if (config.toggles.blockBlanks && (typedItem(items[index])
+        ? parseTyped(s.typedText, items[index].answerType) === null : s.chosenIndex === null)) return false;
       return true;
     },
 
@@ -474,7 +541,13 @@ export function createRun(config) {
       s.accumulatedMs += Date.now() - (s.shownAt ?? Date.now());
       s.shownAt = null;
       s.submitted = true;
-      s.skipped = skipped || (s.chosenIndex === null);
+      // A typed answer is matched to the option it rounds to, so everything downstream (scoring, the
+      // error type, the review table) reads it exactly as if that option had been picked.
+      const typed = typedItem(it);
+      const typedValue = typed ? parseTyped(s.typedText, it.answerType) : null;
+      if (typed) s.chosenIndex = typedValue === null ? null : (matchTyped(typedValue, it.options, it.answerType) >= 0
+        ? matchTyped(typedValue, it.options, it.answerType) : null);
+      s.skipped = skipped || (typed ? typedValue === null : s.chosenIndex === null);
       s.timedOut = timedOut;
       const chosen = s.chosenIndex === null ? null
         : (isClassify ? null : it.options[s.chosenIndex]);
@@ -495,7 +568,9 @@ export function createRun(config) {
         // archetype's 83 seconds, or the CSV misreports what the clock actually allowed.
         targetSeconds: Math.round((perItemMs ?? it.targetSeconds * 1000) / 1000),
         chosenIndex: s.chosenIndex,
-        chosenValue: chosen ? chosen.value : null,
+        chosenValue: chosen ? chosen.value : (typedValue ?? null),
+        typedText: typed ? s.typedText : null,
+        unmatched: typed && typedValue !== null && !chosen,
         correctValue: it.correct.value,
         correct: isClassify
           ? (pickedArch?.id === it.archetypeId)

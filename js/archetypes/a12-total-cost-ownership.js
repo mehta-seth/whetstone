@@ -102,7 +102,7 @@ import { tableSpec } from '../lib/table.js';
 // carries one derived distractor and two fillers.
 //
 // ---------------------------------------------------------------------------------
-// Two constraints hold by construction rather than by rejection, the an earlier round pattern:
+// Two constraints hold by construction rather than by rejection, an earlier round's pattern:
 //
 //   Trainee labour exceeds trainer labour in every package, always, because
 //   trainees × traineeRate >= 10 × 14 = 140 an hour while trainers × trainerRate
@@ -415,7 +415,16 @@ export default {
           note: `all four totals come to ${m(lowest)}` }
       : { value: packages[w].key, display: label(w), sortKey: w };
 
-    const spareFiller = spares.map(i => ({ value: packages[i].key, display: label(i), sortKey: i,
+    // THE CHEAPEST LICENCE IS ALWAYS A SHORTCUT. Items that drop the licence role still contain a
+    // package with the lowest licence fee, and a candidate who picks it took the headline price
+    // whatever the generator meant the slot for. Labelling it filler recorded that mistake as noise.
+    const lic = packages.map(p => p.licence);
+    const cheapest = lic.indexOf(Math.min(...lic));
+    for (const i of spares.filter(i => i === cheapest && !useLicence)) {
+      distractors.push({ value: packages[i].key, display: label(i), sortKey: i, errorType: 'headline-price',
+        note: `took the lowest licence fee, ${m(packages[i].licence)}, and stopped there` });
+    }
+    const spareFiller = spares.filter(i => useLicence || i !== cheapest).map(i => ({ value: packages[i].key, display: label(i), sortKey: i,
       note: 'filler, no shortcut lands on this package' }));
     const catchAll = { value: 'same', display: CATCH_ALL, sortKey: 9, kind: 'verdict',
       note: 'filler, the totals differ' };

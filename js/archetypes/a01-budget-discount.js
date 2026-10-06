@@ -150,7 +150,7 @@ export default {
     // LOWER member. Scan, take the lower, score 100%. a01 carries the warmup tier, so it is in near
     // constant rotation and this was the most exposed defect in the library.
     //
-    // THE OBVIOUS REPAIR WAS MEASURED AND IS DEAD. Both the strategic audit and the an earlier round brief
+    // THE OBVIOUS REPAIR WAS MEASURED AND IS DEAD. Both the strategic audit and an earlier round's brief
     // proposed a second adjacent pair, on the arithmetic that a scanner facing two pairs must then
     // guess and scores 50%. It scores 100%. With `no-discount` and `partial-discount` BOTH below the
     // answer and `round-up` the only thing above it, the answer's pair is always the highest pair in

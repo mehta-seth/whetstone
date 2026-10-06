@@ -8,14 +8,19 @@ What each archetype tests, with an example of each, is in [question-library.md](
 
 ## Formats
 
-Two, matching the two shapes numerical reasoning tests take.
+Five. Two for numerical reasoning, two for logical reasoning, and one that mixes them.
 
 | | Items | Time | Target per item | Archetypes |
 | --- | --- | --- | --- | --- |
 | **Problem Solving** | 18 | 25 min | 83 s | 36 |
 | **Data Interpretation** | 20 | 15 min | 45 s | 11 |
+| **Deductive Reasoning** | 12 | 18 min | 90 s | 4 |
+| **Inductive Reasoning** | 15 | 18 min | 72 s | 3 |
+| **Mixed Reasoning** | 24 | 36 min | 90 s | draws on the three above |
 
-Problem Solving is prose word problems. Data Interpretation reads off tables and charts, often with one stimulus serving several questions in a row. Both offer a 10-item run when you want a single sitting.
+Problem Solving is prose word problems. Data Interpretation reads off tables and charts, often with one stimulus serving several questions in a row. Deductive Reasoning is orders, groups and if-then rules, where the question is what must follow. Inductive Reasoning is number, letter and figure series, where the question is what comes next. Mixed Reasoning is a third of each of the last three, interleaved, in one timed sitting. Every format offers a shorter run when you want a single sitting.
+
+The logical formats leave out Classify: with three or four question types each, naming the type is not a skill worth drilling. Their Timed test mode has no back navigation, because timed reasoning tests of this kind rarely let you go back.
 
 ## Modes
 
@@ -25,7 +30,7 @@ Modes are **presets over the session options below**, not separate code paths. A
 | --- | --- |
 | **Practice** | Learning the method. No clock, feedback after every question, back navigation on. |
 | **Tempo** | Building speed. A per-item clock at the archetype's target pace, feedback still immediate. |
-| **Exam** | Measuring where you are. One session clock, feedback only at the end, blanks blocked, adaptive weighting off so the sample is unbiased. |
+| **Timed test** | Measuring where you are. One session clock, feedback only at the end, blanks blocked, adaptive weighting off so the sample is unbiased. |
 | **Classify** | Recognition drill. Ten seconds an item to *name* the question type without solving it. Recognising an archetype is most of solving it on a clock. |
 | **Review due** | Whatever the scheduler has queued — see [Review scheduling](#review-scheduling). |
 
@@ -49,7 +54,7 @@ The line under the setup box reads *N archetypes in scope · M flagged weak* —
 
 ## Session options
 
-Twelve toggles, under **Session options** on the setup screen. The header shows how many you have changed from the mode's defaults.
+Thirteen toggles, under **Session options** on the setup screen. The header shows how many you have changed from the mode's defaults.
 
 | Option | Effect |
 | --- | --- |
@@ -65,6 +70,7 @@ Twelve toggles, under **Session options** on the setup screen. The header shows 
 | Show option spread | After answering, show the gap between the two closest options |
 | Adaptive weighting | Weight selection toward weak archetypes. Off means uniform. |
 | Timer warning | Visual pulse in the final 60 seconds |
+| Type the answer | Hide the options on numeric items and type the value instead, the way some online tests ask. A value that rounds to what an option shows counts as that option, so a typed wrong answer still names its mistake; one that matches nothing is recorded as unmatched. Label, month and verdict items are still answered by choosing. Off by default. |
 
 **Option order** is a fourth choice alongside these:
 
@@ -112,11 +118,11 @@ staleness = 0.3 × min(days since last seen / 14, 1)
 
 The floor means nothing ever disappears from the pool entirely. A per-archetype cap of 25% of session length stops one weak archetype swallowing a session, and no archetype appears twice in a row.
 
-Turning **Adaptive weighting** off makes selection uniform. Exam mode does this by default: a biased sample is fine for training and useless for measurement.
+Turning **Focus on weak areas** off makes selection uniform. Timed test mode does this by default: a biased sample is fine for training and useless for measurement.
 
-## Flagging
+## Reporting a problem
 
-`F` flags the current item. A flag records the archetype and **the item's seed**, so a flagged question can be regenerated exactly — the same numbers, not merely the same type. That is what makes a bad item reportable, and it is why the issue template asks for the seed.
+**Report a problem** on the question screen, or `F`, opens a short form: pick what is wrong and add a note if you like. **Open a GitHub issue** then opens GitHub with the question, its options, your answer and the answer key already filled in, ready to submit; you need a free GitHub account. **Copy details** puts the same text on your clipboard instead. The session review has the same button under each question, and a reported question is marked in the review.
 
 ## Analytics
 
@@ -144,6 +150,6 @@ Analytics can export a CSV. It lands in `logs/`, which is gitignored — practic
 | `1`–`5` | Select an option (`1`–`8` in Classify) |
 | `Enter` | Submit, or advance |
 | `Esc` | Skip |
-| `F` | Flag the current item |
+| `F` | Report a problem with the current question |
 
 Keys are ignored while you are typing in the setup box, so a `3` in an expression is a 3.

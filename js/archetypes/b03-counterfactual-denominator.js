@@ -23,6 +23,11 @@ export function formula({ other, oldTotal, delta }) {
 
 const PCTS = [20, 25, 27, 30, 40, 50, 60];
 
+// A category named "Other" reads as a typo in "the number of Other", so it is written out the way the
+// printed tables usually write it: "animals in the Other category".
+const catOf = (d, c) => (d.cols[c].label === 'Other'
+  ? `${d.meta?.unitNoun ?? 'items'} in the Other category` : d.cols[c].label);
+
 export default {
   id: 'b03',
   name: 'Counterfactual that changes the denominator',
@@ -115,7 +120,7 @@ export default {
       return {
         id: `b03#${rng.seed}`, archetypeId: 'b03', seed: rng.seed, tier,
         stimulusType: 'table', stimulusId: stimulus.id, stimulus: stimulusFor(stimulus),
-        questionText: `If the number of ${d.cols[c].label} at ${d.rows[r].label} were ${verb} by `
+        questionText: `If the number of ${catOf(d, c)} at ${d.rows[r].label} were ${verb} by `
           + `${pct}%, what percentage of the ${d.meta.unitNoun} at ${d.rows[r].label} would then be `
           + `${d.cols[o].label}?`,
         answerType: 'percentage',

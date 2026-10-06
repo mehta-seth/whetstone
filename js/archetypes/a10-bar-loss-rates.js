@@ -51,8 +51,8 @@
 // Three routes were rejected. Shipping the pin with a note is indefensible, since "pick the
 // second tallest" would answer every item. Replacing the rate with a wide-range multiplier
 // relocates the same size of leak onto a column that sits in the caption rather than the chart,
-// which is easier to scan, so it is worse. Dropping a10 loses the single-bar form, which the real
-// paper contains and which a17 does not cover.
+// which is easier to scan, so it is worse. Dropping a10 loses the single-bar form, a staple of
+// chart questions, which a17 does not cover.
 //
 // NO STEM VARIANT. Varying the stem between most and fewest, as b06 does, is ruled out by the
 // visible-split rule: argmax puts the winner at height rank 2 and argmin at rank 5, the stem says
@@ -100,11 +100,11 @@ const RANK_PAIR_WEIGHTS = [
 ];
 
 const SCENARIOS = [
-  { org: 'Aldermay Group', unit: 'applications', pass: 'cleared first-round screening',
+  { org: 'Aldermay Group', unit: 'applications', pass: 'cleared first-round screening', stage: 'first-round screening',
     channels: ['Job board', 'Recruitment agency', 'Employee referral', 'Careers site', 'Campus fair'] },
-  { org: 'Nyeholt Partners', unit: 'applications', pass: 'passed the online assessment',
+  { org: 'Nyeholt Partners', unit: 'applications', pass: 'passed the online assessment', stage: 'the online assessment',
     channels: ['Open advert', 'Search firm', 'Alumni network', 'Direct approach', 'Insight day'] },
-  { org: 'Craymoor Bank', unit: 'applications', pass: 'reached the assessment centre',
+  { org: 'Craymoor Bank', unit: 'applications', pass: 'reached the assessment centre', stage: 'the screening stage before the assessment centre',
     channels: ['Graduate portal', 'Agency panel', 'Referral scheme', 'University fair', 'Spring week'] },
 ];
 
@@ -250,7 +250,7 @@ export default {
       bars: labels.map((l, i) => ({ label: l, value: heights[i] })),
       // 12.3 puts the per-bar rates in a caption rather than on the chart, so they are text and
       // the grid rule does not apply to them. checkChart only reads `bars`.
-      note: 'Percentage rejected at screening: '
+      note: `Percentage rejected at ${sc.stage}: `
         + labels.map((l, i) => `${l} ${rates[i]}%`).join(', ') + '.',
     });
 
@@ -283,7 +283,7 @@ export default {
       stimulusType: 'chart',
       stimulus: {
         text: `${sc.org} recorded how many ${sc.unit} came from each source this cycle, and what `
-          + `percentage of each was rejected at screening.`,
+          + `percentage of each was rejected at ${sc.stage}.`,
         chart,
       },
       questionText: `Which source produced the most ${sc.unit} that ${sc.pass}?`,

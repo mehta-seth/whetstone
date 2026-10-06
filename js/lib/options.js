@@ -32,7 +32,7 @@ export function assemble({ correct, distractors = [], filler = [], answerType, o
 //
 // Without the sortKey branch a label set came back in assemble order, which puts the
 // correct option first in every single item. Measured on a12 before the fix: slot 1 in
-// 100% of 200 items. That is a harder leak than an earlier round's open finding, because emit
+// 100% of 200 items. That is a harder leak than earlier round's open finding, because emit
 // order is exactly what a candidate sees under ascending and realistic ordering.
 const ascending = opts => {
   if (opts.every(o => typeof o.value === 'number')) return [...opts].sort((a, b) => a.value - b.value);

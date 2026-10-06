@@ -62,7 +62,9 @@ export default {
     const gross = grossPence / 100;
     const answer = netPence / 100;
     const dDown = roundTo(gross * (100 - t) / 100, 2);
-    const dTax = roundTo(gross * t / 100, 2);
+    // The tax itself is gross minus net. gross x rate is neither the tax nor the net price, and the
+    // option used to carry it while its note said "the tax itself".
+    const dTax = roundTo(gross - gross * 100 / (100 + t), 2);
     const dUp = roundTo(gross * (100 + t) / 100, 2);
     if (Math.abs(dDown - answer) < 0.01 * answer) return reject(diag, 'multiply-down-too-close');
 
@@ -93,7 +95,7 @@ export default {
         distractors: [
           { value: dDown, errorType: 'multiply-down',
             note: `took ${t}% off the gross instead of dividing it out, which is not the same thing` },
-          { value: dTax, errorType: 'wrong-quantity', note: `gave the tax itself rather than the figure before tax` },
+          { value: dTax, errorType: 'wrong-quantity', note: `gave the tax itself, ${money(dTax, '£', 2)}, rather than the price before tax` },
           { value: dUp, errorType: 'sign-flip', note: `added another ${t}% instead of stripping the tax already in the price` },
         ],
         filler: [{ value: filler, note: 'filler, close enough that magnitude cannot resolve the item' }],

@@ -137,7 +137,7 @@ export default {
       stimulusType: 'prose',
       stimulus: {
         text: `${kit.org} employs ${headcount} ${kit.roles}, and every one of them needs `
-            + `${kit.unit.s}. At the moment ${frac.t} of the ${kit.roles} do not have one. `
+            + `${/^[aeiou]/i.test(kit.unit.s) ? 'an' : 'a'} ${kit.unit.s}. At the moment ${frac.t} of the ${kit.roles} do not have one. `
             + `Headcount is due to rise by ${growth}%.`,
       },
       questionText: `How many more ${kit.unit.p} must be bought so that every ${kit.role} has one after the rise?`,

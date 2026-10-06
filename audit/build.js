@@ -18,6 +18,10 @@ import { chartText, chartSvg } from '../js/lib/chart.js';
 import { CATEGORICAL_TYPES } from '../js/lib/format.js';
 import { requiredFigures } from '../js/lib/precision.js';
 import { archetypes } from '../js/archetypes/index.js';
+import { figureSvg, figureText } from '../js/lib/figure.js';
+// Desks that own archetypes. The mixed format borrows from the others, so pooling it would count
+// every item twice.
+const DESK_IDS = [...new Set(archetypes.flatMap(a => a.desks))].sort();
 
 const argv = process.argv.slice(2);
 const arg = (name, fallback) => {
@@ -68,7 +72,7 @@ function checkManifest() {
   // Only a known section name opens a section. Testing "looks like a heading" first put every
   // sampled item's ARCHETYPE line in its own phantom section and credited the SAMPLE block zero.
   const ALL = [...REQUIRED_SECTIONS, ...OPTIONAL_SECTIONS];
-  const isRow = l => /^\s{2,}[a-d]\d{2}\b/.test(l) || /^ARCHETYPE [a-d]\d{2}/.test(l)
+  const isRow = l => /^\s{2,}[a-z]\d{2}\b/.test(l) || /^ARCHETYPE [a-z]\d{2}/.test(l)
     || /nothing above the reporting floor/.test(l) || /^\s+(rank|row counts|\d+ segments)/.test(l)
     || /^\s{4,}[A-Za-z].*\brank\b/.test(l)
     // The pooled section's rows are POOLS, not archetype ids, so none of the patterns
@@ -360,7 +364,7 @@ function optionAlgebra(items) {
 // five for free and is right nine times in ten. Best single slot is 1.65x chance.
 //
 // WHY IT READS ON SCREEN. Under 6.2 Desk 01 Exam is `realistic`, ascending 83% of the time, and Desk
-// 02 Exam is ascending outright. Both are correct reproductions of the observed papers. The
+// 02 Exam is ascending outright. Both match how printed option lists usually run. The
 // consequence is that sorted position equals displayed position most of the time, so this is not
 // buried in value space: it reads as "the answer is never A and never E".
 //
@@ -372,7 +376,7 @@ function optionAlgebra(items) {
 // AND THE SESSION-LEVEL FIX DOES NOT WORK, measured earlier rather than assumed. Preferring a
 // regenerated item whose answer is extreme can only sample what an archetype is capable of producing,
 // and 25 of 38 numeric archetypes never produce an extreme-slot item at all: see
-// test/probes/s7slotreach.mjs. Forcing the 13 that can to 100% extreme caps Desk 01's pooled extreme
+// test/probes/slot-reach.mjs. Forcing the 13 that can to 100% extreme caps Desk 01's pooled extreme
 // share at 9/31, about 29% against the 40% wanted, while taking a19 from 50/9/35/7/0 to roughly 100%
 // slot 1, which this harness's own bands call an EXTREME LEAK. That trades one 1.65x pooled shortcut
 // for four 5.00x per-archetype pins, which is the relocation failure already recorded at a12's
@@ -913,6 +917,10 @@ function textBlock(arch, item, index, total) {
     return ''.padEnd(pad) + o.display.padEnd(16) + '<- ' + tag;
   }).join('\n');
   const stim = [wrap('Stimulus:', item.stimulus.text ?? '')];
+  // Deductive clues, numbered as the app shows them, and figure frames as their attribute listing,
+  // which is what the reader checks the stated rules against.
+  for (const [i, l] of (item.stimulus.lines ?? []).entries()) stim.push(wrap(`  ${i + 1}.`, l));
+  for (const [i, fr] of (item.stimulus.figures ?? []).entries()) stim.push(wrap(`  ${i + 1}.`, figureText(fr)));
   if (item.stimulus.table) stim.push(tableText(item.stimulus.table, pad));
   // A chart's terminal rendition is a listing of exactly the figures the candidate can read
   // off it, not a picture, because what is checked is the formula against those figures.
@@ -930,7 +938,7 @@ function textBlock(arch, item, index, total) {
 }
 
 function htmlBlock(arch, item, index, total) {
-  const rows = item.options.map(o => `      <tr class="${o.role}"><td class="opt">${esc(o.display)}</td>`
+  const rows = item.options.map(o => `      <tr class="${o.role}"><td class="opt">${o.figure ? figureSvg(o.figure, { size: 44 }) + ' ' : ''}${esc(o.display)}</td>`
     + `<td class="why">${o.role === 'correct' ? 'CORRECT' : esc(o.note ?? '')}</td>`
     + `<td class="et">${esc(o.errorType ?? '')}</td></tr>`).join('\n');
   return `
@@ -938,6 +946,8 @@ function htmlBlock(arch, item, index, total) {
     <div class="ihead"><span>Item ${index} of ${total}</span><span class="seed">seed ${item.seed}</span></div>
     <dl>
       <dt>Stimulus</dt><dd>${esc(item.stimulus.text ?? '')}${
+        item.stimulus.lines ? `<ol>${item.stimulus.lines.map(l => `<li>${esc(l)}</li>`).join('')}</ol>` : ''}${
+        item.stimulus.figures ? `<div>${item.stimulus.figures.map(fr => figureSvg(fr, { size: 56 })).join(' ')}</div>` : ''}${
         item.stimulus.table ? tableHtml(item.stimulus.table, { cls: 'audit-table' }) : ''}${
         item.stimulus.chart ? chartSvg(item.stimulus.chart) : ''}</dd>
       <dt>Question</dt><dd class="q">${esc(item.questionText)}</dd>
@@ -1408,9 +1418,9 @@ if (withCorr.length) {
         + `${(100 * p.extremes).toFixed(1)}%`.padStart(10) + flag);
     };
     line('all', all);
-    for (const d of [1, 2]) line(`desk ${d}`, pooledPosition(summary.filter(s => s.arch.desks.includes(d))));
+    for (const d of DESK_IDS) line(`desk ${d}`, pooledPosition(summary.filter(s => s.arch.desks.includes(d))));
     for (const t of ['warmup', 'standard', 'hard']) {
-      for (const d of [1, 2]) {
+      for (const d of DESK_IDS) {
         const rows = summary.filter(s => s.arch.desks.includes(d) && s.arch.tiers.includes(t));
         line(`desk ${d} ${t}`, pooledPosition(rows));
       }
@@ -1422,7 +1432,7 @@ if (withCorr.length) {
     console.log('  numeric archetypes never produce an extreme slot, so it caps at about 29% against a');
     console.log('  40% target while pinning a19, b03, d02 and d03 at roughly 5.00x. Practise in the');
     console.log('  shuffled modes, where the whole modal share collapses to chance, and keep Exam');
-    console.log('  authentic. See test/probes/s7slotreach.mjs for the reachability table.');
+    console.log('  authentic. See test/probes/slot-reach.mjs for the reachability table.');
   }
 }
 

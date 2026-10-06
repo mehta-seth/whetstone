@@ -1,6 +1,7 @@
 import { OPTION_RULES } from './constants.js';
 import { NUMERIC_TYPES, ANSWER_TYPES, CATEGORICAL_TYPES, EXPLICIT_DISPLAY_TYPES, displayDp } from './format.js';
 import { onGrid, atMidpoint, axisTicks, readableValues } from './chart.js';
+import { checkFigureStimulus } from './figure.js';
 
 // Named failure strings. The audit page reports rates per name, so keep them
 // stable in the same way errorType strings are stable.
@@ -122,8 +123,8 @@ export function checkOptionSet(options, answerType, context = {}) {
 
 export const optionSet = (options, answerType, context = {}) => checkOptionSet(options, answerType, context).length === 0;
 
-// Standalone table stimulus, part A3. One small table serving one question, which is
-// what the real Desk 01 paper showed. Desk 02's shared-stimulus system is an earlier round.
+// Standalone table stimulus, part A3. One small table serving one question, the way word-problem
+// papers use tables. Desk 02's shared-stimulus system is an earlier round.
 //
 // The spec asks that table totals equal the sum of their parts. None of the three
 // A3 archetypes prints a total row, so the predicate has nothing to check yet, but it is
@@ -161,6 +162,14 @@ export function checkItem(it) {
   if (!it.archetypeId || !it.id) f.push('missing-id');
   if (!it.questionText) f.push('missing-question');
   if (!it.stimulus || (it.stimulusType === 'prose' && !it.stimulus.text)) f.push('missing-stimulus');
+  // Deductive items carry their clues as separate lines so they render as a list. An item with an
+  // intro and no clues is unanswerable, and one with an empty or repeated clue is malformed.
+  if (it.stimulusType === 'logic') {
+    const lines = it.stimulus?.lines;
+    if (!it.stimulus?.text || !Array.isArray(lines) || !lines.length) f.push('missing-clues');
+    else if (lines.some(l => typeof l !== 'string' || !l.trim()) || new Set(lines).size !== lines.length) f.push('bad-clue-line');
+  }
+  if (it.stimulusType === 'figure') f.push(...checkFigureStimulus(it));
   if (it.stimulusType === 'table') f.push(...checkTable(it.stimulus?.table));
   if (it.stimulusType === 'chart') f.push(...checkChart(it.stimulus?.chart));
   if (!ANSWER_TYPES.has(it.answerType)) f.push('unknown-answer-type');
@@ -175,7 +184,7 @@ export function checkItem(it) {
 
 export const item = (it) => checkItem(it).length === 0;
 
-// Chart stimulus. Replaces the an earlier round stub. Named failures, same convention
+// Chart stimulus. Replaces an earlier stub. Named failures, same convention
 // as checkOptionSet and checkTable, so the audit reports rates per name.
 //
 // The grid rule is the whole of the spec as amended: a readable value lands on a

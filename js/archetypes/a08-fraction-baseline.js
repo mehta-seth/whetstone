@@ -17,10 +17,13 @@ import { sig2 } from '../lib/precision.js';
 // because pouring away two fifths cancels the five.
 
 const VESSELS = [
-  { org: 'a cider press', vessel: 'vat', liquid: 'juice', unit: 'of a vat' },
-  { org: 'a paint shop', vessel: 'drum', liquid: 'tint base', unit: 'of a drum' },
-  { org: 'a brewery', vessel: 'tank', liquid: 'wort', unit: 'of a tank' },
-  { org: 'a syrup works', vessel: 'kettle', liquid: 'syrup', unit: 'of a kettle' },
+  // The amounts are measured in a unit (a barrel, a gallon), not as how full the vessel is. Measured as
+  // fullness, "50% more than it held" put 5/6 of a vat up to 5/4 of one, an overflowing vat, in every
+  // item whose start exceeded two thirds, including the specification's own fixture.
+  { org: 'a cider press', vessel: 'vat', liquid: 'juice', unit: 'of a barrel' },
+  { org: 'a paint shop', vessel: 'mixing drum', liquid: 'tint base', unit: 'of a gallon' },
+  { org: 'a brewery', vessel: 'tank', liquid: 'wort', unit: 'of a barrel' },
+  { org: 'a syrup works', vessel: 'kettle', liquid: 'syrup', unit: 'of a gallon' },
 ];
 
 const STARTS = [[5, 6], [5, 8], [7, 8], [7, 12], [11, 12]];
@@ -183,7 +186,7 @@ export default {
       tier,
       stimulusType: 'prose',
       stimulus: {
-        text: `At ${vessel.org} a ${vessel.vessel} of ${vessel.liquid} is ${start.display} full. `
+        text: `At ${vessel.org}, a ${vessel.vessel} holds ${start.display} ${vessel.unit} of ${vessel.liquid}. `
             + `${pour.display === '1/2' ? 'Half' : pour.display} of the ${vessel.liquid} in it is drawn off, `
             + `and a further ${spill.display} ${vessel.unit} is lost to a spill. `
             + `The ${vessel.vessel} must end up holding ${up}% more ${vessel.liquid} than it held to begin with.`,

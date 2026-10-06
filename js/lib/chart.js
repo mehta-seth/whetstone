@@ -63,6 +63,17 @@ export const projector = ({ axisMax, top, height }) => ({
   unproject: y => axisMax * (1 - (y - top) / height),
 });
 
+// The rotated axis label has the plot height to fit in, about 44 characters at this size. A label
+// carrying its precision note ran to 74 and was cut off at the top, which hid the very note that
+// licenses reading a bar at a half gridline. A long label breaks before its bracket onto a second line.
+function axisLabelSvg(axisLabel, plot) {
+  const mid = plot.top + plot.height / 2;
+  const line = (x, t) => `<text class="axis-label" x="${x}" y="${mid}" transform="rotate(-90 ${x} ${mid})">${esc(t)}</text>`;
+  const cut = axisLabel.indexOf(' (');
+  if (axisLabel.length <= 44 || cut < 0) return line(14, axisLabel);
+  return line(12, axisLabel.slice(0, cut)) + line(26, axisLabel.slice(cut + 1));
+}
+
 function frame({ axisMax, interval, axisLabel, categories }) {
   const plot = {
     left: GEOM.padLeft, top: GEOM.padTop,
@@ -85,7 +96,7 @@ function frame({ axisMax, interval, axisLabel, categories }) {
     svg: `<g class="frame">${lines}`
       + `<line class="axis" x1="${plot.left}" y1="${plot.top + plot.height}" x2="${plot.left + plot.width}" y2="${plot.top + plot.height}"/>`
       + `<line class="axis" x1="${plot.left}" y1="${plot.top}" x2="${plot.left}" y2="${plot.top + plot.height}"/>`
-      + `<text class="axis-label" x="14" y="${plot.top + plot.height / 2}" transform="rotate(-90 14 ${plot.top + plot.height / 2})">${esc(axisLabel)}</text>`
+      + axisLabelSvg(axisLabel, plot)
       + cats + `</g>`,
   };
 }
@@ -258,7 +269,7 @@ function stacked100Svg(s) {
 // caption and never inside the chart. Angles come from the labelled figure so the wedge and
 // its label can never disagree, and the last wedge closes on the first by construction
 // rather than by arithmetic, so there is no rounding drift at 360 degrees.
-function pieSvg(s, offsetX = 0, geom = GEOM.pie) {
+function pieSvg(s, offsetX = 0, geom = GEOM.pie, withLegend = true) {
   const { cx, cy, r } = geom;
   const total = s.segments.reduce((a, x) => a + x.value, 0);
   let acc = -90;
@@ -281,18 +292,27 @@ function pieSvg(s, offsetX = 0, geom = GEOM.pie) {
   const labels = s.segments.map((seg, i) =>
     `<rect class="key s${i}" x="${430 + offsetX}" y="${GEOM.padTop + 14 + i * 22 - 9}" width="11" height="11"/>`
     + `<text class="legend-t" x="${446 + offsetX}" y="${GEOM.padTop + 14 + i * 22}">${esc(seg.label)}</text>`).join('');
-  return wedges + labels;
+  return wedges + (withLegend ? labels : '');
 }
 
 function piesSvg(s) {
   // Two pies, different totals. Both totals are stated in the caption, never on the chart,
   // so the absolute-versus-share reversal cannot be read off without using them.
   const g = { cx: 158, cy: 210, r: 104 };
-  const one = pieSvg({ segments: s.pies[0].segments }, 0, g);
-  const two = pieSvg({ segments: s.pies[1].segments }, 356, g);
+  // ONE LEGEND, BELOW BOTH PIES. Each pie used to draw its own legend at a fixed offset from its
+  // centre, which put the first pie's legend on top of the second pie and the second pie's legend
+  // beyond the right edge of the canvas, so two of the category names were unreadable or missing.
+  // The two pies share their labels, so one legend serves both.
+  const one = pieSvg({ segments: s.pies[0].segments }, 0, g, false);
+  const two = pieSvg({ segments: s.pies[1].segments }, 356, g, false);
   const titles = s.pies.map((p, i) =>
     `<text class="cap" x="${(i ? 514 : 158)}" y="${GEOM.padTop + 4}" text-anchor="middle">${esc(p.label)}</text>`).join('');
-  return wrap(s, titles + one + two);
+  const shared = s.pies[0].segments.map((seg, i) => {
+    const x = GEOM.padLeft + (i % 3) * 210, y = 352 + Math.floor(i / 3) * 22;
+    return `<rect class="key s${i}" x="${x}" y="${y - 9}" width="11" height="11"/>`
+      + `<text class="legend-t" x="${x + 16}" y="${y}">${esc(seg.label)}</text>`;
+  }).join('');
+  return wrap(s, titles + one + two + shared);
 }
 
 function wrap(s, inner) {

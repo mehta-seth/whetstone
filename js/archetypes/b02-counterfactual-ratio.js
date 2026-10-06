@@ -10,8 +10,8 @@ import { roundTo } from '../lib/money.js';
 //
 // Perturb one cell, then evaluate a ratio on the modified data.
 //
-// The archetype spec ASKS FOR AN APPROXIMATE ANSWER, WHICH SECTION 4 FORBIDS. Its observed example is a
-// 63% reduction, and 0.37 times a plausible count is not a whole number, which is why the real
+// The archetype spec ASKS FOR AN APPROXIMATE ANSWER, WHICH SECTION 4 FORBIDS. Its worked example is a
+// 63% reduction, and 0.37 times a plausible count is not a whole number, which is why such a
 // stem says "approximate ratio". But an answer chosen by rounding is not defined by a formula,
 // and the spec's first rule is that the answer must be. So the generator searches the dataset
 // for a (cell, percentage, denominator) triple whose ratio is EXACTLY a simple ratio, and the
@@ -43,8 +43,8 @@ import { roundTo } from '../lib/money.js';
 // fall below it, and on an increase it is the largest. "Pick the smallest ratio" scores 62% with
 // no arithmetic at all. That is worse than any of the Desk 01 cases in open item 9, because Desk
 // 02's exam preset orders options ascending rather than realistically, so there is no shuffle
-// diluting it and the order default is not up for negotiation: the observed GF paper was
-// ascending in all twenty items.
+// diluting it and the order default is not up for negotiation: data papers of this
+// kind list options in ascending order.
 //
 // Adding a fifth distractor is not available, so one of the three had to go, and which one is
 // forced: all three are same-direction, so the geometry is identical whichever is dropped, and
@@ -80,6 +80,11 @@ export function formula({ cell, den, pct, direction }) {
     ignored: cell / den, signFlip: cell * (2 - k) / den,
     rawArith: raw / den, inverted: den / (cell * k) };
 }
+
+// A category named "Other" reads as a typo in "the number of Other", so it is written out the way the
+// printed tables usually write it: "animals in the Other category".
+const catOf = (d, c) => (d.cols[c].label === 'Other'
+  ? `${d.meta?.unitNoun ?? 'items'} in the Other category` : d.cols[c].label);
 
 export default {
   id: 'b02',
@@ -215,7 +220,7 @@ export default {
       return {
         id: `b02#${rng.seed}`, archetypeId: 'b02', seed: rng.seed, tier,
         stimulusType: 'table', stimulusId: stimulus.id, stimulus: stimulusFor(stimulus),
-        questionText: `If the number of ${d.cols[c].label} at ${d.rows[r].label} were ${verb} by `
+        questionText: `If the number of ${catOf(d, c)} at ${d.rows[r].label} were ${verb} by `
           + `${pct}%, what would the ratio of ${d.cols[c].label} to ${den.label} at `
           + `${d.rows[r].label} then be?`,
         answerType: 'ratio',

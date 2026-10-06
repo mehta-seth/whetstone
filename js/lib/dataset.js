@@ -7,7 +7,7 @@
 //
 // ---------------------------------------------------------------------------------------
 // FAMILIES. The archetype spec Part B says one table serves 3 to 7 questions and never says which
-// archetypes may share one. Its own observed examples make three incompatible shapes, and
+// archetypes may share one. Its own worked examples make three incompatible shapes, and
 // the incompatibility is semantic rather than arithmetic:
 //
 //   regional   zoos x animal types. Additive along both axes, so a row total, a column
@@ -185,16 +185,19 @@ export function regionalDataset(rng, { places = 4, cats = 5 } = {}) {
 }
 
 const RETAIL = [
+  // `scale` multiplies the drawn price ladder so the figures fit the product: a cup of coffee at about
+  // £2 to £5, a tin of paint at about £12 to £30, a tyre at about £45 to £110. One ladder for all three
+  // printed tyres at £2.17. Shares and argmaxes are scale-free, so no answer moves.
   { set: 'coffee', unit: 'cups', item: 'coffee', sizes: ['Small', 'Regular', 'Medium', 'Large', 'Extra large'],
-    org: 'Bramber Coffee', symbol: '£' },
+    org: 'Bramber Coffee', symbol: '£', scale: 1 },
   { set: 'paint', unit: 'tins', item: 'paint', sizes: ['250ml', '500ml', '1 litre', '2.5 litre', '5 litre'],
-    org: 'Halloway Paints', symbol: '£' },
-  { set: 'tyre', unit: 'tyres', item: 'tyre', sizes: ['13 inch', '14 inch', '15 inch', '16 inch', '17 inch'],
-    org: 'Kirkmoor Tyres', symbol: '£' },
+    org: 'Halloway Paints', symbol: '£', scale: 6 },
+  { set: 'tyre', unit: 'tyres', item: 'tyres', sizes: ['13 inch', '14 inch', '15 inch', '16 inch', '17 inch'],
+    org: 'Kirkmoor Tyres', symbol: '£', scale: 22 },
 ];
 
 // retail. Only the quantity row is additive. price = cost + profit is printed in full,
-// exactly as the observed coffee table does, which is what makes b06's "difference of two
+// exactly as the classic coffee-shop table does, which is what makes b06's "difference of two
 // rows" already visible and forces its derived series to be a product instead.
 // THE WEIGHTING IS THE BUILDER'S DEFAULT, not something a caller has to remember.
 //
@@ -248,10 +251,11 @@ export function retailDataset(rng, { sizes = 5, want = undefined, tries = 40000 
     // b06's derived series is quantity x profit, and a tie in the profit row makes its argmax
     // ambiguous.
     price = []; cost = [];
+    const k = scen.scale ?? 1;
     let p = roundTo(rng.float(1.55, 2.35), 2);
     for (let i = 0; i < sizeKeys.length; i++) {
-      price.push(roundTo(p, 2));
-      cost.push(roundTo(p * rng.float(0.32, 0.82), 2));
+      price.push(roundTo(p * k, 2));
+      cost.push(roundTo(p * k * rng.float(0.32, 0.82), 2));
       p += rng.float(0.35, 0.85);
     }
     profit = price.map((v, i) => roundTo(v - cost[i], 2));
@@ -494,7 +498,7 @@ function finishCivic(scen, keys, pop, early, late, percap, d18, index) {
 // start for a reason. Measured at seven entities, dropping it moves the role separation from 1.23%
 // to 8.08% and the start-column floor from 33% to 25%, so 1.75x rather than 2.33x. That is better
 // than five roles at eight entities, which reached 2.03x, and it keeps the table inside the width
-// the observed papers actually use. The fifth option becomes the leftover entity, labelled from its
+// a printed data table can comfortably carry. The fifth option becomes the leftover entity, labelled from its
 // real rank on the asked series the way a10 and a14 label theirs.
 //
 // THE JOINT CELL IS DRAWN FROM A SOLVED WEIGHTING. Forced-draw measurement put six of nine cells

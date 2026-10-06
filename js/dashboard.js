@@ -39,17 +39,17 @@ function atTargetPanel(rows) {
   const total = allArchetypes.length;
   const share = pc(at.length, total);
   return `
-    <h2>At target</h2>
-    <p class="purpose"><b>${at.length}</b> of ${total} at target, meaning mastery
-      ${AT_TARGET_MASTERY} or better across at least ${AT_TARGET_MIN_ATTEMPTS} attempts.</p>
+    <h2>Mastered</h2>
+    <p class="purpose"><b>${at.length}</b> of ${total} question types mastered, meaning a score of
+      ${Math.round(AT_TARGET_MASTERY * 100)}% or better across at least ${AT_TARGET_MIN_ATTEMPTS} attempts.</p>
     ${at.length ? `<ul class="tag-list">${at.map(r =>
       `<li>${esc(r.name)} <span class="empty mono">${r.mastery.toFixed(2)}</span></li>`).join('')}</ul>`
-      : '<p class="empty">Nothing at target yet.</p>'}
+      : '<p class="empty">Nothing mastered yet.</p>'}
     <div class="coverage-note${share >= COVERAGE_GOAL_PCT ? ' hit' : ''}">
       ${share >= COVERAGE_GOAL_PCT
-        ? `<b>${share}% of the library is at target.</b> Breadth is no longer the constraint;
-           from here, Review due and Tempo are worth more than new coverage.`
-        : `${share}% of the library is at target. Breadth first: an archetype you have never
+        ? `<b>${share}% of question types mastered.</b> Breadth is no longer the constraint;
+           from here, Review due and Tempo are worth more than new ground.`
+        : `${share}% of question types mastered. Breadth first: a type of question you have never
            seen costs more on the clock than one you are merely slow at.`}
     </div>`;
 }
@@ -57,10 +57,10 @@ function atTargetPanel(rows) {
 // Panel 2. Accuracy by archetype, worst first.
 function accuracyPanel(rows) {
   const measured = rows.filter(r => r.attempts > 0).sort((a, b) => a.mastery - b.mastery);
-  if (!measured.length) return '<h2>Accuracy by archetype</h2><p class="empty">No answered items yet.</p>';
+  if (!measured.length) return '<h2>Accuracy by question type</h2><p class="empty">No answered items yet.</p>';
   return `
-    <h2>Accuracy by archetype, worst first</h2>
-    <table class="grid"><thead><tr><th>Archetype</th><th>Group</th><th class="num">Attempts</th>
+    <h2>Accuracy by question type, worst first</h2>
+    <table class="grid"><thead><tr><th>Question type</th><th>Group</th><th class="num">Attempts</th>
       <th class="num">Correct</th><th class="num">Accuracy</th><th class="num">Median</th>
       <th class="num">Target</th></tr></thead><tbody>
       ${measured.map(r => `<tr${r.atTarget ? ' class="at-target"' : ''}>
@@ -97,7 +97,7 @@ function splitPanel() {
   const widest = Math.max(...rows.map(r => r.total));
   return `
     <h2>Comprehension against arithmetic</h2>
-    <p class="purpose">Median split per archetype, from the first keystroke in the Setup box.
+    <p class="purpose">Median split per question type, from the first keystroke in the working box.
       Sorted by the share spent reading rather than calculating.</p>
     <div class="split-list">${rows.map(r => `
       <div class="split-row">
@@ -113,14 +113,19 @@ function splitPanel() {
 }
 
 // Panel 4. Error types ranked, phrased as the spec asks: "wrong percentage base: 7 of your last 12".
+// A filler pick, or a typed value that matches no option, is a wrong answer that no named method
+// explains. Ranking "filler" as a mistake family beside "wrong-base" told you that you kept making the
+// mistake called filler; it is grouped and named for what it is instead.
+const UNMODELLED = 'no named method (a guess, or a mistake no option models)';
+const familyOf = r => (r.errorType && r.errorType !== 'filler' ? r.errorType : UNMODELLED);
 function errorPanel() {
-  const wrong = solved().filter(r => !r.correct && !r.skipped && r.errorType);
+  const wrong = solved().filter(r => !r.correct && !r.skipped && r.mode !== 'classify');
   const recent = wrong.slice(-12);
   const counts = {};
-  for (const r of wrong) counts[r.errorType] = (counts[r.errorType] ?? 0) + 1;
+  for (const r of wrong) counts[familyOf(r)] = (counts[familyOf(r)] ?? 0) + 1;
   const ranked = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
   if (!ranked.length) return '<h2>Error types ranked</h2><p class="empty">No errors logged yet.</p>';
-  const recentCount = k => recent.filter(r => r.errorType === k).length;
+  const recentCount = k => recent.filter(r => familyOf(r) === k).length;
   return `
     <h2>Error types ranked</h2>
     <table class="grid"><thead><tr><th>Mistake family</th><th class="num">All time</th>
@@ -161,15 +166,15 @@ function weightPanel(rows, deskId, adaptiveOn) {
   const cap = Math.max(Math.ceil(ARCHETYPE_SHARE_CAP * length), Math.ceil(length / Math.max(1, rows.length)));
   const sorted = [...rows].sort((a, b) => b.weight - a.weight);
   return `
-    <h2>The weight table</h2>
-    <p class="purpose">Every archetype in scope for ${DESKS[deskId].name}, with its mastery score and its
-      expected share of the next ${length} item session. Adaptive weighting is currently
-      <b>${adaptiveOn ? 'on' : 'off, so selection is uniform'}</b>. No archetype may exceed
+    <h2>What comes up next</h2>
+    <p class="purpose">Every question type in ${DESKS[deskId].name}, with its mastery score and its
+      expected share of the next ${length} item session. Focus on weak areas is currently
+      <b>${adaptiveOn ? 'on' : 'off, so every type is equally likely'}</b>. No question type may exceed
       ${cap} items in one session, and none may appear twice in a row.</p>
     <div class="btn-row" style="justify-content:flex-start">
-      <button class="btn" data-act="toggle-adaptive">Turn adaptive weighting ${adaptiveOn ? 'off' : 'on'}</button>
+      <button class="btn" data-act="toggle-adaptive">Turn focus on weak areas ${adaptiveOn ? 'off' : 'on'}</button>
     </div>
-    <table class="grid"><thead><tr><th>Archetype</th><th class="num">Attempts</th>
+    <table class="grid"><thead><tr><th>Question type</th><th class="num">Attempts</th>
       <th class="num">Mastery</th><th class="num">Weight</th><th class="num">Expected items</th>
       <th>Share of the next session</th></tr></thead><tbody>
       ${sorted.map(r => {
@@ -201,9 +206,9 @@ function classifyPanel() {
   }
   return `
     <h2>Classification</h2>
-    <p class="purpose">Naming the archetype without solving it. Stored separately from solving
+    <p class="purpose">Naming the type of question without solving it. Stored separately from solving
       accuracy, because they are different skills.</p>
-    <table class="grid"><thead><tr><th>Archetype</th><th class="num">Seen</th>
+    <table class="grid"><thead><tr><th>Question type</th><th class="num">Seen</th>
       <th class="num">Named right</th><th>Most often mistaken for</th></tr></thead><tbody>
       ${rows.map(r => `<tr><td>${esc(r.name)}</td><td class="num">${r.attempts}</td>
         <td class="num">${pc(r.correct, r.attempts)}%</td>
@@ -221,8 +226,8 @@ export function renderDashboard(deskId, onToggleAdaptive) {
   const due = reviewDue(pool, mastery);
 
   $('#screen').innerHTML = `
-    <div class="eyebrow">REVIEW</div><h1>Analytics</h1>
-    <p class="purpose">${DESKS[deskId].name}. ${rows.length} archetypes in scope
+    <div class="eyebrow">PROGRESS</div><h1>Your progress</h1>
+    <p class="purpose">${DESKS[deskId].name}. ${rows.length} question types
       ${due.length ? `· ${due.length} due for review` : '· nothing due'}.</p>
     <div class="panel">${atTargetPanel(rows)}</div>
     <div class="panel">${weightPanel(rows, deskId, adaptiveOn)}</div>

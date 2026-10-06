@@ -1,9 +1,9 @@
 {
   "name": "whetstone",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "Numerical reasoning practice that generates every question from scratch. No question bank, no dependencies, no build step.",
+  "description": "Free practice for the numerical and logical reasoning tests in job applications: unlimited fresh questions, worked answers, and an explanation of every wrong option.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -11,10 +11,16 @@
   },
   "keywords": [
     "numerical-reasoning",
+    "logical-reasoning",
     "aptitude-test",
     "question-generator",
     "procedural-generation",
-    "zero-dependencies"
+    "zero-dependencies",
+    "interview-preparation",
+    "practice",
+    "deductive-reasoning",
+    "inductive-reasoning",
+    "data-interpretation"
   ],
   "engines": {
     "node": ">=18"
@@ -23,5 +29,9 @@
     "start": "node tools/serve.js",
     "test": "node test/run.js",
     "audit": "node audit/build.js --n 200"
+  },
+  "homepage": "https://mehta-seth.github.io/whetstone/",
+  "bugs": {
+    "url": "https://github.com/mehta-seth/whetstone/issues"
   }
 }

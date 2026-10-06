@@ -121,7 +121,8 @@ export default {
           `pair rate = ${n(pairOutput)} ÷ ${pairHours} = ${pairRate} an hour`,
           `trio rate = ${n(trioOutput)} ÷ ${trioHours} = ${trioRate} an hour`,
           `${crew.c} = ${trioRate} − ${pairRate} = ${thirdRate} an hour`,
-          `answer = ${thirdRate} × ${targetHours} = ${n(answer)} ${crew.out.p}`,
+          // The hours are shown to four places, not as a raw float: 5 hours 20 minutes printed as 5.333333333333333.
+          `answer = ${thirdRate} × ${Number.isInteger(targetHours) ? targetHours : targetHours.toFixed(4)} hours = ${n(answer)} ${crew.out.p}`,
           `the ${ratio}-to-1 speed ratio is not needed for this question`,
         ],
       },

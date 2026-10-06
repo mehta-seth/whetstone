@@ -111,7 +111,7 @@ export default {
         distractors: [
           { value: dWrongDenom, errorType: 'wrong-denominator',
             note: `divided by the number of parts rather than by their sum, so by 3 instead of ${sum}` },
-          { value: dWrongPart, errorType: 'wrong-part', note: `gave ${pot.who[otherIdx]}'s share instead` },
+          { value: dWrongPart, errorType: 'wrong-part', note: `gave ${pot.who[otherIdx]}${/s$/.test(pot.who[otherIdx]) ? "'" : "'s"} share instead` },
           { value: dGap, errorType: 'wrong-quantity', note: 'gave the difference between the other two shares' },
           { value: dEqual, errorType: 'ignored-ratio', note: 'split the money equally and ignored the ratio' },
         ],

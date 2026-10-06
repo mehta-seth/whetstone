@@ -1,0 +1,21 @@
+name: Something is broken
+description: The site does not load, a button does nothing, a screen looks wrong, or progress was lost.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and device
+      placeholder: e.g. Safari on iPhone, Chrome on Windows
+  - type: input
+    id: version
+    attributes:
+      label: Whetstone version
+      description: Shown at the bottom of the About page.

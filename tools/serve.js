@@ -1,5 +1,5 @@
 // Static file server for local development. Node's standard library only, so the
-// project needs exactly one runtime — the same one the tests and the audit use.
+// project needs exactly one runtime, the same one the tests and the audit use.
 //
 // The app loads js/app.js as a native ES module, which the browser will not do over
 // file://, so it has to be served over HTTP. That is the entire reason this exists.
@@ -84,7 +84,7 @@ server.on('error', err => {
 
 server.listen(port, () => {
   const url = `http://localhost:${port}`;
-  console.log(`Whetstone is running on ${url} — ctrl-c to stop`);
+  console.log(`Whetstone is running on ${url}, ctrl-c to stop`);
 
   if (!shouldOpen) return;
   // Best effort. A failure here is not worth reporting: the URL is above.

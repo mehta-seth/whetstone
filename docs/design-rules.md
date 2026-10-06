@@ -29,6 +29,17 @@ This matters for two reasons. Scoring: the error type of the option chosen is wh
 
 An archetype with a fixed catch-all option ("Cannot say", "All would cost the same") must have that option be correct sometimes. A catch-all that is never right is a free elimination.
 
+### Logical items
+
+The same rule, applied to reasoning rather than arithmetic.
+
+- **The answer is constructed, the enumeration is the check.** A deductive item starts from a hidden arrangement drawn first, and every clue is true of it. Whether the clues settle the question is decided by enumerating every arrangement they allow: 120 orders, 20 splits, or at most 32 truth assignments. That is exhaustive, so it is a definition rather than a search.
+- **A wrong option is what a misreading leads to.** Drop one clue, reverse one, read "the day before" as "earlier", read "exactly two days between" as "two days apart", miss a "not", read a conditional backwards. Each is applied to the clue set and the same enumeration says what it would answer. When several misreadings reach one option, it is labelled with the one that leaves the fewest answers open, since that is the likelier cause.
+- **Clue sets are minimal.** No clue can be dropped without unsettling the answer, and no single clue settles it alone, so every item needs clues combined.
+- **A series is identifiable.** Number and letter series are shown only if no rule in the library fits the same five terms and predicts something else. Figure series are checked attribute by attribute, and every attribute is drawn so that a rule on it is visible: an arrow rather than a symmetric shape, because rotating a square shows nothing.
+- **Scanning shortcuts are measured, then thinned.** A minimal clue set tends to circle its answer, so the answer was the most-named person in 35% of raw items against 20% by chance. Where the audit finds an answer sitting at one end of a visible column (mentions, statement length), that corner of the space is thinned until the column reads near chance. The residual is reported, not hidden: `l03`'s mentions column sits at about 1.6x because one rank is structurally unreachable.
+- **An independent reader re-solves every item.** `test/logical.mjs` re-reads each clue spec with its own semantics and its own enumeration, sharing no code with the generator, and checks that each clue's wording carries the phrase its semantics needs.
+
 ## 3. Answer positioning
 
 Two properties, both distributional, both invisible in any single item:

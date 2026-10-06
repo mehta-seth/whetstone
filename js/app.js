@@ -24,8 +24,9 @@ const validTier = t => (TIERS.some(x => x.id === t) ? t : 'standard');
 function ui(deskId) {
   if (!uiState[deskId]) {
     const saved = store.settings().setup?.[deskId] ?? {};
+    const allowed = DESKS[deskId].modes;
     uiState[deskId] = {
-      mode: saved.mode ?? 'practice',
+      mode: saved.mode && (!allowed || allowed.includes(saved.mode)) ? saved.mode : 'practice',
       tier: validTier(saved.tier),
       groups: saved.groups ?? [],
       length: saved.length ?? DESKS[deskId].items,
@@ -218,8 +219,9 @@ function route() {
     return;
   }
   if (hash === '#review') { if (run) R.renderReview(run); else location.hash = '#home'; return; }
-  if (hash === '#desk1') return mountSetup(1);
-  if (hash === '#desk2') return mountSetup(2);
+  if (hash === '#about') return R.renderAbout();
+  const desk = hash.match(/^#desk(\d)$/);
+  if (desk && DESKS[desk[1]]) return mountSetup(Number(desk[1]));
   if (hash === '#analytics') return mountDashboard();
 
   const saved = store.active();
@@ -229,6 +231,19 @@ function route() {
       () => { store.abandonSession(saved); R.toast('Session abandoned'); location.hash = '#home'; route(); });
   }
   R.renderHome();
+  // One click from the home screen into a session, with nothing to set up first.
+  $('#screen').querySelectorAll('[data-quick]').forEach(b => b.addEventListener('click', () =>
+    quickStart(Number(b.dataset.desk), b.dataset.quick)));
+}
+
+function quickStart(deskId, kind) {
+  const d = DESKS[deskId];
+  Object.assign(ui(deskId), {
+    mode: kind === 'exam' ? 'exam' : 'practice', tier: 'standard', groups: [], overrides: {},
+    length: kind === 'exam' ? d.items : d.lengths[0],
+  });
+  persist(deskId);
+  startSession(deskId);
 }
 
 function mountDashboard() {
@@ -236,7 +251,7 @@ function mountDashboard() {
   const { csvButton } = renderDashboard(deskId, () => mountDashboard());
   csvButton?.addEventListener('click', () => {
     const name = store.downloadCsv();
-    R.toast(`${name} downloaded. Saved to logs/, which stays out of version control.`);
+    R.toast(`Your practice history was downloaded as ${name}.`);
   });
 }
 
@@ -257,7 +272,7 @@ function resume(saved) {
     const i = run.items.findIndex(it => it.id === r.itemId);
     if (i >= 0) {
       Object.assign(run.state[i], {
-        chosenIndex: r.chosenIndex, setupText: r.setupText ?? '', submitted: true,
+        chosenIndex: r.chosenIndex, setupText: r.setupText ?? '', typedText: r.typedText ?? '', submitted: true,
         skipped: r.skipped, flagged: r.flagged, accumulatedMs: r.msToSubmit,
         msToFirstSetupKey: r.msToFirstSetupKey, shownAt: null,
       });
@@ -273,18 +288,19 @@ function resume(saved) {
 // One rule: everything is ignored while focus is inside a text input, so typing 3
 // in the Setup box types a 3. Tab is never trapped.
 document.addEventListener('keydown', e => {
+  if (document.querySelector('dialog[open]')) return;  // the report dialog owns the keyboard while open
   if (e.target.matches('input, textarea')) return;
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   if (!run || run.finished || location.hash !== '#session') return;
   if (e.key >= '1' && e.key <= '8') {
+    if (run.typed) return;                  // typed items are answered in the input, not by number
     const i = Number(e.key) - 1;
     if (i < run.optionCount()) { e.preventDefault(); choose(i); }
   } else if (e.key === 'Enter') { e.preventDefault(); advance(); }
   else if (e.key === 'Escape') { e.preventDefault(); skip(); }
   else if (e.key === 'f' || e.key === 'F') {
     e.preventDefault();
-    R.toast(run.flag() ? 'Flagged for review' : 'Flag removed');
-    paintBar(sessionClock?.remaining() ?? null);
+    R.openReportFor(run);
   }
 });
 

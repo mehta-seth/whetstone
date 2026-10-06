@@ -35,6 +35,11 @@ export function formula({ cellA, cellB, pct }) {
   return { increase, value: 100 * increase / cellB };
 }
 
+// A category named "Other" reads as a typo in "the number of Other", so it is written out the way the
+// printed tables usually write it: "animals in the Other category".
+const catOf = (d, c) => (d.cols[c].label === 'Other'
+  ? `${d.meta?.unitNoun ?? 'items'} in the Other category` : d.cols[c].label);
+
 export default {
   id: 'b04',
   name: 'Counterfactual under a conservation constraint',
@@ -116,7 +121,7 @@ export default {
       return {
         id: `b04#${rng.seed}`, archetypeId: 'b04', seed: rng.seed, tier,
         stimulusType: 'table', stimulusId: stimulus.id, stimulus: stimulusFor(stimulus),
-        questionText: `If ${d.rows[r].label} increases its ${d.cols[cA].label} by ${pct}%, by what `
+        questionText: `If ${d.rows[r].label} increases its ${catOf(d, cA)} by ${pct}%, by what `
           + `percentage would it have to reduce its ${d.cols[cB].label} to keep its total number `
           + `of ${d.meta.unitNoun} the same?`,
         answerType: 'percentage',

@@ -19,10 +19,10 @@ import { reject } from '../lib/validate.js';
 // side. Each visible half now reaches two slots, which is what the rule asks for.
 
 const SETS = [
-  { org: 'the Ashwell squad', unit: 'points', thing: 'a new player' },
-  { org: 'Redmarley Kilns', unit: 'firings', thing: 'a new kiln' },
-  { org: 'the Calderbank branch', unit: 'accounts', thing: 'a new adviser' },
-  { org: 'Pelham Haulage', unit: 'deliveries', thing: 'a new driver' },
+  { org: 'the Ashwell squad', unit: 'points', thing: 'a new player', members: 'players' },
+  { org: 'Redmarley Kilns', unit: 'firings', thing: 'a new kiln', members: 'kilns' },
+  { org: 'the Calderbank branch', unit: 'accounts', thing: 'a new adviser', members: 'advisers' },
+  { org: 'Pelham Haulage', unit: 'deliveries', thing: 'a new driver', members: 'drivers' },
 ];
 
 export default {
@@ -99,7 +99,7 @@ export default {
     return {
       id: `d09#${rng.seed}`, archetypeId: 'd09', seed: rng.seed, tier,
       stimulusType: 'prose',
-      stimulus: { text: `Across ${n} people, ${set.org} averaged ${groupDigits(oldMean, 0)} `
+      stimulus: { text: `Across its ${n} ${set.members}, ${set.org} averaged ${groupDigits(oldMean, 0)} `
         + `${set.unit} each last season. ${set.thing[0].toUpperCase()}${set.thing.slice(1)} then `
         + `joined, with ${groupDigits(newValue, 0)} ${set.unit}.` },
       questionText: `What is the mean across all ${n + 1} of them?`,

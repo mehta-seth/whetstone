@@ -16,6 +16,7 @@ produced it.
 | `data-interp-session.mjs` | Builds a full data-interpretation session for inspection |
 | `build-single-item.mjs` | Builds one item from one archetype |
 | `chart-harness.mjs` | Renders chart stimuli in isolation |
+| `slot-reach.mjs` | Which numeric archetypes can put the answer in slot 1 or 5 at all; the audit cites it |
 
 Run any of them directly:
 

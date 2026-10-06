@@ -7,7 +7,7 @@ import { shortfall } from '../lib/relations.js';
 // b05 - Shortfall or excess against a reference
 //
 // Compare a computed quantity against a reference and report the gap. The answer set mixes
-// numeric options with verdict strings, which the real Desk 02 paper does.
+// numeric options with verdict strings, as data interpretation papers often do.
 //
 // "CANNOT SAY" COULD NEVER BE CORRECT AS SPECIFIED, and an earlier round's own rule says that is a
 // defect. The archetype spec asks for "Cannot Say" as an option "where the data genuinely does not

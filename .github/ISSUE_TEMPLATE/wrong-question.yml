@@ -1,0 +1,36 @@
+name: Wrong or unclear question
+description: A question whose answer is wrong, whose wording is unclear, or whose table, chart or figure is hard to read.
+title: "[question] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The quickest way to report a question is **Report a problem** on the question screen in the app.
+        It fills all of this in for you, including the details needed to rebuild the exact question.
+  - type: dropdown
+    id: reason
+    attributes:
+      label: What is wrong?
+      options:
+        - The marked answer is wrong
+        - More than one option could be right
+        - None of the options is right
+        - The question is unclear or could be read two ways
+        - A typo or a wording problem
+        - The table, chart or figure is hard to read
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: The question
+      description: Paste the question and its options, or describe them as closely as you can.
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else
+      description: Which option you think is right, or what reads two ways. The question type and seed help too, if you have them.

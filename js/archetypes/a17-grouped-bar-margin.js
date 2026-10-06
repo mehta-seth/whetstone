@@ -17,7 +17,7 @@
 // The note is mandatory, not decorative. It is what licenses the half-gridline read, and
 // validate.checkChart rejects a midpoint value without it.
 //
-// THE OPTION SET IS NOT the archetype spec', AND THE REASON IS STRUCTURAL. An earlier round, second pass.
+// THE OPTION SET IS NOT THE ARCHETYPE SPEC'S, AND THE REASON IS STRUCTURAL. An earlier round, second pass.
 //
 // The archetype spec names three rate-omission distractors: the raw difference, and the difference with one
 // of the two rates applied. All three sit on the SAME chart quantity as the answer, the difference

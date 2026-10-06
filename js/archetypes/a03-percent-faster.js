@@ -17,6 +17,9 @@ const TASKS = [
 ];
 const SPEEDUPS = [15, 18, 20, 22, 25];
 
+// A count of one takes the singular noun: "1 shelf tag", not "1 shelf tags".
+const count = (n, noun) => (n === 1 ? `1 ${noun.s.replace(/^an? /, '')}` : `${n} ${noun.p}`);
+
 export default {
   id: 'a03',
   name: '"X percent faster" on a composite task',
@@ -96,7 +99,7 @@ export default {
             + `${task.a.s} and ${tB} seconds to prepare ${task.b.s}. `
             + `After training, the same worker completes the whole job ${speedup}% faster.`,
       },
-      questionText: `How many seconds will it take to prepare ${qtyA} ${task.a.p} and ${qtyB} ${task.b.p} after the training?`,
+      questionText: `How many seconds will it take to prepare ${count(qtyA, task.a)} and ${count(qtyB, task.b)} after the training?`,
       answerType: 'number',
       correct: { value: answer, display: options.find(o => o.role === 'correct').display },
       options,
@@ -107,6 +110,8 @@ export default {
         steps: [
           `old total = ${qtyA} × ${tA} + ${qtyB} × ${tB} = ${oldTotal} seconds`,
           `answer = ${oldTotal} × ${(1 - speedup / 100).toFixed(2)} = ${answer} seconds`,
+          // The convention is stated because the strict reading differs and a careful solver will try it.
+          `convention: ${speedup}% faster is read as ${speedup}% less time; ${speedup}% more speed would be ${oldTotal} ÷ ${(1 + speedup / 100).toFixed(2)} = ${roundTo(oldTotal / (1 + speedup / 100), 2)}, which is not offered`,
         ],
       },
       targetSeconds: 83,

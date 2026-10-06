@@ -1,51 +1,65 @@
-# Contributing
+# Contributing to Whetstone
 
-Thanks for looking. This is a small, deliberately dependency-free project, so contributing is mostly a matter of keeping it that way.
-
-## Ground rules
-
-- **No dependencies.** The project has none and should keep none. If something needs a library, it probably needs to be smaller instead.
-- **No build step.** The browser loads `js/app.js` as a native ES module. Anything that requires compilation, bundling or transpilation is out of scope.
-- **Both commands must pass.** `npm test` must be green, and `npm run audit` must run without throwing.
-- **Every tunable number goes in `js/lib/constants.js`.** No magic numbers in archetypes or renderers.
+Thanks for helping. The most useful contribution is a report of a question that is wrong, unclear or
+hard to read: use **Report a problem** on the question screen, which fills the issue in for you.
 
 ## Setting up
 
 ```bash
 git clone https://github.com/mehta-seth/whetstone.git
 cd whetstone
-npm start        # serve on :8000 (Node standard library, no install)
-npm test         # the suite
-npm run audit    # writes audit/audit.html
+npm start        # the app, on http://localhost:8000
+npm test         # the test suite, over 800 checks, under a minute
+npm run audit    # generates questions for every type and writes audit/audit.html
 ```
 
-Nothing to install.
+Node 18 or later is the only requirement. There are no dependencies to install and no build step, and
+that is deliberate: the site must keep working for years without maintenance.
 
-## Adding a question archetype
+## How the project fits together
 
-This is the most likely contribution, and it has its own guide: [docs/adding-an-archetype.md](docs/adding-an-archetype.md). In short — a new module in `js/archetypes/`, one import line in `index.js`, and one pinned fixture in `test/fixtures.json`.
+| Where | What |
+| --- | --- |
+| `index.html`, `css/`, `js/app.js`, `js/render.js` | The site: routing, screens, keyboard |
+| `js/session.js`, `js/adaptive.js`, `js/store.js` | Sessions, the choice of question types, saved progress |
+| `js/archetypes/` | One file per question type (internally, an *archetype*) |
+| `js/lib/` | Shared building blocks: random numbers, options, validation, tables, charts, logic, series, figures |
+| `js/report.js` | Report a problem: the issue text and the GitHub link |
+| `test/run.js`, `test/logical.mjs` | The test suite |
+| `audit/build.js` | The statistical audit |
+| `tools/serve.js`, `tools/reproduce.mjs` | The local server, and a tool to rebuild a reported question |
 
-An archetype is not finished when it generates a plausible question. It is finished when the audit report shows its constraint rejection rates are sane, its answer is not sitting in the same option slot every time, and its answer is not recoverable from the largest number on screen. `docs/adding-an-archetype.md` explains how to read those sections.
+[docs/architecture.md](docs/architecture.md) goes deeper.
 
-## Changing shared code
+## Fixing a reported question
 
-`js/lib/` is used by all 47 archetypes, so a change there can alter every item in the library. The fixture suite exists to catch exactly that: each archetype has a pinned fixture with a known seed and an expected option set, so an unintended change fails immediately and names the archetype.
+1. Rebuild it from the report: `node tools/reproduce.mjs <question type> <seed> <tier>`. The command is
+   in the issue, under *For the maintainer*.
+2. Find the cause. Most problems are in one question type's file in `js/archetypes/`.
+3. Add a check to `test/logical.mjs`, in *content regressions found by reading items*, that fails on the
+   old behaviour, so the mistake cannot return.
+4. Run `npm test` and `npm run audit`. The audit must still exit cleanly.
 
-If a fixture legitimately needs to change, update it in the same commit as the code change and say why in the commit body.
+## Adding or changing a question type
 
-## Style
+Read [docs/design-rules.md](docs/design-rules.md) and
+[docs/adding-an-archetype.md](docs/adding-an-archetype.md) first. The rules that matter most:
 
-- `.editorconfig` covers the mechanics: two-space indentation, LF, final newline, no trailing whitespace.
-- Match the surrounding code. There is no linter, on purpose.
-- Comments should explain *why* a rule exists, not restate what the line does. The codebase leans heavily on this and it is worth preserving.
-- All colour, spacing and type values belong in `css/tokens.css`.
+- The correct answer is computed from the question type's own definition, never searched for.
+- Every wrong option is a named mistake applied to the question, never a random nudge from the answer.
+- Questions are reproducible from their seed.
+- A change that alters a pinned example in `test/fixtures.json` is either a bug, or a deliberate change
+  to a wrong option whose reason goes in the example's label.
 
-## Commits
+## Writing for the site
 
-[Conventional Commits](https://www.conventionalcommits.org/): `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `style:`, `perf:`, `chore:`, with an optional scope such as `feat(library):` or `fix(charts):`.
+- Plain language. People see "question type", not "archetype".
+- British spelling: practise as a verb, practice as a noun.
+- No em dashes.
+- The project is independent. Do not name commercial test providers or their products anywhere.
 
-One capability or one fix per commit. If the subject line needs "and", it is probably two commits.
+## Releasing
 
-## Reporting a problem with a question
-
-Sessions are reproducible from their seed, so include the seed and the archetype ID (shown on the feedback screen). With those two things a bad item can be regenerated exactly; without them it usually cannot be found.
+Bump `APP_VERSION` in `js/lib/constants.js` and `version` in `package.json` together (a test checks
+they match), add an entry to [CHANGELOG.md](CHANGELOG.md), and tag the commit. Every push to `main`
+that passes the tests is published to the live site.

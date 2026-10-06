@@ -129,8 +129,8 @@ console.log('\nFORMATTER AND OPTION-RULE PREFLIGHT');
   say(checkOptionSet(ratios.map(({ display, ...o }) => o), 'ratio')
       .includes('missing-explicit-display'), 'ratio options without a display are rejected');
 
-  // verdict mixes verbal options with numeric ones in the same set, which the real Desk 02 test
-  // does. It is categorical, so the ratio guards must not fire on the strings.
+  // verdict mixes verbal options with numeric ones in the same set, as data interpretation papers
+  // often do. It is categorical, so the ratio guards must not fire on the strings.
   const verdicts = [
     { value: 'exceeded', display: 'They have exceeded the RDA', role: 'correct', errorType: null },
     { value: 12, display: '12%', role: 'distractor', errorType: 'sign-flip' },
@@ -859,6 +859,10 @@ console.log('\nfeedback renders the route above the exact chain');
     'a one-figure item collapses the exact chain even when setupBox is on');
   say(html.includes('lands on'), 'the route states which option the estimate lands on');
 }
+
+// The logical-reasoning formats and typed answers live in their own file, which re-solves every
+// deductive item by an independent reader. See test/logical.mjs.
+await (await import('./logical.mjs')).runLogical({ say, checkItem });
 
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exit(fail ? 1 : 0);

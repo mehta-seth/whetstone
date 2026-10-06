@@ -52,12 +52,21 @@ import d14 from './d14-speed-conversion.js';
 import d15 from './d15-inverse-proportion.js';
 import d16 from './d16-divide-ratio.js';
 import d17 from './d17-cagr.js';
+import l01 from './l01-sequencing.js';
+import l02 from './l02-must-be-true.js';
+import l03 from './l03-grouping.js';
+import l04 from './l04-conditionals.js';
+import i01 from './i01-number-series.js';
+import i02 from './i02-letter-series.js';
+import i03 from './i03-figure-series.js';
 
 export const archetypes = [
   a01, a02, a03, a04, a05, a06, a07, a08, a09, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20, a21, a22,
   b01, b02, b03, b04, b05, b06, b07, b08,
   c01, c02,
   d01, d02, d03, d04, d05, d06, d07, d08, d09, d10, d13, d14, d15, d16, d17,
+  l01, l02, l03, l04,
+  i01, i02, i03,
 ];
 export const byId = Object.fromEntries(archetypes.map(a => [a.id, a]));
 export const forDesk = desk => archetypes.filter(a => a.desks.includes(desk));

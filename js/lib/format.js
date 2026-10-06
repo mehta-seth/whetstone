@@ -15,9 +15,8 @@ export const CATEGORICAL_TYPES = new Set(['label', 'month', 'verdict']);
 // cannot be formatted back into the printed form: 3/4 and 0.75 are the same number.
 export const EXPLICIT_DISPLAY_TYPES = new Set(['fraction', 'ratio', 'label', 'verdict']);
 
-// Decision 11. Every real currency option set observed is uniform: the
-// paper's Q13 all integers, Q15 all integers, a20 all 2dp. Every real percentage set
-// observed is mixed: 0.30 / 3.0 / 24 / 30 / 32, and 40 / 50 / 52.5 / 55 / 65. So money
+// Decision 11. Currency option sets in practice papers are uniform: all integers, or all
+// to two places. Percentage sets are commonly mixed: 0.30 / 3.0 / 24 / 30 / 32, and 40 / 50 / 52.5 / 55 / 65. So money
 // forces one decimal count across the set, and percentages and bare numbers stay
 // natural. This narrows an earlier round's decision 3 rather than reversing it: that decision
 // existed because forced uniformity printed "40.0%" and "65.0%", which is a percentage

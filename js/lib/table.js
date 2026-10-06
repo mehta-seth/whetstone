@@ -1,5 +1,5 @@
-// Standalone table stimulus. Part A3 only: one small table serving one question, which
-// is what the real Desk 01 paper showed in 3 of its 18 items. Desk 02's shared-stimulus
+// Standalone table stimulus. Part A3 only: one small table serving one question, the way
+// word-problem papers use the occasional table. Desk 02's shared-stimulus
 // system, where one table serves 3 to 7 questions, is an earlier round and is a different
 // thing entirely.
 //

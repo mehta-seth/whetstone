@@ -1,0 +1,11 @@
+name: Idea or request
+description: Something that would make practising better.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help, and why?
+      description: The problem you are trying to solve matters more than the exact solution.
+    validations:
+      required: true

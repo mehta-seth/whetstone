@@ -251,3 +251,77 @@ svg.trend .tp { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
   border-left: 3px solid var(--warn); background: var(--raised);
   font-size: var(--t-sm); color: var(--ink);
 }
+
+/* Deductive clues: a numbered list, since an item's clues are referred to one at a time. */
+.clues { margin: 0 0 var(--s-3); padding-left: 1.4em; display: grid; gap: var(--s-1); }
+.clues li { padding-left: var(--s-1); }
+
+/* Series written out large, because reading the terms is the whole first step. */
+.series-line { font-family: var(--mono); font-size: var(--t-xl); letter-spacing: .02em; word-spacing: .15em; }
+
+/* Figure series: the frames in a row, wrapping on narrow screens, and figures inside options. */
+.fig-row { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; margin: var(--s-2) 0 var(--s-3); }
+.fig { display: block; flex: none; }
+.option .val .fig { margin: 2px 0; }
+
+/* Typed answers. */
+.typed-row { margin: 0 0 var(--s-4); }
+.typed-row label { display: block; font-size: var(--t-xs); letter-spacing: .08em; color: var(--dim); margin-bottom: var(--s-1); }
+.typed-row input {
+  width: 100%; max-width: 280px; padding: var(--s-2) var(--s-3); border: 1px solid var(--line-2);
+  border-radius: var(--r-1); background: var(--surface); color: var(--ink);
+  font: var(--t-lg)/1.3 var(--mono); font-variant-numeric: tabular-nums;
+}
+.typed-row input:focus-visible { border-color: var(--accent); }
+.typed-row input[disabled] { color: var(--ink-2); background: var(--raised); }
+
+/* ---------- home ---------- */
+.hero { margin: 0 0 var(--s-6); max-width: 760px; }
+.hero h1 { font-size: var(--t-2xl); line-height: 1.15; margin: 0 0 var(--s-3); }
+.lede { font-size: var(--t-lg); color: var(--ink-2); margin: 0; line-height: 1.5; }
+.practice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--s-4); }
+.practice-card {
+  display: flex; flex-direction: column; gap: var(--s-2);
+  border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); padding: var(--s-5);
+}
+.practice-card h3 { margin: 0; font-size: var(--t-xl); font-weight: 620; }
+.practice-card p { margin: 0; color: var(--ink-2); line-height: 1.45; flex: 1; }
+.practice-card .stat { font-size: var(--t-sm); color: var(--dim); }
+.practice-card .stat b { color: var(--ink); font-weight: 620; }
+.card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin-top: var(--s-2); }
+.card-actions .more { margin-left: auto; font-size: var(--t-sm); color: var(--dim); }
+.card-actions .more:hover { color: var(--accent); }
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-4); margin: var(--s-6) 0 var(--s-2); }
+.how > div { color: var(--ink-2); line-height: 1.45; }
+.how b { color: var(--ink); }
+.fine { font-size: var(--t-sm); }
+
+/* ---------- about ---------- */
+.about { max-width: 720px; line-height: 1.55; }
+.about h2 { margin: var(--s-6) 0 var(--s-2); }
+.about ul { padding-left: 1.2em; }
+.about li { margin: var(--s-1) 0; }
+
+/* ---------- report dialog ---------- */
+.btn-small { padding: 4px var(--s-3); font-size: var(--t-sm); margin-top: var(--s-2); }
+dialog.report {
+  border: 1px solid var(--line-2); border-radius: var(--r-2); background: var(--surface); color: var(--ink);
+  padding: var(--s-5); width: min(640px, calc(100vw - 2 * var(--s-4))); max-height: calc(100vh - 2 * var(--s-5));
+}
+dialog.report::backdrop { background: rgba(10, 12, 16, .45); }
+.report-form h2 { margin: 0 0 var(--s-2); }
+.report-form .purpose { margin-bottom: var(--s-4); }
+.report-form fieldset { border: 0; padding: 0; margin: 0 0 var(--s-4); display: grid; gap: var(--s-2); }
+.report-form legend { font-weight: 600; margin-bottom: var(--s-2); }
+.report-form .reason { display: flex; gap: var(--s-2); align-items: baseline; cursor: pointer; }
+.report-form textarea {
+  width: 100%; box-sizing: border-box; margin: var(--s-1) 0 var(--s-3); padding: var(--s-2) var(--s-3);
+  border: 1px solid var(--line-2); border-radius: var(--r-1); background: var(--bg); color: var(--ink); font: inherit;
+}
+.report-form .preview { margin-bottom: var(--s-4); }
+.report-preview {
+  max-height: 220px; overflow: auto; white-space: pre-wrap; font: var(--t-xs)/1.45 var(--mono);
+  background: var(--raised); border: 1px solid var(--line); border-radius: var(--r-1); padding: var(--s-3);
+}
+.report-form .btn-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--s-2); }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; }

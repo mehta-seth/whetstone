@@ -28,7 +28,14 @@ const SETS = [
   { org: 'Ledsham Press', unit: 'print runs', noun: 'print run', period: 'month' },
   { org: 'Cranmore Ferry', unit: 'crossings', noun: 'crossing', period: 'day' },
 ];
-const LABELS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+// Labels follow the period the stem names. Every set used weekday names, so a mean "a week across 5
+// weeks" was followed by figures for Monday to Thursday and a question about Friday.
+const LABELS = {
+  day: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+  week: ['week 1', 'week 2', 'week 3', 'week 4', 'week 5', 'week 6'],
+  month: ['January', 'February', 'March', 'April', 'May', 'June'],
+};
+const when = (period, label) => (period === 'day' ? `on ${label}` : `in ${label}`);
 
 export default {
   id: 'd08',
@@ -107,14 +114,14 @@ export default {
       throw e;
     }
 
-    const named = known.map((v, i) => `${LABELS[i]} ${groupDigits(v, 0)}`).join(', ');
+    const named = known.map((v, i) => `${LABELS[set.period][i]}: ${groupDigits(v, 0)}`).join(', ');
     return {
       id: `d08#${rng.seed}`, archetypeId: 'd08', seed: rng.seed, tier,
       stimulusType: 'prose',
       stimulus: { text: `${set.org} handled a mean of ${groupDigits(mean, 0)} ${set.unit} a `
         + `${set.period} across ${n} ${set.period}s. The figures for ${n - 1} of them were `
         + `${named}.` },
-      questionText: `How many ${set.unit} were handled on ${LABELS[n - 1]}?`,
+      questionText: `How many ${set.unit} were handled ${when(set.period, LABELS[set.period][n - 1])}?`,
       answerType: 'number',
       correct: { value: answer, display: options.find(o => o.role === 'correct').display },
       options, optionContext: {},

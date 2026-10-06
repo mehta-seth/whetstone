@@ -189,7 +189,7 @@ export default {
             + `warranty sold, also as a percentage of that model's sale price. Warranties are sold `
             + `separately from the ${scenario.kind} themselves, so the two counts are unrelated.`,
       },
-      questionText: `Profit for the year came to ${m(statedTotal)} in total. `
+      questionText: `Profit for the year, warranty bonuses included, came to ${m(statedTotal)} in total. `
                   + `How many ${scenario.b.p} were sold?`,
       answerType: 'countWithUnit',
       correct: { value: u2, display: options.find(o => o.role === 'correct').display },
